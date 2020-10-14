@@ -17,15 +17,15 @@ reserved = {
 tokens = [  'PLUS',  'MINUS',  'TIMES',  'DIVIDE', 
             "DOTADD", "DOTSUB", "DOTMUL", "DOTDIV",
             "ASSIGN",  "ADDASSIGN", "SUBASSIGN", "MULASSIGN", "DIVASSIGN",
-            "LT", "GT", "LTEQ", "GTEQ", "NEQ", "EQ",
-            'LPAREN',  'RPAREN' , "LSQUARE", "RSQUARE", "LBOX", "RBOX",
+            "LT", "GT", "NGT", "NLT", "NEQ", "EQ",
+            'LPAREN',  'RPAREN' , "LSQUARE", "RSQUARE", "LCURL", "RCURL",
             "RANGE", "TRANSPOSITION", "COMMA", "SEMICOLON",
             'ID',
             'INTNUM', "FLOAT", "STRING" 
             
             ] + list(reserved.values())
 
-literals = [ '+','-','*','/','(',')', "=", "[", "]", "{", "}", ":", "'", ":", ";"]
+literals = [ '+','-','*','/','(',')', "=", "[", "]", "{", "}", ":", "'", ",", ";"]
 
 t_DOTADD = r'\.\+'
 t_DOTSUB = r'\.\-'
@@ -39,8 +39,8 @@ t_DIVASSIGN = r'\/\='
 
 t_LT = r"\<"
 t_GT = r"\>"
-t_LTEQ = r"\<\="
-t_GTEQ = r"\>\="
+t_NGT = r"\<\="
+t_NLT = r"\>\="
 t_NEQ = r"\!\="
 t_EQ = r"\=\="
 
@@ -50,9 +50,8 @@ def t_ID(t):
     t.type = reserved.get(t.value,'ID')
     return t
 
-
 def t_FLOAT(t):
-    r'\d+\.\d+'
+    r'[+-]?(((\d*\.\d+)|(\d+\.\d*))([eE][-+]?\d+)?|\d+[eE][-+]?\d+)'
     t.value = float(t.value)
     return t
 
@@ -89,4 +88,4 @@ for token in lexer:
     print("(%d): %s(%s)" %(token.lineno, token.type, token.value))
     output += "(%d): %s(%s)\n" %(token.lineno, token.type, token.value)
 
-print("\nTest: " + "OK" if output == open("pattern.txt").read() else "FAIL")
+with open("output.txt", "w") as f: f.write(output)
