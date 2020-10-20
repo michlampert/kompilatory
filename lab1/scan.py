@@ -80,7 +80,10 @@ def t_error(t) :
     t.lexer.skip(1)
 
 lexer = lex.lex()
-fh = open("input.txt", "r");
+
+import sys
+print(sys.argv)
+fh = open((sys.argv + [False])[1] or "input.txt", "r");
 lexer.input( fh.read() )
 
 output = ""
