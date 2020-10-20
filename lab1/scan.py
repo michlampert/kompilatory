@@ -82,7 +82,6 @@ def t_error(t) :
 lexer = lex.lex()
 
 import sys
-print(sys.argv)
 fh = open((sys.argv + [False])[1] or "input.txt", "r");
 lexer.input( fh.read() )
 
