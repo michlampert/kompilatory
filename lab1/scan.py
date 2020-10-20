@@ -62,6 +62,7 @@ def t_INTNUM(t):
 
 def t_STRING(t):
     r'\"[a-zA-Z_0-9 \-]*\"'
+    t.value = t.value[1:-1]
     return t
 
 def t_COMMENT(t):
