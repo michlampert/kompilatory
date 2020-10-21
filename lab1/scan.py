@@ -47,12 +47,12 @@ t_EQ = r"\=\="
 
 
 def t_ID(t):
-    r'[a-zA-Z_][a-zA-Z_0-9]*'
+    r'[a-zA-Z_](\w|_)*'
     t.type = reserved.get(t.value,'ID')
     return t
 
 def t_FLOAT(t):
-    r'(((\d*\.\d+)|(\d+\.\d*))([eE][-+]?\d+)?|\d+[eE][-+]?\d+)'
+    r'(((\d*\.\d+)|(\d+\.))([eE][-+]?\d+)?|\d+[eE][-+]?\d+)'
     t.value = float(t.value)
     return t
 
@@ -62,7 +62,7 @@ def t_INTNUM(t):
     return t
 
 def t_STRING(t):
-    r'\".*\"'
+    r'\".*?\"'
     t.value = t.value[1:-1]
     return t
 
