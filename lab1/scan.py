@@ -5,6 +5,7 @@ reserved = {
     'then'  : 'THEN',
     'else'  : 'ELSE',
     'while' : 'WHILE',
+    'for': "FOR",
     "break" : "BREAK",
     "continue" : "CONTINUE",
     "return" : "RETURN",
