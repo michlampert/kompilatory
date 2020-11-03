@@ -11,6 +11,7 @@ precedence = (
    ("left", 'TIMES',  'DIVIDE', "DOTMUL", "DOTDIV"),
    ("left", "LT", "GT", "NGT", "NLT", "NEQ", "EQ"),
    ("left", "ASSIGN",  "ADDASSIGN", "SUBASSIGN", "MULASSIGN", "DIVASSIGN"),
+   ("right", "TRANSPOSITION"),
    ("nonassoc", 'IFX'),
    ("nonassoc", 'ELSE')
 )
@@ -31,17 +32,21 @@ def p_instruction(p):
     """instruction : for_instruction
                    | while_instruction
                    | if_instruction
-                   | LCURL instruction RCURL
+                   | LCURL instructions_list RCURL
                    | BREAK SEMICOLON
                    | CONTINUE SEMICOLON
                    | RETURN expression SEMICOLON
-                   | expression SEMICOLON"""
+                   | expression SEMICOLON
+
+       instructions_list : instructions_list instruction
+                         | instruction"""
 
 def p_expression(p):
     """expression : ID
                   | STRING
                   | INTNUM
                   | FLOAT
+                  | LSQUARE expressions_list RSQUARE
 
                   | ID ASSIGN expression
                   | ID ADDASSIGN expression 
@@ -64,8 +69,17 @@ def p_expression(p):
                   | expression NLT expression
                   | expression EQ expression
                   | expression NEQ expression
-                  | MINUS expr %prec OPPOSITE
-                  """
+
+                  | expression TRANSPOSITION
+                  | MINUS expression %prec OPPOSITE
+
+                  | EYE LPAREN expression RPAREN
+                  | ONES LPAREN expression RPAREN
+                  | ZEROS LPAREN expression RPAREN
+
+       expressions_list: expressions_list, expression
+                       | expression 
+    """
 
 def p_if_instruction(p):
     """if_instruction : IF LPAREN expression RPAREN instruction %prec IFX
@@ -80,12 +94,5 @@ def p_for_instruction(p):
 
 def p_print_instruction(p):
     """ print_instruction: PRINT expression """
-
-# to finish the grammar
-# ....
-
-
-    
-
 
 parser = yacc.yacc()
