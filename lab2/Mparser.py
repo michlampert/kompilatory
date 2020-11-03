@@ -59,7 +59,7 @@ def p_arithmetic_expr(p):
                        | INTNUM
                        | FLOAT
                        | LSQUARE RSQUARE
-                       | LSQUARE expressions_list RSQUARE
+                       | LSQUARE arithmetic_list RSQUARE
                        | arithmetic_expr PLUS arithmetic_expr
                        | arithmetic_expr MINUS arithmetic_expr
                        | arithmetic_expr TIMES arithmetic_expr
@@ -68,11 +68,11 @@ def p_arithmetic_expr(p):
                        | arithmetic_expr DOTMUL arithmetic_expr
                        | arithmetic_expr DOTSUB arithmetic_expr
                        | arithmetic_expr DOTDIV arithmetic_expr 
-                       | expression TRANSPOSITION
-                       | MINUS expression %prec OPPOSITE
-                       | EYE LPAREN expression RPAREN
-                       | ONES LPAREN expression RPAREN
-                       | ZEROS LPAREN expression RPAREN
+                       | arithmetic_expr TRANSPOSITION
+                       | MINUS arithmetic_expr %prec OPPOSITE
+                       | EYE LPAREN arithmetic_expr RPAREN
+                       | ONES LPAREN arithmetic_expr RPAREN
+                       | ZEROS LPAREN arithmetic_expr RPAREN
     
        arithmetic_list : arithmetic_list COLON arithmetic_expr
                        | arithmetic_expr 
