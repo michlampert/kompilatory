@@ -35,13 +35,14 @@ def p_instruction(p):
     """instruction : for_instruction
                    | while_instruction
                    | if_instruction
+                   | print_instruction
                    | LCURL instructions_list RCURL
                    | BREAK SEMICOLON
                    | CONTINUE SEMICOLON
                    | RETURN expression SEMICOLON
                    | expression SEMICOLON
 
-       instructions_list : instructions_list instruction
+       instructions_list : instructions_list COMMA instruction
                          | instruction"""
 
 def p_boolean_expr(p):
@@ -74,7 +75,7 @@ def p_arithmetic_expr(p):
                        | ONES LPAREN arithmetic_expr RPAREN
                        | ZEROS LPAREN arithmetic_expr RPAREN
     
-       arithmetic_list : arithmetic_list COLON arithmetic_expr
+       arithmetic_list : arithmetic_list COMMA arithmetic_expr
                        | arithmetic_expr 
        """
 
@@ -94,18 +95,18 @@ def p_expression(p):
     """
 
 def p_if_instruction(p):
-    """if_instruction : IF LPAREN boolean_expr RPAREN instruction %prec IFX
-                      | IF LPAREN boolean_expr RPAREN instruction ELSE instruction"""
+    """if_instruction : IF LPAREN boolean_expr RPAREN THEN instruction %prec IFX
+                      | IF LPAREN boolean_expr RPAREN THEN instruction ELSE instruction"""
 
 def p_while_instruction(p):
     """while_instruction : WHILE LPAREN boolean_expr RPAREN instruction"""
 
 def p_for_instruction(p):
-    """range: arithmetic_expr RANGE arithmetic_expr
-       for_instruction: FOR ID ASSIGN range instruction"""
+    """range : arithmetic_expr RANGE arithmetic_expr
+       for_instruction : FOR ID ASSIGN range instruction"""
 
 def p_print_instruction(p):
-    """ print_instruction: PRINT arithmetic_expr
-                         | PRINT boolean_expr """
+    """ print_instruction : PRINT arithmetic_expr
+                          | PRINT boolean_expr """
 
 parser = yacc.yacc()

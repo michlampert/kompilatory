@@ -67,7 +67,7 @@ def t_STRING(t):
     return t
 
 def t_COMMENT(t):
-    r'\#.*'
+    r'\#.*?\n'
     pass
 
 t_ignore = '  \t'
@@ -82,14 +82,14 @@ def t_error(t) :
 
 lexer = lex.lex()
 
-import sys
-fh = open((sys.argv + [False])[1] or "input.txt", "r");
-lexer.input( fh.read() )
+#import sys
+#fh = open((sys.argv + [False])[1] or "", "r");
+#lexer.input( fh.read() )
 
-output = ""
+#output = ""
 
-for token in lexer:
-    print("(%d): %s(%s)" %(token.lineno, token.type, token.value))
-    output += "(%d): %s(%s)\n" %(token.lineno, token.type, token.value)
+#for token in lexer:
+#    print("(%d): %s(%s)" %(token.lineno, token.type, token.value))
+#    output += "(%d): %s(%s)\n" %(token.lineno, token.type, token.value)
 
-with open("output.txt", "w") as f: f.write(output)
+#with open("output.txt", "w") as f: f.write(output)
