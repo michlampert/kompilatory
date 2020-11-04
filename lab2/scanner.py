@@ -67,7 +67,7 @@ def t_STRING(t):
     return t
 
 def t_COMMENT(t):
-    r'\#.*?\n'
+    r'\#.*?'
     pass
 
 t_ignore = '  \t'
