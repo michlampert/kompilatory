@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import scanner
 import ply.yacc as yacc
 
@@ -7,14 +5,14 @@ import ply.yacc as yacc
 tokens = scanner.tokens
 
 precedence = (
-   ("left", 'PLUS', 'MINUS', "DOTADD", "DOTSUB"),
-   ("left", 'TIMES',  'DIVIDE', "DOTMUL", "DOTDIV"),
+   ('left', '=', "ADDASSIGN", "SUBASSIGN", "MULASSIGN", "DIVASSIGN"),
+   ("left", '+', '-', "DOTADD", "DOTSUB"),
+   ("left", '*', '/', "DOTMUL", "DOTDIV"),
    ("left", "LT", "GT", "NGT", "NLT", "NEQ", "EQ"),
-   ("left", "ASSIGN",  "ADDASSIGN", "SUBASSIGN", "MULASSIGN", "DIVASSIGN"),
-   ("right", "EYE", "ONES", "ZEROS"),
-   ("right", "TRANSPOSITION"),
-   ("right", "RANGE"),
-   ("right", "OPPOSITE"),
+   ("nonassoc", 'ONES', 'ZEROS', 'EYE'),
+   ("nonassoc", "OPP"),
+   ("nonassoc", 'TRANSPOSITION'),
+   ("nonassoc", ":"),
    ("nonassoc", 'IFX'),
    ("nonassoc", 'ELSE')
 )
@@ -28,85 +26,105 @@ def p_error(p):
 
 
 def p_program(p):
-    """program : instruction
-                | program instruction"""
+    """
+    program : instruction
+            | program instruction
+    """
 
 def p_instruction(p):
-    """instruction : for_instruction
-                   | while_instruction
-                   | if_instruction
-                   | print_instruction
-                   | LCURL instructions_list RCURL
-                   | BREAK SEMICOLON
-                   | CONTINUE SEMICOLON
-                   | RETURN expression SEMICOLON
-                   | expression SEMICOLON
+    """
+    instruction : for_instruction
+                | while_instruction
+                | if_instruction
+                | print_instruction
+                | '{' instructions_list '}'
+                | BREAK ';'
+                | CONTINUE ';'
+                | RETURN expression ';'
+                | expression ';'
+    """
 
-       instructions_list : instructions_list COMMA instruction
-                         | instruction"""
+def p_instructions_list(p):
+    """
+    instructions_list : instruction
+                      | instructions_list instruction
+    """
 
-def p_boolean_expr(p):
-    """boolean_expr : arithmetic_expr LT arithmetic_expr
-                    | arithmetic_expr GT arithmetic_expr
-                    | arithmetic_expr NGT arithmetic_expr
-                    | arithmetic_expr NLT arithmetic_expr
-                    | arithmetic_expr EQ arithmetic_expr
-                    | arithmetic_expr NEQ arithmetic_expr 
-                    | STRING EQ STRING
-                    | STRING NEQ STRING"""
-
-def p_arithmetic_expr(p):
-    """arithmetic_expr : ID
-                       | INTNUM
-                       | FLOAT
-                       | LSQUARE RSQUARE
-                       | LSQUARE arithmetic_list RSQUARE
-                       | arithmetic_expr PLUS arithmetic_expr
-                       | arithmetic_expr MINUS arithmetic_expr
-                       | arithmetic_expr TIMES arithmetic_expr
-                       | arithmetic_expr DIVIDE arithmetic_expr
-                       | arithmetic_expr DOTADD arithmetic_expr
-                       | arithmetic_expr DOTMUL arithmetic_expr
-                       | arithmetic_expr DOTSUB arithmetic_expr
-                       | arithmetic_expr DOTDIV arithmetic_expr 
-                       | arithmetic_expr TRANSPOSITION
-                       | MINUS arithmetic_expr %prec OPPOSITE
-                       | EYE LPAREN arithmetic_expr RPAREN
-                       | ONES LPAREN arithmetic_expr RPAREN
-                       | ZEROS LPAREN arithmetic_expr RPAREN
-    
-       arithmetic_list : arithmetic_list COMMA arithmetic_expr
-                       | arithmetic_expr 
-       """
-
-def p_assign_expr(p):
-    """ assign_expr : ID ASSIGN arithmetic_expr
-                    | ID ADDASSIGN arithmetic_expr 
-                    | ID SUBASSIGN arithmetic_expr
-                    | ID MULASSIGN arithmetic_expr
-                    | ID DIVASSIGN arithmetic_expr
-                    | ID ASSIGN boolean_expr
-                    | ID ASSIGN STRING """
-
+# TODO w sekcji z przypisywaniem ID czy expression ?
 def p_expression(p):
-    """expression : assign_expr
-                  | arithmetic_expr
-                  | boolean_expr
+    """
+    expression : ID
+               | INTNUM
+               | FLOAT
+               | STRING
+ 
+               | '(' expression ')' 
+ 
+               | '[' ']'
+               | '[' expression_list ']'
+ 
+               | ID '=' expression       
+               | ID ADDASSIGN expression
+               | ID SUBASSIGN expression 
+               | ID MULASSIGN expression
+               | ID DIVASSIGN expression
+               | ID '[' expression_list ']' '=' expression       
+               | ID '[' expression_list ']' ADDASSIGN expression
+               | ID '[' expression_list ']' SUBASSIGN expression 
+               | ID '[' expression_list ']' MULASSIGN expression
+               | ID '[' expression_list ']' DIVASSIGN expression
+ 
+               | ZEROS '(' expression_list ')'
+               | ONES '(' expression_list ')'
+               | EYE '(' expression_list ')'
+ 
+               | expression '+' expression
+               | expression '-' expression
+               | expression '*' expression
+               | expression '/' expression
+               | expression DOTADD expression
+               | expression DOTSUB expression
+               | expression DOTMUL expression
+               | expression DOTDIV expression
+               | '-' expression %prec OPP
+ 
+               | expression TRANSPOSITION
+               
+               | expression EQ expression
+               | expression NEQ expression
+               | expression LT expression
+               | expression NLT expression
+               | expression GT expression
+               | expression NGT expression
+    """ 
+
+def p_expression_list(p):
+    """
+    expression_list : expression
+                    | expression_list ',' expression
     """
 
 def p_if_instruction(p):
-    """if_instruction : IF LPAREN boolean_expr RPAREN THEN instruction %prec IFX
-                      | IF LPAREN boolean_expr RPAREN THEN instruction ELSE instruction"""
+    """
+    if_instruction : IF '(' expression ')' instruction %prec IFX
+                   | IF '(' expression ')' instruction ELSE instruction
+    """
 
 def p_while_instruction(p):
-    """while_instruction : WHILE LPAREN boolean_expr RPAREN instruction"""
+    """
+    while_instruction : WHILE '(' expression ')' instruction
+    """
 
 def p_for_instruction(p):
-    """range : arithmetic_expr RANGE arithmetic_expr
-       for_instruction : FOR ID ASSIGN range instruction"""
+    """
+    range : expression ':' expression
+    for_instruction : FOR ID '=' range instruction
+    """
 
 def p_print_instruction(p):
-    """ print_instruction : PRINT arithmetic_expr
-                          | PRINT boolean_expr """
+    """
+    print_instruction : PRINT expression_list ';'
+    """
+
 
 parser = yacc.yacc()

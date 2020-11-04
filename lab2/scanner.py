@@ -2,7 +2,7 @@ import ply.lex as lex
 
 reserved = {
     'if'    : 'IF',
-    'then'  : 'THEN',
+    #'then'  : 'THEN',
     'else'  : 'ELSE',
     'for'   : 'FOR',
     'while' : 'WHILE',
@@ -15,18 +15,16 @@ reserved = {
     "print" : "PRINT"
 }
 
-tokens = [  'PLUS',  'MINUS',  'TIMES',  'DIVIDE', 
+tokens = [   
             "DOTADD", "DOTSUB", "DOTMUL", "DOTDIV",
-            "ASSIGN",  "ADDASSIGN", "SUBASSIGN", "MULASSIGN", "DIVASSIGN",
+            "ADDASSIGN", "SUBASSIGN", "MULASSIGN", "DIVASSIGN",
             "LT", "GT", "NGT", "NLT", "NEQ", "EQ",
-            'LPAREN',  'RPAREN' , "LSQUARE", "RSQUARE", "LCURL", "RCURL",
-            "RANGE", "TRANSPOSITION", "COMMA", "SEMICOLON",
-            'ID',
-            'INTNUM', "FLOAT", "STRING" 
+            "TRANSPOSITION", 
+            'ID', 'INTNUM', "FLOAT", "STRING" 
             
             ] + list(reserved.values())
 
-literals = [ '+','-','*','/','(',')', "=", "[", "]", "{", "}", ":", "'", ",", ";"]
+literals = [ '+','-','*','/','(',')', "=", "[", "]", "{", "}", ":", ",", ";"]
 
 t_DOTADD = r'\.\+'
 t_DOTSUB = r'\.\-'
@@ -44,6 +42,8 @@ t_NGT = r"\<\="
 t_NLT = r"\>\="
 t_NEQ = r"\!\="
 t_EQ = r"\=\="
+
+t_TRANSPOSITION = r"\'"
 
 
 def t_ID(t):

@@ -1,24 +1,5 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
-Unused terminals:
-
-    ASSIGN
-    COMMA
-    DIVIDE
-    LCURL
-    LPAREN
-    LSQUARE
-    MINUS
-    PLUS
-    RANGE
-    RCURL
-    RPAREN
-    RSQUARE
-    SEMICOLON
-    THEN
-    TIMES
-    TRANSPOSITION
-
 Grammar
 
 Rule 0     S' -> program
@@ -64,7 +45,7 @@ Rule 39    expression -> expression DOTSUB expression
 Rule 40    expression -> expression DOTMUL expression
 Rule 41    expression -> expression DOTDIV expression
 Rule 42    expression -> - expression
-Rule 43    expression -> expression '
+Rule 43    expression -> expression TRANSPOSITION
 Rule 44    expression -> expression EQ expression
 Rule 45    expression -> expression NEQ expression
 Rule 46    expression -> expression LT expression
@@ -82,7 +63,6 @@ Rule 57    print_instruction -> PRINT expression_list ;
 
 Terminals, with rules where they appear
 
-'                    : 43
 (                    : 18 31 32 33 52 53 54
 )                    : 18 31 32 33 52 53 54
 *                    : 36
@@ -94,12 +74,9 @@ Terminals, with rules where they appear
 ;                    : 8 9 10 11 57
 =                    : 21 26 56
 ADDASSIGN            : 22 27
-ASSIGN               : 
 BREAK                : 8
-COMMA                : 
 CONTINUE             : 9
 DIVASSIGN            : 25 30
-DIVIDE               : 
 DOTADD               : 38
 DOTDIV               : 41
 DOTMUL               : 40
@@ -113,29 +90,17 @@ GT                   : 48
 ID                   : 14 21 22 23 24 25 26 27 28 29 30 56
 IF                   : 52 53
 INTNUM               : 15
-LCURL                : 
-LPAREN               : 
-LSQUARE              : 
 LT                   : 46
-MINUS                : 
 MULASSIGN            : 24 29
 NEQ                  : 45
 NGT                  : 49
 NLT                  : 47
 ONES                 : 32
-PLUS                 : 
 PRINT                : 57
-RANGE                : 
-RCURL                : 
 RETURN               : 10
-RPAREN               : 
-RSQUARE              : 
-SEMICOLON            : 
 STRING               : 17
 SUBASSIGN            : 23 28
-THEN                 : 
-TIMES                : 
-TRANSPOSITION        : 
+TRANSPOSITION        : 43
 WHILE                : 54
 ZEROS                : 31
 [                    : 19 20 26 27 28 29 30
@@ -207,7 +172,7 @@ state 0
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -289,7 +254,7 @@ state 1
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -504,7 +469,7 @@ state 7
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -585,7 +550,7 @@ state 10
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -617,7 +582,7 @@ state 11
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -634,7 +599,7 @@ state 11
     DOTSUB          shift and go to state 38
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -674,7 +639,7 @@ state 13
     DOTSUB          reduce using rule 14 (expression -> ID .)
     DOTMUL          reduce using rule 14 (expression -> ID .)
     DOTDIV          reduce using rule 14 (expression -> ID .)
-    '               reduce using rule 14 (expression -> ID .)
+    TRANSPOSITION   reduce using rule 14 (expression -> ID .)
     EQ              reduce using rule 14 (expression -> ID .)
     NEQ             reduce using rule 14 (expression -> ID .)
     LT              reduce using rule 14 (expression -> ID .)
@@ -750,7 +715,7 @@ state 15
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -813,7 +778,7 @@ state 17
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -848,7 +813,7 @@ state 18
     DOTSUB          reduce using rule 15 (expression -> INTNUM .)
     DOTMUL          reduce using rule 15 (expression -> INTNUM .)
     DOTDIV          reduce using rule 15 (expression -> INTNUM .)
-    '               reduce using rule 15 (expression -> INTNUM .)
+    TRANSPOSITION   reduce using rule 15 (expression -> INTNUM .)
     EQ              reduce using rule 15 (expression -> INTNUM .)
     NEQ             reduce using rule 15 (expression -> INTNUM .)
     LT              reduce using rule 15 (expression -> INTNUM .)
@@ -891,7 +856,7 @@ state 19
     DOTSUB          reduce using rule 16 (expression -> FLOAT .)
     DOTMUL          reduce using rule 16 (expression -> FLOAT .)
     DOTDIV          reduce using rule 16 (expression -> FLOAT .)
-    '               reduce using rule 16 (expression -> FLOAT .)
+    TRANSPOSITION   reduce using rule 16 (expression -> FLOAT .)
     EQ              reduce using rule 16 (expression -> FLOAT .)
     NEQ             reduce using rule 16 (expression -> FLOAT .)
     LT              reduce using rule 16 (expression -> FLOAT .)
@@ -934,7 +899,7 @@ state 20
     DOTSUB          reduce using rule 17 (expression -> STRING .)
     DOTMUL          reduce using rule 17 (expression -> STRING .)
     DOTDIV          reduce using rule 17 (expression -> STRING .)
-    '               reduce using rule 17 (expression -> STRING .)
+    TRANSPOSITION   reduce using rule 17 (expression -> STRING .)
     EQ              reduce using rule 17 (expression -> STRING .)
     NEQ             reduce using rule 17 (expression -> STRING .)
     LT              reduce using rule 17 (expression -> STRING .)
@@ -999,7 +964,7 @@ state 21
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -1075,7 +1040,7 @@ state 25
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -1168,7 +1133,7 @@ state 27
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -1293,7 +1258,7 @@ state 31
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -1310,7 +1275,7 @@ state 31
     DOTSUB          shift and go to state 38
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -1378,7 +1343,7 @@ state 33
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -1431,7 +1396,7 @@ state 34
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -1484,7 +1449,7 @@ state 35
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -1537,7 +1502,7 @@ state 36
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -1590,7 +1555,7 @@ state 37
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -1643,7 +1608,7 @@ state 38
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -1696,7 +1661,7 @@ state 39
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -1749,7 +1714,7 @@ state 40
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -1772,45 +1737,45 @@ state 40
 
 state 41
 
-    (43) expression -> expression ' .
+    (43) expression -> expression TRANSPOSITION .
 
-    ;               reduce using rule 43 (expression -> expression ' .)
-    +               reduce using rule 43 (expression -> expression ' .)
-    -               reduce using rule 43 (expression -> expression ' .)
-    *               reduce using rule 43 (expression -> expression ' .)
-    /               reduce using rule 43 (expression -> expression ' .)
-    DOTADD          reduce using rule 43 (expression -> expression ' .)
-    DOTSUB          reduce using rule 43 (expression -> expression ' .)
-    DOTMUL          reduce using rule 43 (expression -> expression ' .)
-    DOTDIV          reduce using rule 43 (expression -> expression ' .)
-    '               reduce using rule 43 (expression -> expression ' .)
-    EQ              reduce using rule 43 (expression -> expression ' .)
-    NEQ             reduce using rule 43 (expression -> expression ' .)
-    LT              reduce using rule 43 (expression -> expression ' .)
-    NLT             reduce using rule 43 (expression -> expression ' .)
-    GT              reduce using rule 43 (expression -> expression ' .)
-    NGT             reduce using rule 43 (expression -> expression ' .)
-    )               reduce using rule 43 (expression -> expression ' .)
-    ,               reduce using rule 43 (expression -> expression ' .)
-    ]               reduce using rule 43 (expression -> expression ' .)
-    :               reduce using rule 43 (expression -> expression ' .)
-    {               reduce using rule 43 (expression -> expression ' .)
-    BREAK           reduce using rule 43 (expression -> expression ' .)
-    CONTINUE        reduce using rule 43 (expression -> expression ' .)
-    RETURN          reduce using rule 43 (expression -> expression ' .)
-    FOR             reduce using rule 43 (expression -> expression ' .)
-    WHILE           reduce using rule 43 (expression -> expression ' .)
-    IF              reduce using rule 43 (expression -> expression ' .)
-    PRINT           reduce using rule 43 (expression -> expression ' .)
-    ID              reduce using rule 43 (expression -> expression ' .)
-    INTNUM          reduce using rule 43 (expression -> expression ' .)
-    FLOAT           reduce using rule 43 (expression -> expression ' .)
-    STRING          reduce using rule 43 (expression -> expression ' .)
-    (               reduce using rule 43 (expression -> expression ' .)
-    [               reduce using rule 43 (expression -> expression ' .)
-    ZEROS           reduce using rule 43 (expression -> expression ' .)
-    ONES            reduce using rule 43 (expression -> expression ' .)
-    EYE             reduce using rule 43 (expression -> expression ' .)
+    ;               reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    +               reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    -               reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    *               reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    /               reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    DOTADD          reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    DOTSUB          reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    DOTMUL          reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    DOTDIV          reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    TRANSPOSITION   reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    EQ              reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    NEQ             reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    LT              reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    NLT             reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    GT              reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    NGT             reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    )               reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    ,               reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    ]               reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    :               reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    {               reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    BREAK           reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    CONTINUE        reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    RETURN          reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    FOR             reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    WHILE           reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    IF              reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    PRINT           reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    ID              reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    INTNUM          reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    FLOAT           reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    STRING          reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    (               reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    [               reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    ZEROS           reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    ONES            reduce using rule 43 (expression -> expression TRANSPOSITION .)
+    EYE             reduce using rule 43 (expression -> expression TRANSPOSITION .)
 
 
 state 42
@@ -1845,7 +1810,7 @@ state 42
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -1898,7 +1863,7 @@ state 43
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -1951,7 +1916,7 @@ state 44
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -2004,7 +1969,7 @@ state 45
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -2057,7 +2022,7 @@ state 46
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -2110,7 +2075,7 @@ state 47
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -2170,7 +2135,7 @@ state 49
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -2223,7 +2188,7 @@ state 50
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -2276,7 +2241,7 @@ state 51
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -2329,7 +2294,7 @@ state 52
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -2382,7 +2347,7 @@ state 53
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -2441,7 +2406,7 @@ state 54
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -2495,7 +2460,7 @@ state 55
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -2527,7 +2492,7 @@ state 56
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -2544,7 +2509,7 @@ state 56
     DOTSUB          shift and go to state 38
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -2586,7 +2551,7 @@ state 57
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -2627,7 +2592,7 @@ state 59
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -2647,7 +2612,7 @@ state 59
     DOTSUB          shift and go to state 38
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -2669,7 +2634,7 @@ state 60
     DOTSUB          reduce using rule 19 (expression -> [ ] .)
     DOTMUL          reduce using rule 19 (expression -> [ ] .)
     DOTDIV          reduce using rule 19 (expression -> [ ] .)
-    '               reduce using rule 19 (expression -> [ ] .)
+    TRANSPOSITION   reduce using rule 19 (expression -> [ ] .)
     EQ              reduce using rule 19 (expression -> [ ] .)
     NEQ             reduce using rule 19 (expression -> [ ] .)
     LT              reduce using rule 19 (expression -> [ ] .)
@@ -2742,7 +2707,7 @@ state 62
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -2798,7 +2763,7 @@ state 63
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -2854,7 +2819,7 @@ state 64
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -2887,7 +2852,7 @@ state 65
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -2931,9 +2896,9 @@ state 65
     ZEROS           reduce using rule 42 (expression -> - expression .)
     ONES            reduce using rule 42 (expression -> - expression .)
     EYE             reduce using rule 42 (expression -> - expression .)
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
 
-  ! '               [ reduce using rule 42 (expression -> - expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 42 (expression -> - expression .) ]
   ! +               [ shift and go to state 33 ]
   ! -               [ shift and go to state 34 ]
   ! *               [ shift and go to state 35 ]
@@ -3040,7 +3005,7 @@ state 69
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -3078,7 +3043,7 @@ state 69
     /               shift and go to state 36
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -3090,7 +3055,7 @@ state 69
   ! /               [ reduce using rule 34 (expression -> expression + expression .) ]
   ! DOTMUL          [ reduce using rule 34 (expression -> expression + expression .) ]
   ! DOTDIV          [ reduce using rule 34 (expression -> expression + expression .) ]
-  ! '               [ reduce using rule 34 (expression -> expression + expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 34 (expression -> expression + expression .) ]
   ! EQ              [ reduce using rule 34 (expression -> expression + expression .) ]
   ! NEQ             [ reduce using rule 34 (expression -> expression + expression .) ]
   ! LT              [ reduce using rule 34 (expression -> expression + expression .) ]
@@ -3114,7 +3079,7 @@ state 70
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -3152,7 +3117,7 @@ state 70
     /               shift and go to state 36
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -3164,7 +3129,7 @@ state 70
   ! /               [ reduce using rule 35 (expression -> expression - expression .) ]
   ! DOTMUL          [ reduce using rule 35 (expression -> expression - expression .) ]
   ! DOTDIV          [ reduce using rule 35 (expression -> expression - expression .) ]
-  ! '               [ reduce using rule 35 (expression -> expression - expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 35 (expression -> expression - expression .) ]
   ! EQ              [ reduce using rule 35 (expression -> expression - expression .) ]
   ! NEQ             [ reduce using rule 35 (expression -> expression - expression .) ]
   ! LT              [ reduce using rule 35 (expression -> expression - expression .) ]
@@ -3188,7 +3153,7 @@ state 71
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -3226,7 +3191,7 @@ state 71
     ZEROS           reduce using rule 36 (expression -> expression * expression .)
     ONES            reduce using rule 36 (expression -> expression * expression .)
     EYE             reduce using rule 36 (expression -> expression * expression .)
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -3234,7 +3199,7 @@ state 71
     GT              shift and go to state 46
     NGT             shift and go to state 47
 
-  ! '               [ reduce using rule 36 (expression -> expression * expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 36 (expression -> expression * expression .) ]
   ! EQ              [ reduce using rule 36 (expression -> expression * expression .) ]
   ! NEQ             [ reduce using rule 36 (expression -> expression * expression .) ]
   ! LT              [ reduce using rule 36 (expression -> expression * expression .) ]
@@ -3262,7 +3227,7 @@ state 72
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -3300,7 +3265,7 @@ state 72
     ZEROS           reduce using rule 37 (expression -> expression / expression .)
     ONES            reduce using rule 37 (expression -> expression / expression .)
     EYE             reduce using rule 37 (expression -> expression / expression .)
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -3308,7 +3273,7 @@ state 72
     GT              shift and go to state 46
     NGT             shift and go to state 47
 
-  ! '               [ reduce using rule 37 (expression -> expression / expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 37 (expression -> expression / expression .) ]
   ! EQ              [ reduce using rule 37 (expression -> expression / expression .) ]
   ! NEQ             [ reduce using rule 37 (expression -> expression / expression .) ]
   ! LT              [ reduce using rule 37 (expression -> expression / expression .) ]
@@ -3336,7 +3301,7 @@ state 73
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -3374,7 +3339,7 @@ state 73
     /               shift and go to state 36
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -3386,7 +3351,7 @@ state 73
   ! /               [ reduce using rule 38 (expression -> expression DOTADD expression .) ]
   ! DOTMUL          [ reduce using rule 38 (expression -> expression DOTADD expression .) ]
   ! DOTDIV          [ reduce using rule 38 (expression -> expression DOTADD expression .) ]
-  ! '               [ reduce using rule 38 (expression -> expression DOTADD expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 38 (expression -> expression DOTADD expression .) ]
   ! EQ              [ reduce using rule 38 (expression -> expression DOTADD expression .) ]
   ! NEQ             [ reduce using rule 38 (expression -> expression DOTADD expression .) ]
   ! LT              [ reduce using rule 38 (expression -> expression DOTADD expression .) ]
@@ -3410,7 +3375,7 @@ state 74
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -3448,7 +3413,7 @@ state 74
     /               shift and go to state 36
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -3460,7 +3425,7 @@ state 74
   ! /               [ reduce using rule 39 (expression -> expression DOTSUB expression .) ]
   ! DOTMUL          [ reduce using rule 39 (expression -> expression DOTSUB expression .) ]
   ! DOTDIV          [ reduce using rule 39 (expression -> expression DOTSUB expression .) ]
-  ! '               [ reduce using rule 39 (expression -> expression DOTSUB expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 39 (expression -> expression DOTSUB expression .) ]
   ! EQ              [ reduce using rule 39 (expression -> expression DOTSUB expression .) ]
   ! NEQ             [ reduce using rule 39 (expression -> expression DOTSUB expression .) ]
   ! LT              [ reduce using rule 39 (expression -> expression DOTSUB expression .) ]
@@ -3484,7 +3449,7 @@ state 75
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -3522,7 +3487,7 @@ state 75
     ZEROS           reduce using rule 40 (expression -> expression DOTMUL expression .)
     ONES            reduce using rule 40 (expression -> expression DOTMUL expression .)
     EYE             reduce using rule 40 (expression -> expression DOTMUL expression .)
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -3530,7 +3495,7 @@ state 75
     GT              shift and go to state 46
     NGT             shift and go to state 47
 
-  ! '               [ reduce using rule 40 (expression -> expression DOTMUL expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 40 (expression -> expression DOTMUL expression .) ]
   ! EQ              [ reduce using rule 40 (expression -> expression DOTMUL expression .) ]
   ! NEQ             [ reduce using rule 40 (expression -> expression DOTMUL expression .) ]
   ! LT              [ reduce using rule 40 (expression -> expression DOTMUL expression .) ]
@@ -3558,7 +3523,7 @@ state 76
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -3596,7 +3561,7 @@ state 76
     ZEROS           reduce using rule 41 (expression -> expression DOTDIV expression .)
     ONES            reduce using rule 41 (expression -> expression DOTDIV expression .)
     EYE             reduce using rule 41 (expression -> expression DOTDIV expression .)
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -3604,7 +3569,7 @@ state 76
     GT              shift and go to state 46
     NGT             shift and go to state 47
 
-  ! '               [ reduce using rule 41 (expression -> expression DOTDIV expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 41 (expression -> expression DOTDIV expression .) ]
   ! EQ              [ reduce using rule 41 (expression -> expression DOTDIV expression .) ]
   ! NEQ             [ reduce using rule 41 (expression -> expression DOTDIV expression .) ]
   ! LT              [ reduce using rule 41 (expression -> expression DOTDIV expression .) ]
@@ -3632,7 +3597,7 @@ state 77
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -3676,9 +3641,9 @@ state 77
     ZEROS           reduce using rule 44 (expression -> expression EQ expression .)
     ONES            reduce using rule 44 (expression -> expression EQ expression .)
     EYE             reduce using rule 44 (expression -> expression EQ expression .)
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
 
-  ! '               [ reduce using rule 44 (expression -> expression EQ expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 44 (expression -> expression EQ expression .) ]
   ! +               [ shift and go to state 33 ]
   ! -               [ shift and go to state 34 ]
   ! *               [ shift and go to state 35 ]
@@ -3706,7 +3671,7 @@ state 78
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -3750,9 +3715,9 @@ state 78
     ZEROS           reduce using rule 45 (expression -> expression NEQ expression .)
     ONES            reduce using rule 45 (expression -> expression NEQ expression .)
     EYE             reduce using rule 45 (expression -> expression NEQ expression .)
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
 
-  ! '               [ reduce using rule 45 (expression -> expression NEQ expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 45 (expression -> expression NEQ expression .) ]
   ! +               [ shift and go to state 33 ]
   ! -               [ shift and go to state 34 ]
   ! *               [ shift and go to state 35 ]
@@ -3780,7 +3745,7 @@ state 79
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -3824,9 +3789,9 @@ state 79
     ZEROS           reduce using rule 46 (expression -> expression LT expression .)
     ONES            reduce using rule 46 (expression -> expression LT expression .)
     EYE             reduce using rule 46 (expression -> expression LT expression .)
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
 
-  ! '               [ reduce using rule 46 (expression -> expression LT expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 46 (expression -> expression LT expression .) ]
   ! +               [ shift and go to state 33 ]
   ! -               [ shift and go to state 34 ]
   ! *               [ shift and go to state 35 ]
@@ -3854,7 +3819,7 @@ state 80
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -3898,9 +3863,9 @@ state 80
     ZEROS           reduce using rule 47 (expression -> expression NLT expression .)
     ONES            reduce using rule 47 (expression -> expression NLT expression .)
     EYE             reduce using rule 47 (expression -> expression NLT expression .)
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
 
-  ! '               [ reduce using rule 47 (expression -> expression NLT expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 47 (expression -> expression NLT expression .) ]
   ! +               [ shift and go to state 33 ]
   ! -               [ shift and go to state 34 ]
   ! *               [ shift and go to state 35 ]
@@ -3928,7 +3893,7 @@ state 81
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -3972,9 +3937,9 @@ state 81
     ZEROS           reduce using rule 48 (expression -> expression GT expression .)
     ONES            reduce using rule 48 (expression -> expression GT expression .)
     EYE             reduce using rule 48 (expression -> expression GT expression .)
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
 
-  ! '               [ reduce using rule 48 (expression -> expression GT expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 48 (expression -> expression GT expression .) ]
   ! +               [ shift and go to state 33 ]
   ! -               [ shift and go to state 34 ]
   ! *               [ shift and go to state 35 ]
@@ -4002,7 +3967,7 @@ state 82
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -4046,9 +4011,9 @@ state 82
     ZEROS           reduce using rule 49 (expression -> expression NGT expression .)
     ONES            reduce using rule 49 (expression -> expression NGT expression .)
     EYE             reduce using rule 49 (expression -> expression NGT expression .)
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
 
-  ! '               [ reduce using rule 49 (expression -> expression NGT expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 49 (expression -> expression NGT expression .) ]
   ! +               [ shift and go to state 33 ]
   ! -               [ shift and go to state 34 ]
   ! *               [ shift and go to state 35 ]
@@ -4098,7 +4063,7 @@ state 83
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -4131,7 +4096,7 @@ state 84
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -4169,7 +4134,7 @@ state 84
     DOTSUB          shift and go to state 38
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -4185,7 +4150,7 @@ state 84
   ! DOTSUB          [ reduce using rule 21 (expression -> ID = expression .) ]
   ! DOTMUL          [ reduce using rule 21 (expression -> ID = expression .) ]
   ! DOTDIV          [ reduce using rule 21 (expression -> ID = expression .) ]
-  ! '               [ reduce using rule 21 (expression -> ID = expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 21 (expression -> ID = expression .) ]
   ! EQ              [ reduce using rule 21 (expression -> ID = expression .) ]
   ! NEQ             [ reduce using rule 21 (expression -> ID = expression .) ]
   ! LT              [ reduce using rule 21 (expression -> ID = expression .) ]
@@ -4205,7 +4170,7 @@ state 85
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -4243,7 +4208,7 @@ state 85
     DOTSUB          shift and go to state 38
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -4259,7 +4224,7 @@ state 85
   ! DOTSUB          [ reduce using rule 22 (expression -> ID ADDASSIGN expression .) ]
   ! DOTMUL          [ reduce using rule 22 (expression -> ID ADDASSIGN expression .) ]
   ! DOTDIV          [ reduce using rule 22 (expression -> ID ADDASSIGN expression .) ]
-  ! '               [ reduce using rule 22 (expression -> ID ADDASSIGN expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 22 (expression -> ID ADDASSIGN expression .) ]
   ! EQ              [ reduce using rule 22 (expression -> ID ADDASSIGN expression .) ]
   ! NEQ             [ reduce using rule 22 (expression -> ID ADDASSIGN expression .) ]
   ! LT              [ reduce using rule 22 (expression -> ID ADDASSIGN expression .) ]
@@ -4279,7 +4244,7 @@ state 86
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -4317,7 +4282,7 @@ state 86
     DOTSUB          shift and go to state 38
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -4333,7 +4298,7 @@ state 86
   ! DOTSUB          [ reduce using rule 23 (expression -> ID SUBASSIGN expression .) ]
   ! DOTMUL          [ reduce using rule 23 (expression -> ID SUBASSIGN expression .) ]
   ! DOTDIV          [ reduce using rule 23 (expression -> ID SUBASSIGN expression .) ]
-  ! '               [ reduce using rule 23 (expression -> ID SUBASSIGN expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 23 (expression -> ID SUBASSIGN expression .) ]
   ! EQ              [ reduce using rule 23 (expression -> ID SUBASSIGN expression .) ]
   ! NEQ             [ reduce using rule 23 (expression -> ID SUBASSIGN expression .) ]
   ! LT              [ reduce using rule 23 (expression -> ID SUBASSIGN expression .) ]
@@ -4353,7 +4318,7 @@ state 87
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -4391,7 +4356,7 @@ state 87
     DOTSUB          shift and go to state 38
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -4407,7 +4372,7 @@ state 87
   ! DOTSUB          [ reduce using rule 24 (expression -> ID MULASSIGN expression .) ]
   ! DOTMUL          [ reduce using rule 24 (expression -> ID MULASSIGN expression .) ]
   ! DOTDIV          [ reduce using rule 24 (expression -> ID MULASSIGN expression .) ]
-  ! '               [ reduce using rule 24 (expression -> ID MULASSIGN expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 24 (expression -> ID MULASSIGN expression .) ]
   ! EQ              [ reduce using rule 24 (expression -> ID MULASSIGN expression .) ]
   ! NEQ             [ reduce using rule 24 (expression -> ID MULASSIGN expression .) ]
   ! LT              [ reduce using rule 24 (expression -> ID MULASSIGN expression .) ]
@@ -4427,7 +4392,7 @@ state 88
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -4465,7 +4430,7 @@ state 88
     DOTSUB          shift and go to state 38
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -4481,7 +4446,7 @@ state 88
   ! DOTSUB          [ reduce using rule 25 (expression -> ID DIVASSIGN expression .) ]
   ! DOTMUL          [ reduce using rule 25 (expression -> ID DIVASSIGN expression .) ]
   ! DOTDIV          [ reduce using rule 25 (expression -> ID DIVASSIGN expression .) ]
-  ! '               [ reduce using rule 25 (expression -> ID DIVASSIGN expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 25 (expression -> ID DIVASSIGN expression .) ]
   ! EQ              [ reduce using rule 25 (expression -> ID DIVASSIGN expression .) ]
   ! NEQ             [ reduce using rule 25 (expression -> ID DIVASSIGN expression .) ]
   ! LT              [ reduce using rule 25 (expression -> ID DIVASSIGN expression .) ]
@@ -4514,7 +4479,7 @@ state 90
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -4531,7 +4496,7 @@ state 90
     DOTSUB          shift and go to state 38
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -4553,7 +4518,7 @@ state 91
     DOTSUB          reduce using rule 18 (expression -> ( expression ) .)
     DOTMUL          reduce using rule 18 (expression -> ( expression ) .)
     DOTDIV          reduce using rule 18 (expression -> ( expression ) .)
-    '               reduce using rule 18 (expression -> ( expression ) .)
+    TRANSPOSITION   reduce using rule 18 (expression -> ( expression ) .)
     EQ              reduce using rule 18 (expression -> ( expression ) .)
     NEQ             reduce using rule 18 (expression -> ( expression ) .)
     LT              reduce using rule 18 (expression -> ( expression ) .)
@@ -4595,7 +4560,7 @@ state 92
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -4612,7 +4577,7 @@ state 92
     DOTSUB          shift and go to state 38
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -4680,7 +4645,7 @@ state 94
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -4714,7 +4679,7 @@ state 95
     DOTSUB          reduce using rule 20 (expression -> [ expression_list ] .)
     DOTMUL          reduce using rule 20 (expression -> [ expression_list ] .)
     DOTDIV          reduce using rule 20 (expression -> [ expression_list ] .)
-    '               reduce using rule 20 (expression -> [ expression_list ] .)
+    TRANSPOSITION   reduce using rule 20 (expression -> [ expression_list ] .)
     EQ              reduce using rule 20 (expression -> [ expression_list ] .)
     NEQ             reduce using rule 20 (expression -> [ expression_list ] .)
     LT              reduce using rule 20 (expression -> [ expression_list ] .)
@@ -4817,7 +4782,7 @@ state 99
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -4862,7 +4827,7 @@ state 100
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -4879,7 +4844,7 @@ state 100
     DOTSUB          shift and go to state 38
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -4949,7 +4914,7 @@ state 102
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -5030,7 +4995,7 @@ state 103
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -5075,7 +5040,7 @@ state 104
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -5095,7 +5060,7 @@ state 104
     DOTSUB          shift and go to state 38
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -5117,7 +5082,7 @@ state 105
     DOTSUB          reduce using rule 31 (expression -> ZEROS ( expression_list ) .)
     DOTMUL          reduce using rule 31 (expression -> ZEROS ( expression_list ) .)
     DOTDIV          reduce using rule 31 (expression -> ZEROS ( expression_list ) .)
-    '               reduce using rule 31 (expression -> ZEROS ( expression_list ) .)
+    TRANSPOSITION   reduce using rule 31 (expression -> ZEROS ( expression_list ) .)
     EQ              reduce using rule 31 (expression -> ZEROS ( expression_list ) .)
     NEQ             reduce using rule 31 (expression -> ZEROS ( expression_list ) .)
     LT              reduce using rule 31 (expression -> ZEROS ( expression_list ) .)
@@ -5160,7 +5125,7 @@ state 106
     DOTSUB          reduce using rule 32 (expression -> ONES ( expression_list ) .)
     DOTMUL          reduce using rule 32 (expression -> ONES ( expression_list ) .)
     DOTDIV          reduce using rule 32 (expression -> ONES ( expression_list ) .)
-    '               reduce using rule 32 (expression -> ONES ( expression_list ) .)
+    TRANSPOSITION   reduce using rule 32 (expression -> ONES ( expression_list ) .)
     EQ              reduce using rule 32 (expression -> ONES ( expression_list ) .)
     NEQ             reduce using rule 32 (expression -> ONES ( expression_list ) .)
     LT              reduce using rule 32 (expression -> ONES ( expression_list ) .)
@@ -5203,7 +5168,7 @@ state 107
     DOTSUB          reduce using rule 33 (expression -> EYE ( expression_list ) .)
     DOTMUL          reduce using rule 33 (expression -> EYE ( expression_list ) .)
     DOTDIV          reduce using rule 33 (expression -> EYE ( expression_list ) .)
-    '               reduce using rule 33 (expression -> EYE ( expression_list ) .)
+    TRANSPOSITION   reduce using rule 33 (expression -> EYE ( expression_list ) .)
     EQ              reduce using rule 33 (expression -> EYE ( expression_list ) .)
     NEQ             reduce using rule 33 (expression -> EYE ( expression_list ) .)
     LT              reduce using rule 33 (expression -> EYE ( expression_list ) .)
@@ -5292,7 +5257,7 @@ state 109
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -5345,7 +5310,7 @@ state 110
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -5398,7 +5363,7 @@ state 111
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -5451,7 +5416,7 @@ state 112
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -5504,7 +5469,7 @@ state 113
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -5557,7 +5522,7 @@ state 114
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
@@ -5646,7 +5611,7 @@ state 117
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -5679,7 +5644,7 @@ state 117
     DOTSUB          shift and go to state 38
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -5701,7 +5666,7 @@ state 118
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -5739,7 +5704,7 @@ state 118
     DOTSUB          shift and go to state 38
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -5755,7 +5720,7 @@ state 118
   ! DOTSUB          [ reduce using rule 26 (expression -> ID [ expression_list ] = expression .) ]
   ! DOTMUL          [ reduce using rule 26 (expression -> ID [ expression_list ] = expression .) ]
   ! DOTDIV          [ reduce using rule 26 (expression -> ID [ expression_list ] = expression .) ]
-  ! '               [ reduce using rule 26 (expression -> ID [ expression_list ] = expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 26 (expression -> ID [ expression_list ] = expression .) ]
   ! EQ              [ reduce using rule 26 (expression -> ID [ expression_list ] = expression .) ]
   ! NEQ             [ reduce using rule 26 (expression -> ID [ expression_list ] = expression .) ]
   ! LT              [ reduce using rule 26 (expression -> ID [ expression_list ] = expression .) ]
@@ -5775,7 +5740,7 @@ state 119
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -5813,7 +5778,7 @@ state 119
     DOTSUB          shift and go to state 38
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -5829,7 +5794,7 @@ state 119
   ! DOTSUB          [ reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .) ]
   ! DOTMUL          [ reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .) ]
   ! DOTDIV          [ reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .) ]
-  ! '               [ reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .) ]
   ! EQ              [ reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .) ]
   ! NEQ             [ reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .) ]
   ! LT              [ reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .) ]
@@ -5849,7 +5814,7 @@ state 120
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -5887,7 +5852,7 @@ state 120
     DOTSUB          shift and go to state 38
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -5903,7 +5868,7 @@ state 120
   ! DOTSUB          [ reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .) ]
   ! DOTMUL          [ reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .) ]
   ! DOTDIV          [ reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .) ]
-  ! '               [ reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .) ]
   ! EQ              [ reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .) ]
   ! NEQ             [ reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .) ]
   ! LT              [ reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .) ]
@@ -5923,7 +5888,7 @@ state 121
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -5961,7 +5926,7 @@ state 121
     DOTSUB          shift and go to state 38
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -5977,7 +5942,7 @@ state 121
   ! DOTSUB          [ reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .) ]
   ! DOTMUL          [ reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .) ]
   ! DOTDIV          [ reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .) ]
-  ! '               [ reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .) ]
   ! EQ              [ reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .) ]
   ! NEQ             [ reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .) ]
   ! LT              [ reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .) ]
@@ -5997,7 +5962,7 @@ state 122
     (39) expression -> expression . DOTSUB expression
     (40) expression -> expression . DOTMUL expression
     (41) expression -> expression . DOTDIV expression
-    (43) expression -> expression . '
+    (43) expression -> expression . TRANSPOSITION
     (44) expression -> expression . EQ expression
     (45) expression -> expression . NEQ expression
     (46) expression -> expression . LT expression
@@ -6035,7 +6000,7 @@ state 122
     DOTSUB          shift and go to state 38
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
-    '               shift and go to state 41
+    TRANSPOSITION   shift and go to state 41
     EQ              shift and go to state 42
     NEQ             shift and go to state 43
     LT              shift and go to state 44
@@ -6051,7 +6016,7 @@ state 122
   ! DOTSUB          [ reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .) ]
   ! DOTMUL          [ reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .) ]
   ! DOTDIV          [ reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .) ]
-  ! '               [ reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .) ]
+  ! TRANSPOSITION   [ reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .) ]
   ! EQ              [ reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .) ]
   ! NEQ             [ reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .) ]
   ! LT              [ reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .) ]
@@ -6106,7 +6071,7 @@ state 123
     (40) expression -> . expression DOTMUL expression
     (41) expression -> . expression DOTDIV expression
     (42) expression -> . - expression
-    (43) expression -> . expression '
+    (43) expression -> . expression TRANSPOSITION
     (44) expression -> . expression EQ expression
     (45) expression -> . expression NEQ expression
     (46) expression -> . expression LT expression
