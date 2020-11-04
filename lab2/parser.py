@@ -8,8 +8,11 @@ precedence = (
    ('left', '=', "ADDASSIGN", "SUBASSIGN", "MULASSIGN", "DIVASSIGN"),
    ("left", '+', '-', "DOTADD", "DOTSUB"),
    ("left", '*', '/', "DOTMUL", "DOTDIV"),
-   ("right", "-"),
+   ("left", "LT", "GT", "NGT", "NLT", "NEQ", "EQ"),
+   ("right", 'ONES', 'ZEROS', 'EYE'),
+   ("right", "OPP"),
    ("left", "'"),
+   ("left", ":"),
    ("nonassoc", 'IFX'),
    ("nonassoc", 'ELSE')
 )
@@ -51,7 +54,6 @@ def p_instructions_list(p):
 def p_expression(p):
     """
     expression : ID
- 
                | INTNUM
                | FLOAT
                | STRING
@@ -84,7 +86,7 @@ def p_expression(p):
                | expression DOTSUB expression
                | expression DOTMUL expression
                | expression DOTDIV expression
-               | '-' expression
+               | '-' expression %prec OPP
  
                | expression '\\\''
                

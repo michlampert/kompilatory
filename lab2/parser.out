@@ -2898,8 +2898,12 @@ state 65
     ;               reduce using rule 42 (expression -> - expression .)
     +               reduce using rule 42 (expression -> - expression .)
     -               reduce using rule 42 (expression -> - expression .)
+    *               reduce using rule 42 (expression -> - expression .)
+    /               reduce using rule 42 (expression -> - expression .)
     DOTADD          reduce using rule 42 (expression -> - expression .)
     DOTSUB          reduce using rule 42 (expression -> - expression .)
+    DOTMUL          reduce using rule 42 (expression -> - expression .)
+    DOTDIV          reduce using rule 42 (expression -> - expression .)
     EQ              reduce using rule 42 (expression -> - expression .)
     NEQ             reduce using rule 42 (expression -> - expression .)
     LT              reduce using rule 42 (expression -> - expression .)
@@ -2927,21 +2931,17 @@ state 65
     ZEROS           reduce using rule 42 (expression -> - expression .)
     ONES            reduce using rule 42 (expression -> - expression .)
     EYE             reduce using rule 42 (expression -> - expression .)
-    *               shift and go to state 35
-    /               shift and go to state 36
-    DOTMUL          shift and go to state 39
-    DOTDIV          shift and go to state 40
     '               shift and go to state 41
 
-  ! *               [ reduce using rule 42 (expression -> - expression .) ]
-  ! /               [ reduce using rule 42 (expression -> - expression .) ]
-  ! DOTMUL          [ reduce using rule 42 (expression -> - expression .) ]
-  ! DOTDIV          [ reduce using rule 42 (expression -> - expression .) ]
   ! '               [ reduce using rule 42 (expression -> - expression .) ]
   ! +               [ shift and go to state 33 ]
   ! -               [ shift and go to state 34 ]
+  ! *               [ shift and go to state 35 ]
+  ! /               [ shift and go to state 36 ]
   ! DOTADD          [ shift and go to state 37 ]
   ! DOTSUB          [ shift and go to state 38 ]
+  ! DOTMUL          [ shift and go to state 39 ]
+  ! DOTDIV          [ shift and go to state 40 ]
   ! EQ              [ shift and go to state 42 ]
   ! NEQ             [ shift and go to state 43 ]
   ! LT              [ shift and go to state 44 ]
@@ -3053,12 +3053,6 @@ state 69
     -               reduce using rule 34 (expression -> expression + expression .)
     DOTADD          reduce using rule 34 (expression -> expression + expression .)
     DOTSUB          reduce using rule 34 (expression -> expression + expression .)
-    EQ              reduce using rule 34 (expression -> expression + expression .)
-    NEQ             reduce using rule 34 (expression -> expression + expression .)
-    LT              reduce using rule 34 (expression -> expression + expression .)
-    NLT             reduce using rule 34 (expression -> expression + expression .)
-    GT              reduce using rule 34 (expression -> expression + expression .)
-    NGT             reduce using rule 34 (expression -> expression + expression .)
     )               reduce using rule 34 (expression -> expression + expression .)
     ,               reduce using rule 34 (expression -> expression + expression .)
     ]               reduce using rule 34 (expression -> expression + expression .)
@@ -3085,22 +3079,28 @@ state 69
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
     '               shift and go to state 41
+    EQ              shift and go to state 42
+    NEQ             shift and go to state 43
+    LT              shift and go to state 44
+    NLT             shift and go to state 45
+    GT              shift and go to state 46
+    NGT             shift and go to state 47
 
   ! *               [ reduce using rule 34 (expression -> expression + expression .) ]
   ! /               [ reduce using rule 34 (expression -> expression + expression .) ]
   ! DOTMUL          [ reduce using rule 34 (expression -> expression + expression .) ]
   ! DOTDIV          [ reduce using rule 34 (expression -> expression + expression .) ]
   ! '               [ reduce using rule 34 (expression -> expression + expression .) ]
+  ! EQ              [ reduce using rule 34 (expression -> expression + expression .) ]
+  ! NEQ             [ reduce using rule 34 (expression -> expression + expression .) ]
+  ! LT              [ reduce using rule 34 (expression -> expression + expression .) ]
+  ! NLT             [ reduce using rule 34 (expression -> expression + expression .) ]
+  ! GT              [ reduce using rule 34 (expression -> expression + expression .) ]
+  ! NGT             [ reduce using rule 34 (expression -> expression + expression .) ]
   ! +               [ shift and go to state 33 ]
   ! -               [ shift and go to state 34 ]
   ! DOTADD          [ shift and go to state 37 ]
   ! DOTSUB          [ shift and go to state 38 ]
-  ! EQ              [ shift and go to state 42 ]
-  ! NEQ             [ shift and go to state 43 ]
-  ! LT              [ shift and go to state 44 ]
-  ! NLT             [ shift and go to state 45 ]
-  ! GT              [ shift and go to state 46 ]
-  ! NGT             [ shift and go to state 47 ]
 
 
 state 70
@@ -3127,12 +3127,6 @@ state 70
     -               reduce using rule 35 (expression -> expression - expression .)
     DOTADD          reduce using rule 35 (expression -> expression - expression .)
     DOTSUB          reduce using rule 35 (expression -> expression - expression .)
-    EQ              reduce using rule 35 (expression -> expression - expression .)
-    NEQ             reduce using rule 35 (expression -> expression - expression .)
-    LT              reduce using rule 35 (expression -> expression - expression .)
-    NLT             reduce using rule 35 (expression -> expression - expression .)
-    GT              reduce using rule 35 (expression -> expression - expression .)
-    NGT             reduce using rule 35 (expression -> expression - expression .)
     )               reduce using rule 35 (expression -> expression - expression .)
     ,               reduce using rule 35 (expression -> expression - expression .)
     ]               reduce using rule 35 (expression -> expression - expression .)
@@ -3159,22 +3153,28 @@ state 70
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
     '               shift and go to state 41
+    EQ              shift and go to state 42
+    NEQ             shift and go to state 43
+    LT              shift and go to state 44
+    NLT             shift and go to state 45
+    GT              shift and go to state 46
+    NGT             shift and go to state 47
 
   ! *               [ reduce using rule 35 (expression -> expression - expression .) ]
   ! /               [ reduce using rule 35 (expression -> expression - expression .) ]
   ! DOTMUL          [ reduce using rule 35 (expression -> expression - expression .) ]
   ! DOTDIV          [ reduce using rule 35 (expression -> expression - expression .) ]
   ! '               [ reduce using rule 35 (expression -> expression - expression .) ]
+  ! EQ              [ reduce using rule 35 (expression -> expression - expression .) ]
+  ! NEQ             [ reduce using rule 35 (expression -> expression - expression .) ]
+  ! LT              [ reduce using rule 35 (expression -> expression - expression .) ]
+  ! NLT             [ reduce using rule 35 (expression -> expression - expression .) ]
+  ! GT              [ reduce using rule 35 (expression -> expression - expression .) ]
+  ! NGT             [ reduce using rule 35 (expression -> expression - expression .) ]
   ! +               [ shift and go to state 33 ]
   ! -               [ shift and go to state 34 ]
   ! DOTADD          [ shift and go to state 37 ]
   ! DOTSUB          [ shift and go to state 38 ]
-  ! EQ              [ shift and go to state 42 ]
-  ! NEQ             [ shift and go to state 43 ]
-  ! LT              [ shift and go to state 44 ]
-  ! NLT             [ shift and go to state 45 ]
-  ! GT              [ shift and go to state 46 ]
-  ! NGT             [ shift and go to state 47 ]
 
 
 state 71
@@ -3205,12 +3205,6 @@ state 71
     DOTSUB          reduce using rule 36 (expression -> expression * expression .)
     DOTMUL          reduce using rule 36 (expression -> expression * expression .)
     DOTDIV          reduce using rule 36 (expression -> expression * expression .)
-    EQ              reduce using rule 36 (expression -> expression * expression .)
-    NEQ             reduce using rule 36 (expression -> expression * expression .)
-    LT              reduce using rule 36 (expression -> expression * expression .)
-    NLT             reduce using rule 36 (expression -> expression * expression .)
-    GT              reduce using rule 36 (expression -> expression * expression .)
-    NGT             reduce using rule 36 (expression -> expression * expression .)
     )               reduce using rule 36 (expression -> expression * expression .)
     ,               reduce using rule 36 (expression -> expression * expression .)
     ]               reduce using rule 36 (expression -> expression * expression .)
@@ -3233,8 +3227,20 @@ state 71
     ONES            reduce using rule 36 (expression -> expression * expression .)
     EYE             reduce using rule 36 (expression -> expression * expression .)
     '               shift and go to state 41
+    EQ              shift and go to state 42
+    NEQ             shift and go to state 43
+    LT              shift and go to state 44
+    NLT             shift and go to state 45
+    GT              shift and go to state 46
+    NGT             shift and go to state 47
 
   ! '               [ reduce using rule 36 (expression -> expression * expression .) ]
+  ! EQ              [ reduce using rule 36 (expression -> expression * expression .) ]
+  ! NEQ             [ reduce using rule 36 (expression -> expression * expression .) ]
+  ! LT              [ reduce using rule 36 (expression -> expression * expression .) ]
+  ! NLT             [ reduce using rule 36 (expression -> expression * expression .) ]
+  ! GT              [ reduce using rule 36 (expression -> expression * expression .) ]
+  ! NGT             [ reduce using rule 36 (expression -> expression * expression .) ]
   ! +               [ shift and go to state 33 ]
   ! -               [ shift and go to state 34 ]
   ! *               [ shift and go to state 35 ]
@@ -3243,12 +3249,6 @@ state 71
   ! DOTSUB          [ shift and go to state 38 ]
   ! DOTMUL          [ shift and go to state 39 ]
   ! DOTDIV          [ shift and go to state 40 ]
-  ! EQ              [ shift and go to state 42 ]
-  ! NEQ             [ shift and go to state 43 ]
-  ! LT              [ shift and go to state 44 ]
-  ! NLT             [ shift and go to state 45 ]
-  ! GT              [ shift and go to state 46 ]
-  ! NGT             [ shift and go to state 47 ]
 
 
 state 72
@@ -3279,12 +3279,6 @@ state 72
     DOTSUB          reduce using rule 37 (expression -> expression / expression .)
     DOTMUL          reduce using rule 37 (expression -> expression / expression .)
     DOTDIV          reduce using rule 37 (expression -> expression / expression .)
-    EQ              reduce using rule 37 (expression -> expression / expression .)
-    NEQ             reduce using rule 37 (expression -> expression / expression .)
-    LT              reduce using rule 37 (expression -> expression / expression .)
-    NLT             reduce using rule 37 (expression -> expression / expression .)
-    GT              reduce using rule 37 (expression -> expression / expression .)
-    NGT             reduce using rule 37 (expression -> expression / expression .)
     )               reduce using rule 37 (expression -> expression / expression .)
     ,               reduce using rule 37 (expression -> expression / expression .)
     ]               reduce using rule 37 (expression -> expression / expression .)
@@ -3307,8 +3301,20 @@ state 72
     ONES            reduce using rule 37 (expression -> expression / expression .)
     EYE             reduce using rule 37 (expression -> expression / expression .)
     '               shift and go to state 41
+    EQ              shift and go to state 42
+    NEQ             shift and go to state 43
+    LT              shift and go to state 44
+    NLT             shift and go to state 45
+    GT              shift and go to state 46
+    NGT             shift and go to state 47
 
   ! '               [ reduce using rule 37 (expression -> expression / expression .) ]
+  ! EQ              [ reduce using rule 37 (expression -> expression / expression .) ]
+  ! NEQ             [ reduce using rule 37 (expression -> expression / expression .) ]
+  ! LT              [ reduce using rule 37 (expression -> expression / expression .) ]
+  ! NLT             [ reduce using rule 37 (expression -> expression / expression .) ]
+  ! GT              [ reduce using rule 37 (expression -> expression / expression .) ]
+  ! NGT             [ reduce using rule 37 (expression -> expression / expression .) ]
   ! +               [ shift and go to state 33 ]
   ! -               [ shift and go to state 34 ]
   ! *               [ shift and go to state 35 ]
@@ -3317,12 +3323,6 @@ state 72
   ! DOTSUB          [ shift and go to state 38 ]
   ! DOTMUL          [ shift and go to state 39 ]
   ! DOTDIV          [ shift and go to state 40 ]
-  ! EQ              [ shift and go to state 42 ]
-  ! NEQ             [ shift and go to state 43 ]
-  ! LT              [ shift and go to state 44 ]
-  ! NLT             [ shift and go to state 45 ]
-  ! GT              [ shift and go to state 46 ]
-  ! NGT             [ shift and go to state 47 ]
 
 
 state 73
@@ -3349,12 +3349,6 @@ state 73
     -               reduce using rule 38 (expression -> expression DOTADD expression .)
     DOTADD          reduce using rule 38 (expression -> expression DOTADD expression .)
     DOTSUB          reduce using rule 38 (expression -> expression DOTADD expression .)
-    EQ              reduce using rule 38 (expression -> expression DOTADD expression .)
-    NEQ             reduce using rule 38 (expression -> expression DOTADD expression .)
-    LT              reduce using rule 38 (expression -> expression DOTADD expression .)
-    NLT             reduce using rule 38 (expression -> expression DOTADD expression .)
-    GT              reduce using rule 38 (expression -> expression DOTADD expression .)
-    NGT             reduce using rule 38 (expression -> expression DOTADD expression .)
     )               reduce using rule 38 (expression -> expression DOTADD expression .)
     ,               reduce using rule 38 (expression -> expression DOTADD expression .)
     ]               reduce using rule 38 (expression -> expression DOTADD expression .)
@@ -3381,22 +3375,28 @@ state 73
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
     '               shift and go to state 41
+    EQ              shift and go to state 42
+    NEQ             shift and go to state 43
+    LT              shift and go to state 44
+    NLT             shift and go to state 45
+    GT              shift and go to state 46
+    NGT             shift and go to state 47
 
   ! *               [ reduce using rule 38 (expression -> expression DOTADD expression .) ]
   ! /               [ reduce using rule 38 (expression -> expression DOTADD expression .) ]
   ! DOTMUL          [ reduce using rule 38 (expression -> expression DOTADD expression .) ]
   ! DOTDIV          [ reduce using rule 38 (expression -> expression DOTADD expression .) ]
   ! '               [ reduce using rule 38 (expression -> expression DOTADD expression .) ]
+  ! EQ              [ reduce using rule 38 (expression -> expression DOTADD expression .) ]
+  ! NEQ             [ reduce using rule 38 (expression -> expression DOTADD expression .) ]
+  ! LT              [ reduce using rule 38 (expression -> expression DOTADD expression .) ]
+  ! NLT             [ reduce using rule 38 (expression -> expression DOTADD expression .) ]
+  ! GT              [ reduce using rule 38 (expression -> expression DOTADD expression .) ]
+  ! NGT             [ reduce using rule 38 (expression -> expression DOTADD expression .) ]
   ! +               [ shift and go to state 33 ]
   ! -               [ shift and go to state 34 ]
   ! DOTADD          [ shift and go to state 37 ]
   ! DOTSUB          [ shift and go to state 38 ]
-  ! EQ              [ shift and go to state 42 ]
-  ! NEQ             [ shift and go to state 43 ]
-  ! LT              [ shift and go to state 44 ]
-  ! NLT             [ shift and go to state 45 ]
-  ! GT              [ shift and go to state 46 ]
-  ! NGT             [ shift and go to state 47 ]
 
 
 state 74
@@ -3423,12 +3423,6 @@ state 74
     -               reduce using rule 39 (expression -> expression DOTSUB expression .)
     DOTADD          reduce using rule 39 (expression -> expression DOTSUB expression .)
     DOTSUB          reduce using rule 39 (expression -> expression DOTSUB expression .)
-    EQ              reduce using rule 39 (expression -> expression DOTSUB expression .)
-    NEQ             reduce using rule 39 (expression -> expression DOTSUB expression .)
-    LT              reduce using rule 39 (expression -> expression DOTSUB expression .)
-    NLT             reduce using rule 39 (expression -> expression DOTSUB expression .)
-    GT              reduce using rule 39 (expression -> expression DOTSUB expression .)
-    NGT             reduce using rule 39 (expression -> expression DOTSUB expression .)
     )               reduce using rule 39 (expression -> expression DOTSUB expression .)
     ,               reduce using rule 39 (expression -> expression DOTSUB expression .)
     ]               reduce using rule 39 (expression -> expression DOTSUB expression .)
@@ -3455,22 +3449,28 @@ state 74
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
     '               shift and go to state 41
+    EQ              shift and go to state 42
+    NEQ             shift and go to state 43
+    LT              shift and go to state 44
+    NLT             shift and go to state 45
+    GT              shift and go to state 46
+    NGT             shift and go to state 47
 
   ! *               [ reduce using rule 39 (expression -> expression DOTSUB expression .) ]
   ! /               [ reduce using rule 39 (expression -> expression DOTSUB expression .) ]
   ! DOTMUL          [ reduce using rule 39 (expression -> expression DOTSUB expression .) ]
   ! DOTDIV          [ reduce using rule 39 (expression -> expression DOTSUB expression .) ]
   ! '               [ reduce using rule 39 (expression -> expression DOTSUB expression .) ]
+  ! EQ              [ reduce using rule 39 (expression -> expression DOTSUB expression .) ]
+  ! NEQ             [ reduce using rule 39 (expression -> expression DOTSUB expression .) ]
+  ! LT              [ reduce using rule 39 (expression -> expression DOTSUB expression .) ]
+  ! NLT             [ reduce using rule 39 (expression -> expression DOTSUB expression .) ]
+  ! GT              [ reduce using rule 39 (expression -> expression DOTSUB expression .) ]
+  ! NGT             [ reduce using rule 39 (expression -> expression DOTSUB expression .) ]
   ! +               [ shift and go to state 33 ]
   ! -               [ shift and go to state 34 ]
   ! DOTADD          [ shift and go to state 37 ]
   ! DOTSUB          [ shift and go to state 38 ]
-  ! EQ              [ shift and go to state 42 ]
-  ! NEQ             [ shift and go to state 43 ]
-  ! LT              [ shift and go to state 44 ]
-  ! NLT             [ shift and go to state 45 ]
-  ! GT              [ shift and go to state 46 ]
-  ! NGT             [ shift and go to state 47 ]
 
 
 state 75
@@ -3501,12 +3501,6 @@ state 75
     DOTSUB          reduce using rule 40 (expression -> expression DOTMUL expression .)
     DOTMUL          reduce using rule 40 (expression -> expression DOTMUL expression .)
     DOTDIV          reduce using rule 40 (expression -> expression DOTMUL expression .)
-    EQ              reduce using rule 40 (expression -> expression DOTMUL expression .)
-    NEQ             reduce using rule 40 (expression -> expression DOTMUL expression .)
-    LT              reduce using rule 40 (expression -> expression DOTMUL expression .)
-    NLT             reduce using rule 40 (expression -> expression DOTMUL expression .)
-    GT              reduce using rule 40 (expression -> expression DOTMUL expression .)
-    NGT             reduce using rule 40 (expression -> expression DOTMUL expression .)
     )               reduce using rule 40 (expression -> expression DOTMUL expression .)
     ,               reduce using rule 40 (expression -> expression DOTMUL expression .)
     ]               reduce using rule 40 (expression -> expression DOTMUL expression .)
@@ -3529,8 +3523,20 @@ state 75
     ONES            reduce using rule 40 (expression -> expression DOTMUL expression .)
     EYE             reduce using rule 40 (expression -> expression DOTMUL expression .)
     '               shift and go to state 41
+    EQ              shift and go to state 42
+    NEQ             shift and go to state 43
+    LT              shift and go to state 44
+    NLT             shift and go to state 45
+    GT              shift and go to state 46
+    NGT             shift and go to state 47
 
   ! '               [ reduce using rule 40 (expression -> expression DOTMUL expression .) ]
+  ! EQ              [ reduce using rule 40 (expression -> expression DOTMUL expression .) ]
+  ! NEQ             [ reduce using rule 40 (expression -> expression DOTMUL expression .) ]
+  ! LT              [ reduce using rule 40 (expression -> expression DOTMUL expression .) ]
+  ! NLT             [ reduce using rule 40 (expression -> expression DOTMUL expression .) ]
+  ! GT              [ reduce using rule 40 (expression -> expression DOTMUL expression .) ]
+  ! NGT             [ reduce using rule 40 (expression -> expression DOTMUL expression .) ]
   ! +               [ shift and go to state 33 ]
   ! -               [ shift and go to state 34 ]
   ! *               [ shift and go to state 35 ]
@@ -3539,12 +3545,6 @@ state 75
   ! DOTSUB          [ shift and go to state 38 ]
   ! DOTMUL          [ shift and go to state 39 ]
   ! DOTDIV          [ shift and go to state 40 ]
-  ! EQ              [ shift and go to state 42 ]
-  ! NEQ             [ shift and go to state 43 ]
-  ! LT              [ shift and go to state 44 ]
-  ! NLT             [ shift and go to state 45 ]
-  ! GT              [ shift and go to state 46 ]
-  ! NGT             [ shift and go to state 47 ]
 
 
 state 76
@@ -3575,12 +3575,6 @@ state 76
     DOTSUB          reduce using rule 41 (expression -> expression DOTDIV expression .)
     DOTMUL          reduce using rule 41 (expression -> expression DOTDIV expression .)
     DOTDIV          reduce using rule 41 (expression -> expression DOTDIV expression .)
-    EQ              reduce using rule 41 (expression -> expression DOTDIV expression .)
-    NEQ             reduce using rule 41 (expression -> expression DOTDIV expression .)
-    LT              reduce using rule 41 (expression -> expression DOTDIV expression .)
-    NLT             reduce using rule 41 (expression -> expression DOTDIV expression .)
-    GT              reduce using rule 41 (expression -> expression DOTDIV expression .)
-    NGT             reduce using rule 41 (expression -> expression DOTDIV expression .)
     )               reduce using rule 41 (expression -> expression DOTDIV expression .)
     ,               reduce using rule 41 (expression -> expression DOTDIV expression .)
     ]               reduce using rule 41 (expression -> expression DOTDIV expression .)
@@ -3603,8 +3597,20 @@ state 76
     ONES            reduce using rule 41 (expression -> expression DOTDIV expression .)
     EYE             reduce using rule 41 (expression -> expression DOTDIV expression .)
     '               shift and go to state 41
+    EQ              shift and go to state 42
+    NEQ             shift and go to state 43
+    LT              shift and go to state 44
+    NLT             shift and go to state 45
+    GT              shift and go to state 46
+    NGT             shift and go to state 47
 
   ! '               [ reduce using rule 41 (expression -> expression DOTDIV expression .) ]
+  ! EQ              [ reduce using rule 41 (expression -> expression DOTDIV expression .) ]
+  ! NEQ             [ reduce using rule 41 (expression -> expression DOTDIV expression .) ]
+  ! LT              [ reduce using rule 41 (expression -> expression DOTDIV expression .) ]
+  ! NLT             [ reduce using rule 41 (expression -> expression DOTDIV expression .) ]
+  ! GT              [ reduce using rule 41 (expression -> expression DOTDIV expression .) ]
+  ! NGT             [ reduce using rule 41 (expression -> expression DOTDIV expression .) ]
   ! +               [ shift and go to state 33 ]
   ! -               [ shift and go to state 34 ]
   ! *               [ shift and go to state 35 ]
@@ -3613,12 +3619,6 @@ state 76
   ! DOTSUB          [ shift and go to state 38 ]
   ! DOTMUL          [ shift and go to state 39 ]
   ! DOTDIV          [ shift and go to state 40 ]
-  ! EQ              [ shift and go to state 42 ]
-  ! NEQ             [ shift and go to state 43 ]
-  ! LT              [ shift and go to state 44 ]
-  ! NLT             [ shift and go to state 45 ]
-  ! GT              [ shift and go to state 46 ]
-  ! NGT             [ shift and go to state 47 ]
 
 
 state 77
@@ -3640,22 +3640,21 @@ state 77
     (48) expression -> expression . GT expression
     (49) expression -> expression . NGT expression
 
-  ! shift/reduce conflict for + resolved as shift
-  ! shift/reduce conflict for - resolved as shift
-  ! shift/reduce conflict for * resolved as shift
-  ! shift/reduce conflict for / resolved as shift
-  ! shift/reduce conflict for DOTADD resolved as shift
-  ! shift/reduce conflict for DOTSUB resolved as shift
-  ! shift/reduce conflict for DOTMUL resolved as shift
-  ! shift/reduce conflict for DOTDIV resolved as shift
-  ! shift/reduce conflict for ' resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for NEQ resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-  ! shift/reduce conflict for NLT resolved as shift
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for NGT resolved as shift
     ;               reduce using rule 44 (expression -> expression EQ expression .)
+    +               reduce using rule 44 (expression -> expression EQ expression .)
+    -               reduce using rule 44 (expression -> expression EQ expression .)
+    *               reduce using rule 44 (expression -> expression EQ expression .)
+    /               reduce using rule 44 (expression -> expression EQ expression .)
+    DOTADD          reduce using rule 44 (expression -> expression EQ expression .)
+    DOTSUB          reduce using rule 44 (expression -> expression EQ expression .)
+    DOTMUL          reduce using rule 44 (expression -> expression EQ expression .)
+    DOTDIV          reduce using rule 44 (expression -> expression EQ expression .)
+    EQ              reduce using rule 44 (expression -> expression EQ expression .)
+    NEQ             reduce using rule 44 (expression -> expression EQ expression .)
+    LT              reduce using rule 44 (expression -> expression EQ expression .)
+    NLT             reduce using rule 44 (expression -> expression EQ expression .)
+    GT              reduce using rule 44 (expression -> expression EQ expression .)
+    NGT             reduce using rule 44 (expression -> expression EQ expression .)
     )               reduce using rule 44 (expression -> expression EQ expression .)
     ,               reduce using rule 44 (expression -> expression EQ expression .)
     ]               reduce using rule 44 (expression -> expression EQ expression .)
@@ -3677,37 +3676,23 @@ state 77
     ZEROS           reduce using rule 44 (expression -> expression EQ expression .)
     ONES            reduce using rule 44 (expression -> expression EQ expression .)
     EYE             reduce using rule 44 (expression -> expression EQ expression .)
-    +               shift and go to state 33
-    -               shift and go to state 34
-    *               shift and go to state 35
-    /               shift and go to state 36
-    DOTADD          shift and go to state 37
-    DOTSUB          shift and go to state 38
-    DOTMUL          shift and go to state 39
-    DOTDIV          shift and go to state 40
     '               shift and go to state 41
-    EQ              shift and go to state 42
-    NEQ             shift and go to state 43
-    LT              shift and go to state 44
-    NLT             shift and go to state 45
-    GT              shift and go to state 46
-    NGT             shift and go to state 47
 
-  ! +               [ reduce using rule 44 (expression -> expression EQ expression .) ]
-  ! -               [ reduce using rule 44 (expression -> expression EQ expression .) ]
-  ! *               [ reduce using rule 44 (expression -> expression EQ expression .) ]
-  ! /               [ reduce using rule 44 (expression -> expression EQ expression .) ]
-  ! DOTADD          [ reduce using rule 44 (expression -> expression EQ expression .) ]
-  ! DOTSUB          [ reduce using rule 44 (expression -> expression EQ expression .) ]
-  ! DOTMUL          [ reduce using rule 44 (expression -> expression EQ expression .) ]
-  ! DOTDIV          [ reduce using rule 44 (expression -> expression EQ expression .) ]
   ! '               [ reduce using rule 44 (expression -> expression EQ expression .) ]
-  ! EQ              [ reduce using rule 44 (expression -> expression EQ expression .) ]
-  ! NEQ             [ reduce using rule 44 (expression -> expression EQ expression .) ]
-  ! LT              [ reduce using rule 44 (expression -> expression EQ expression .) ]
-  ! NLT             [ reduce using rule 44 (expression -> expression EQ expression .) ]
-  ! GT              [ reduce using rule 44 (expression -> expression EQ expression .) ]
-  ! NGT             [ reduce using rule 44 (expression -> expression EQ expression .) ]
+  ! +               [ shift and go to state 33 ]
+  ! -               [ shift and go to state 34 ]
+  ! *               [ shift and go to state 35 ]
+  ! /               [ shift and go to state 36 ]
+  ! DOTADD          [ shift and go to state 37 ]
+  ! DOTSUB          [ shift and go to state 38 ]
+  ! DOTMUL          [ shift and go to state 39 ]
+  ! DOTDIV          [ shift and go to state 40 ]
+  ! EQ              [ shift and go to state 42 ]
+  ! NEQ             [ shift and go to state 43 ]
+  ! LT              [ shift and go to state 44 ]
+  ! NLT             [ shift and go to state 45 ]
+  ! GT              [ shift and go to state 46 ]
+  ! NGT             [ shift and go to state 47 ]
 
 
 state 78
@@ -3729,22 +3714,21 @@ state 78
     (48) expression -> expression . GT expression
     (49) expression -> expression . NGT expression
 
-  ! shift/reduce conflict for + resolved as shift
-  ! shift/reduce conflict for - resolved as shift
-  ! shift/reduce conflict for * resolved as shift
-  ! shift/reduce conflict for / resolved as shift
-  ! shift/reduce conflict for DOTADD resolved as shift
-  ! shift/reduce conflict for DOTSUB resolved as shift
-  ! shift/reduce conflict for DOTMUL resolved as shift
-  ! shift/reduce conflict for DOTDIV resolved as shift
-  ! shift/reduce conflict for ' resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for NEQ resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-  ! shift/reduce conflict for NLT resolved as shift
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for NGT resolved as shift
     ;               reduce using rule 45 (expression -> expression NEQ expression .)
+    +               reduce using rule 45 (expression -> expression NEQ expression .)
+    -               reduce using rule 45 (expression -> expression NEQ expression .)
+    *               reduce using rule 45 (expression -> expression NEQ expression .)
+    /               reduce using rule 45 (expression -> expression NEQ expression .)
+    DOTADD          reduce using rule 45 (expression -> expression NEQ expression .)
+    DOTSUB          reduce using rule 45 (expression -> expression NEQ expression .)
+    DOTMUL          reduce using rule 45 (expression -> expression NEQ expression .)
+    DOTDIV          reduce using rule 45 (expression -> expression NEQ expression .)
+    EQ              reduce using rule 45 (expression -> expression NEQ expression .)
+    NEQ             reduce using rule 45 (expression -> expression NEQ expression .)
+    LT              reduce using rule 45 (expression -> expression NEQ expression .)
+    NLT             reduce using rule 45 (expression -> expression NEQ expression .)
+    GT              reduce using rule 45 (expression -> expression NEQ expression .)
+    NGT             reduce using rule 45 (expression -> expression NEQ expression .)
     )               reduce using rule 45 (expression -> expression NEQ expression .)
     ,               reduce using rule 45 (expression -> expression NEQ expression .)
     ]               reduce using rule 45 (expression -> expression NEQ expression .)
@@ -3766,37 +3750,23 @@ state 78
     ZEROS           reduce using rule 45 (expression -> expression NEQ expression .)
     ONES            reduce using rule 45 (expression -> expression NEQ expression .)
     EYE             reduce using rule 45 (expression -> expression NEQ expression .)
-    +               shift and go to state 33
-    -               shift and go to state 34
-    *               shift and go to state 35
-    /               shift and go to state 36
-    DOTADD          shift and go to state 37
-    DOTSUB          shift and go to state 38
-    DOTMUL          shift and go to state 39
-    DOTDIV          shift and go to state 40
     '               shift and go to state 41
-    EQ              shift and go to state 42
-    NEQ             shift and go to state 43
-    LT              shift and go to state 44
-    NLT             shift and go to state 45
-    GT              shift and go to state 46
-    NGT             shift and go to state 47
 
-  ! +               [ reduce using rule 45 (expression -> expression NEQ expression .) ]
-  ! -               [ reduce using rule 45 (expression -> expression NEQ expression .) ]
-  ! *               [ reduce using rule 45 (expression -> expression NEQ expression .) ]
-  ! /               [ reduce using rule 45 (expression -> expression NEQ expression .) ]
-  ! DOTADD          [ reduce using rule 45 (expression -> expression NEQ expression .) ]
-  ! DOTSUB          [ reduce using rule 45 (expression -> expression NEQ expression .) ]
-  ! DOTMUL          [ reduce using rule 45 (expression -> expression NEQ expression .) ]
-  ! DOTDIV          [ reduce using rule 45 (expression -> expression NEQ expression .) ]
   ! '               [ reduce using rule 45 (expression -> expression NEQ expression .) ]
-  ! EQ              [ reduce using rule 45 (expression -> expression NEQ expression .) ]
-  ! NEQ             [ reduce using rule 45 (expression -> expression NEQ expression .) ]
-  ! LT              [ reduce using rule 45 (expression -> expression NEQ expression .) ]
-  ! NLT             [ reduce using rule 45 (expression -> expression NEQ expression .) ]
-  ! GT              [ reduce using rule 45 (expression -> expression NEQ expression .) ]
-  ! NGT             [ reduce using rule 45 (expression -> expression NEQ expression .) ]
+  ! +               [ shift and go to state 33 ]
+  ! -               [ shift and go to state 34 ]
+  ! *               [ shift and go to state 35 ]
+  ! /               [ shift and go to state 36 ]
+  ! DOTADD          [ shift and go to state 37 ]
+  ! DOTSUB          [ shift and go to state 38 ]
+  ! DOTMUL          [ shift and go to state 39 ]
+  ! DOTDIV          [ shift and go to state 40 ]
+  ! EQ              [ shift and go to state 42 ]
+  ! NEQ             [ shift and go to state 43 ]
+  ! LT              [ shift and go to state 44 ]
+  ! NLT             [ shift and go to state 45 ]
+  ! GT              [ shift and go to state 46 ]
+  ! NGT             [ shift and go to state 47 ]
 
 
 state 79
@@ -3818,22 +3788,21 @@ state 79
     (48) expression -> expression . GT expression
     (49) expression -> expression . NGT expression
 
-  ! shift/reduce conflict for + resolved as shift
-  ! shift/reduce conflict for - resolved as shift
-  ! shift/reduce conflict for * resolved as shift
-  ! shift/reduce conflict for / resolved as shift
-  ! shift/reduce conflict for DOTADD resolved as shift
-  ! shift/reduce conflict for DOTSUB resolved as shift
-  ! shift/reduce conflict for DOTMUL resolved as shift
-  ! shift/reduce conflict for DOTDIV resolved as shift
-  ! shift/reduce conflict for ' resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for NEQ resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-  ! shift/reduce conflict for NLT resolved as shift
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for NGT resolved as shift
     ;               reduce using rule 46 (expression -> expression LT expression .)
+    +               reduce using rule 46 (expression -> expression LT expression .)
+    -               reduce using rule 46 (expression -> expression LT expression .)
+    *               reduce using rule 46 (expression -> expression LT expression .)
+    /               reduce using rule 46 (expression -> expression LT expression .)
+    DOTADD          reduce using rule 46 (expression -> expression LT expression .)
+    DOTSUB          reduce using rule 46 (expression -> expression LT expression .)
+    DOTMUL          reduce using rule 46 (expression -> expression LT expression .)
+    DOTDIV          reduce using rule 46 (expression -> expression LT expression .)
+    EQ              reduce using rule 46 (expression -> expression LT expression .)
+    NEQ             reduce using rule 46 (expression -> expression LT expression .)
+    LT              reduce using rule 46 (expression -> expression LT expression .)
+    NLT             reduce using rule 46 (expression -> expression LT expression .)
+    GT              reduce using rule 46 (expression -> expression LT expression .)
+    NGT             reduce using rule 46 (expression -> expression LT expression .)
     )               reduce using rule 46 (expression -> expression LT expression .)
     ,               reduce using rule 46 (expression -> expression LT expression .)
     ]               reduce using rule 46 (expression -> expression LT expression .)
@@ -3855,37 +3824,23 @@ state 79
     ZEROS           reduce using rule 46 (expression -> expression LT expression .)
     ONES            reduce using rule 46 (expression -> expression LT expression .)
     EYE             reduce using rule 46 (expression -> expression LT expression .)
-    +               shift and go to state 33
-    -               shift and go to state 34
-    *               shift and go to state 35
-    /               shift and go to state 36
-    DOTADD          shift and go to state 37
-    DOTSUB          shift and go to state 38
-    DOTMUL          shift and go to state 39
-    DOTDIV          shift and go to state 40
     '               shift and go to state 41
-    EQ              shift and go to state 42
-    NEQ             shift and go to state 43
-    LT              shift and go to state 44
-    NLT             shift and go to state 45
-    GT              shift and go to state 46
-    NGT             shift and go to state 47
 
-  ! +               [ reduce using rule 46 (expression -> expression LT expression .) ]
-  ! -               [ reduce using rule 46 (expression -> expression LT expression .) ]
-  ! *               [ reduce using rule 46 (expression -> expression LT expression .) ]
-  ! /               [ reduce using rule 46 (expression -> expression LT expression .) ]
-  ! DOTADD          [ reduce using rule 46 (expression -> expression LT expression .) ]
-  ! DOTSUB          [ reduce using rule 46 (expression -> expression LT expression .) ]
-  ! DOTMUL          [ reduce using rule 46 (expression -> expression LT expression .) ]
-  ! DOTDIV          [ reduce using rule 46 (expression -> expression LT expression .) ]
   ! '               [ reduce using rule 46 (expression -> expression LT expression .) ]
-  ! EQ              [ reduce using rule 46 (expression -> expression LT expression .) ]
-  ! NEQ             [ reduce using rule 46 (expression -> expression LT expression .) ]
-  ! LT              [ reduce using rule 46 (expression -> expression LT expression .) ]
-  ! NLT             [ reduce using rule 46 (expression -> expression LT expression .) ]
-  ! GT              [ reduce using rule 46 (expression -> expression LT expression .) ]
-  ! NGT             [ reduce using rule 46 (expression -> expression LT expression .) ]
+  ! +               [ shift and go to state 33 ]
+  ! -               [ shift and go to state 34 ]
+  ! *               [ shift and go to state 35 ]
+  ! /               [ shift and go to state 36 ]
+  ! DOTADD          [ shift and go to state 37 ]
+  ! DOTSUB          [ shift and go to state 38 ]
+  ! DOTMUL          [ shift and go to state 39 ]
+  ! DOTDIV          [ shift and go to state 40 ]
+  ! EQ              [ shift and go to state 42 ]
+  ! NEQ             [ shift and go to state 43 ]
+  ! LT              [ shift and go to state 44 ]
+  ! NLT             [ shift and go to state 45 ]
+  ! GT              [ shift and go to state 46 ]
+  ! NGT             [ shift and go to state 47 ]
 
 
 state 80
@@ -3907,22 +3862,21 @@ state 80
     (48) expression -> expression . GT expression
     (49) expression -> expression . NGT expression
 
-  ! shift/reduce conflict for + resolved as shift
-  ! shift/reduce conflict for - resolved as shift
-  ! shift/reduce conflict for * resolved as shift
-  ! shift/reduce conflict for / resolved as shift
-  ! shift/reduce conflict for DOTADD resolved as shift
-  ! shift/reduce conflict for DOTSUB resolved as shift
-  ! shift/reduce conflict for DOTMUL resolved as shift
-  ! shift/reduce conflict for DOTDIV resolved as shift
-  ! shift/reduce conflict for ' resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for NEQ resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-  ! shift/reduce conflict for NLT resolved as shift
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for NGT resolved as shift
     ;               reduce using rule 47 (expression -> expression NLT expression .)
+    +               reduce using rule 47 (expression -> expression NLT expression .)
+    -               reduce using rule 47 (expression -> expression NLT expression .)
+    *               reduce using rule 47 (expression -> expression NLT expression .)
+    /               reduce using rule 47 (expression -> expression NLT expression .)
+    DOTADD          reduce using rule 47 (expression -> expression NLT expression .)
+    DOTSUB          reduce using rule 47 (expression -> expression NLT expression .)
+    DOTMUL          reduce using rule 47 (expression -> expression NLT expression .)
+    DOTDIV          reduce using rule 47 (expression -> expression NLT expression .)
+    EQ              reduce using rule 47 (expression -> expression NLT expression .)
+    NEQ             reduce using rule 47 (expression -> expression NLT expression .)
+    LT              reduce using rule 47 (expression -> expression NLT expression .)
+    NLT             reduce using rule 47 (expression -> expression NLT expression .)
+    GT              reduce using rule 47 (expression -> expression NLT expression .)
+    NGT             reduce using rule 47 (expression -> expression NLT expression .)
     )               reduce using rule 47 (expression -> expression NLT expression .)
     ,               reduce using rule 47 (expression -> expression NLT expression .)
     ]               reduce using rule 47 (expression -> expression NLT expression .)
@@ -3944,37 +3898,23 @@ state 80
     ZEROS           reduce using rule 47 (expression -> expression NLT expression .)
     ONES            reduce using rule 47 (expression -> expression NLT expression .)
     EYE             reduce using rule 47 (expression -> expression NLT expression .)
-    +               shift and go to state 33
-    -               shift and go to state 34
-    *               shift and go to state 35
-    /               shift and go to state 36
-    DOTADD          shift and go to state 37
-    DOTSUB          shift and go to state 38
-    DOTMUL          shift and go to state 39
-    DOTDIV          shift and go to state 40
     '               shift and go to state 41
-    EQ              shift and go to state 42
-    NEQ             shift and go to state 43
-    LT              shift and go to state 44
-    NLT             shift and go to state 45
-    GT              shift and go to state 46
-    NGT             shift and go to state 47
 
-  ! +               [ reduce using rule 47 (expression -> expression NLT expression .) ]
-  ! -               [ reduce using rule 47 (expression -> expression NLT expression .) ]
-  ! *               [ reduce using rule 47 (expression -> expression NLT expression .) ]
-  ! /               [ reduce using rule 47 (expression -> expression NLT expression .) ]
-  ! DOTADD          [ reduce using rule 47 (expression -> expression NLT expression .) ]
-  ! DOTSUB          [ reduce using rule 47 (expression -> expression NLT expression .) ]
-  ! DOTMUL          [ reduce using rule 47 (expression -> expression NLT expression .) ]
-  ! DOTDIV          [ reduce using rule 47 (expression -> expression NLT expression .) ]
   ! '               [ reduce using rule 47 (expression -> expression NLT expression .) ]
-  ! EQ              [ reduce using rule 47 (expression -> expression NLT expression .) ]
-  ! NEQ             [ reduce using rule 47 (expression -> expression NLT expression .) ]
-  ! LT              [ reduce using rule 47 (expression -> expression NLT expression .) ]
-  ! NLT             [ reduce using rule 47 (expression -> expression NLT expression .) ]
-  ! GT              [ reduce using rule 47 (expression -> expression NLT expression .) ]
-  ! NGT             [ reduce using rule 47 (expression -> expression NLT expression .) ]
+  ! +               [ shift and go to state 33 ]
+  ! -               [ shift and go to state 34 ]
+  ! *               [ shift and go to state 35 ]
+  ! /               [ shift and go to state 36 ]
+  ! DOTADD          [ shift and go to state 37 ]
+  ! DOTSUB          [ shift and go to state 38 ]
+  ! DOTMUL          [ shift and go to state 39 ]
+  ! DOTDIV          [ shift and go to state 40 ]
+  ! EQ              [ shift and go to state 42 ]
+  ! NEQ             [ shift and go to state 43 ]
+  ! LT              [ shift and go to state 44 ]
+  ! NLT             [ shift and go to state 45 ]
+  ! GT              [ shift and go to state 46 ]
+  ! NGT             [ shift and go to state 47 ]
 
 
 state 81
@@ -3996,22 +3936,21 @@ state 81
     (48) expression -> expression . GT expression
     (49) expression -> expression . NGT expression
 
-  ! shift/reduce conflict for + resolved as shift
-  ! shift/reduce conflict for - resolved as shift
-  ! shift/reduce conflict for * resolved as shift
-  ! shift/reduce conflict for / resolved as shift
-  ! shift/reduce conflict for DOTADD resolved as shift
-  ! shift/reduce conflict for DOTSUB resolved as shift
-  ! shift/reduce conflict for DOTMUL resolved as shift
-  ! shift/reduce conflict for DOTDIV resolved as shift
-  ! shift/reduce conflict for ' resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for NEQ resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-  ! shift/reduce conflict for NLT resolved as shift
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for NGT resolved as shift
     ;               reduce using rule 48 (expression -> expression GT expression .)
+    +               reduce using rule 48 (expression -> expression GT expression .)
+    -               reduce using rule 48 (expression -> expression GT expression .)
+    *               reduce using rule 48 (expression -> expression GT expression .)
+    /               reduce using rule 48 (expression -> expression GT expression .)
+    DOTADD          reduce using rule 48 (expression -> expression GT expression .)
+    DOTSUB          reduce using rule 48 (expression -> expression GT expression .)
+    DOTMUL          reduce using rule 48 (expression -> expression GT expression .)
+    DOTDIV          reduce using rule 48 (expression -> expression GT expression .)
+    EQ              reduce using rule 48 (expression -> expression GT expression .)
+    NEQ             reduce using rule 48 (expression -> expression GT expression .)
+    LT              reduce using rule 48 (expression -> expression GT expression .)
+    NLT             reduce using rule 48 (expression -> expression GT expression .)
+    GT              reduce using rule 48 (expression -> expression GT expression .)
+    NGT             reduce using rule 48 (expression -> expression GT expression .)
     )               reduce using rule 48 (expression -> expression GT expression .)
     ,               reduce using rule 48 (expression -> expression GT expression .)
     ]               reduce using rule 48 (expression -> expression GT expression .)
@@ -4033,37 +3972,23 @@ state 81
     ZEROS           reduce using rule 48 (expression -> expression GT expression .)
     ONES            reduce using rule 48 (expression -> expression GT expression .)
     EYE             reduce using rule 48 (expression -> expression GT expression .)
-    +               shift and go to state 33
-    -               shift and go to state 34
-    *               shift and go to state 35
-    /               shift and go to state 36
-    DOTADD          shift and go to state 37
-    DOTSUB          shift and go to state 38
-    DOTMUL          shift and go to state 39
-    DOTDIV          shift and go to state 40
     '               shift and go to state 41
-    EQ              shift and go to state 42
-    NEQ             shift and go to state 43
-    LT              shift and go to state 44
-    NLT             shift and go to state 45
-    GT              shift and go to state 46
-    NGT             shift and go to state 47
 
-  ! +               [ reduce using rule 48 (expression -> expression GT expression .) ]
-  ! -               [ reduce using rule 48 (expression -> expression GT expression .) ]
-  ! *               [ reduce using rule 48 (expression -> expression GT expression .) ]
-  ! /               [ reduce using rule 48 (expression -> expression GT expression .) ]
-  ! DOTADD          [ reduce using rule 48 (expression -> expression GT expression .) ]
-  ! DOTSUB          [ reduce using rule 48 (expression -> expression GT expression .) ]
-  ! DOTMUL          [ reduce using rule 48 (expression -> expression GT expression .) ]
-  ! DOTDIV          [ reduce using rule 48 (expression -> expression GT expression .) ]
   ! '               [ reduce using rule 48 (expression -> expression GT expression .) ]
-  ! EQ              [ reduce using rule 48 (expression -> expression GT expression .) ]
-  ! NEQ             [ reduce using rule 48 (expression -> expression GT expression .) ]
-  ! LT              [ reduce using rule 48 (expression -> expression GT expression .) ]
-  ! NLT             [ reduce using rule 48 (expression -> expression GT expression .) ]
-  ! GT              [ reduce using rule 48 (expression -> expression GT expression .) ]
-  ! NGT             [ reduce using rule 48 (expression -> expression GT expression .) ]
+  ! +               [ shift and go to state 33 ]
+  ! -               [ shift and go to state 34 ]
+  ! *               [ shift and go to state 35 ]
+  ! /               [ shift and go to state 36 ]
+  ! DOTADD          [ shift and go to state 37 ]
+  ! DOTSUB          [ shift and go to state 38 ]
+  ! DOTMUL          [ shift and go to state 39 ]
+  ! DOTDIV          [ shift and go to state 40 ]
+  ! EQ              [ shift and go to state 42 ]
+  ! NEQ             [ shift and go to state 43 ]
+  ! LT              [ shift and go to state 44 ]
+  ! NLT             [ shift and go to state 45 ]
+  ! GT              [ shift and go to state 46 ]
+  ! NGT             [ shift and go to state 47 ]
 
 
 state 82
@@ -4085,22 +4010,21 @@ state 82
     (48) expression -> expression . GT expression
     (49) expression -> expression . NGT expression
 
-  ! shift/reduce conflict for + resolved as shift
-  ! shift/reduce conflict for - resolved as shift
-  ! shift/reduce conflict for * resolved as shift
-  ! shift/reduce conflict for / resolved as shift
-  ! shift/reduce conflict for DOTADD resolved as shift
-  ! shift/reduce conflict for DOTSUB resolved as shift
-  ! shift/reduce conflict for DOTMUL resolved as shift
-  ! shift/reduce conflict for DOTDIV resolved as shift
-  ! shift/reduce conflict for ' resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for NEQ resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-  ! shift/reduce conflict for NLT resolved as shift
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for NGT resolved as shift
     ;               reduce using rule 49 (expression -> expression NGT expression .)
+    +               reduce using rule 49 (expression -> expression NGT expression .)
+    -               reduce using rule 49 (expression -> expression NGT expression .)
+    *               reduce using rule 49 (expression -> expression NGT expression .)
+    /               reduce using rule 49 (expression -> expression NGT expression .)
+    DOTADD          reduce using rule 49 (expression -> expression NGT expression .)
+    DOTSUB          reduce using rule 49 (expression -> expression NGT expression .)
+    DOTMUL          reduce using rule 49 (expression -> expression NGT expression .)
+    DOTDIV          reduce using rule 49 (expression -> expression NGT expression .)
+    EQ              reduce using rule 49 (expression -> expression NGT expression .)
+    NEQ             reduce using rule 49 (expression -> expression NGT expression .)
+    LT              reduce using rule 49 (expression -> expression NGT expression .)
+    NLT             reduce using rule 49 (expression -> expression NGT expression .)
+    GT              reduce using rule 49 (expression -> expression NGT expression .)
+    NGT             reduce using rule 49 (expression -> expression NGT expression .)
     )               reduce using rule 49 (expression -> expression NGT expression .)
     ,               reduce using rule 49 (expression -> expression NGT expression .)
     ]               reduce using rule 49 (expression -> expression NGT expression .)
@@ -4122,37 +4046,23 @@ state 82
     ZEROS           reduce using rule 49 (expression -> expression NGT expression .)
     ONES            reduce using rule 49 (expression -> expression NGT expression .)
     EYE             reduce using rule 49 (expression -> expression NGT expression .)
-    +               shift and go to state 33
-    -               shift and go to state 34
-    *               shift and go to state 35
-    /               shift and go to state 36
-    DOTADD          shift and go to state 37
-    DOTSUB          shift and go to state 38
-    DOTMUL          shift and go to state 39
-    DOTDIV          shift and go to state 40
     '               shift and go to state 41
-    EQ              shift and go to state 42
-    NEQ             shift and go to state 43
-    LT              shift and go to state 44
-    NLT             shift and go to state 45
-    GT              shift and go to state 46
-    NGT             shift and go to state 47
 
-  ! +               [ reduce using rule 49 (expression -> expression NGT expression .) ]
-  ! -               [ reduce using rule 49 (expression -> expression NGT expression .) ]
-  ! *               [ reduce using rule 49 (expression -> expression NGT expression .) ]
-  ! /               [ reduce using rule 49 (expression -> expression NGT expression .) ]
-  ! DOTADD          [ reduce using rule 49 (expression -> expression NGT expression .) ]
-  ! DOTSUB          [ reduce using rule 49 (expression -> expression NGT expression .) ]
-  ! DOTMUL          [ reduce using rule 49 (expression -> expression NGT expression .) ]
-  ! DOTDIV          [ reduce using rule 49 (expression -> expression NGT expression .) ]
   ! '               [ reduce using rule 49 (expression -> expression NGT expression .) ]
-  ! EQ              [ reduce using rule 49 (expression -> expression NGT expression .) ]
-  ! NEQ             [ reduce using rule 49 (expression -> expression NGT expression .) ]
-  ! LT              [ reduce using rule 49 (expression -> expression NGT expression .) ]
-  ! NLT             [ reduce using rule 49 (expression -> expression NGT expression .) ]
-  ! GT              [ reduce using rule 49 (expression -> expression NGT expression .) ]
-  ! NGT             [ reduce using rule 49 (expression -> expression NGT expression .) ]
+  ! +               [ shift and go to state 33 ]
+  ! -               [ shift and go to state 34 ]
+  ! *               [ shift and go to state 35 ]
+  ! /               [ shift and go to state 36 ]
+  ! DOTADD          [ shift and go to state 37 ]
+  ! DOTSUB          [ shift and go to state 38 ]
+  ! DOTMUL          [ shift and go to state 39 ]
+  ! DOTDIV          [ shift and go to state 40 ]
+  ! EQ              [ shift and go to state 42 ]
+  ! NEQ             [ shift and go to state 43 ]
+  ! LT              [ shift and go to state 44 ]
+  ! NLT             [ shift and go to state 45 ]
+  ! GT              [ shift and go to state 46 ]
+  ! NGT             [ shift and go to state 47 ]
 
 
 state 83
@@ -4230,12 +4140,6 @@ state 84
     (49) expression -> expression . NGT expression
 
     ;               reduce using rule 21 (expression -> ID = expression .)
-    EQ              reduce using rule 21 (expression -> ID = expression .)
-    NEQ             reduce using rule 21 (expression -> ID = expression .)
-    LT              reduce using rule 21 (expression -> ID = expression .)
-    NLT             reduce using rule 21 (expression -> ID = expression .)
-    GT              reduce using rule 21 (expression -> ID = expression .)
-    NGT             reduce using rule 21 (expression -> ID = expression .)
     )               reduce using rule 21 (expression -> ID = expression .)
     ,               reduce using rule 21 (expression -> ID = expression .)
     ]               reduce using rule 21 (expression -> ID = expression .)
@@ -4266,6 +4170,12 @@ state 84
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
     '               shift and go to state 41
+    EQ              shift and go to state 42
+    NEQ             shift and go to state 43
+    LT              shift and go to state 44
+    NLT             shift and go to state 45
+    GT              shift and go to state 46
+    NGT             shift and go to state 47
 
   ! +               [ reduce using rule 21 (expression -> ID = expression .) ]
   ! -               [ reduce using rule 21 (expression -> ID = expression .) ]
@@ -4276,12 +4186,12 @@ state 84
   ! DOTMUL          [ reduce using rule 21 (expression -> ID = expression .) ]
   ! DOTDIV          [ reduce using rule 21 (expression -> ID = expression .) ]
   ! '               [ reduce using rule 21 (expression -> ID = expression .) ]
-  ! EQ              [ shift and go to state 42 ]
-  ! NEQ             [ shift and go to state 43 ]
-  ! LT              [ shift and go to state 44 ]
-  ! NLT             [ shift and go to state 45 ]
-  ! GT              [ shift and go to state 46 ]
-  ! NGT             [ shift and go to state 47 ]
+  ! EQ              [ reduce using rule 21 (expression -> ID = expression .) ]
+  ! NEQ             [ reduce using rule 21 (expression -> ID = expression .) ]
+  ! LT              [ reduce using rule 21 (expression -> ID = expression .) ]
+  ! NLT             [ reduce using rule 21 (expression -> ID = expression .) ]
+  ! GT              [ reduce using rule 21 (expression -> ID = expression .) ]
+  ! NGT             [ reduce using rule 21 (expression -> ID = expression .) ]
 
 
 state 85
@@ -4304,12 +4214,6 @@ state 85
     (49) expression -> expression . NGT expression
 
     ;               reduce using rule 22 (expression -> ID ADDASSIGN expression .)
-    EQ              reduce using rule 22 (expression -> ID ADDASSIGN expression .)
-    NEQ             reduce using rule 22 (expression -> ID ADDASSIGN expression .)
-    LT              reduce using rule 22 (expression -> ID ADDASSIGN expression .)
-    NLT             reduce using rule 22 (expression -> ID ADDASSIGN expression .)
-    GT              reduce using rule 22 (expression -> ID ADDASSIGN expression .)
-    NGT             reduce using rule 22 (expression -> ID ADDASSIGN expression .)
     )               reduce using rule 22 (expression -> ID ADDASSIGN expression .)
     ,               reduce using rule 22 (expression -> ID ADDASSIGN expression .)
     ]               reduce using rule 22 (expression -> ID ADDASSIGN expression .)
@@ -4340,6 +4244,12 @@ state 85
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
     '               shift and go to state 41
+    EQ              shift and go to state 42
+    NEQ             shift and go to state 43
+    LT              shift and go to state 44
+    NLT             shift and go to state 45
+    GT              shift and go to state 46
+    NGT             shift and go to state 47
 
   ! +               [ reduce using rule 22 (expression -> ID ADDASSIGN expression .) ]
   ! -               [ reduce using rule 22 (expression -> ID ADDASSIGN expression .) ]
@@ -4350,12 +4260,12 @@ state 85
   ! DOTMUL          [ reduce using rule 22 (expression -> ID ADDASSIGN expression .) ]
   ! DOTDIV          [ reduce using rule 22 (expression -> ID ADDASSIGN expression .) ]
   ! '               [ reduce using rule 22 (expression -> ID ADDASSIGN expression .) ]
-  ! EQ              [ shift and go to state 42 ]
-  ! NEQ             [ shift and go to state 43 ]
-  ! LT              [ shift and go to state 44 ]
-  ! NLT             [ shift and go to state 45 ]
-  ! GT              [ shift and go to state 46 ]
-  ! NGT             [ shift and go to state 47 ]
+  ! EQ              [ reduce using rule 22 (expression -> ID ADDASSIGN expression .) ]
+  ! NEQ             [ reduce using rule 22 (expression -> ID ADDASSIGN expression .) ]
+  ! LT              [ reduce using rule 22 (expression -> ID ADDASSIGN expression .) ]
+  ! NLT             [ reduce using rule 22 (expression -> ID ADDASSIGN expression .) ]
+  ! GT              [ reduce using rule 22 (expression -> ID ADDASSIGN expression .) ]
+  ! NGT             [ reduce using rule 22 (expression -> ID ADDASSIGN expression .) ]
 
 
 state 86
@@ -4378,12 +4288,6 @@ state 86
     (49) expression -> expression . NGT expression
 
     ;               reduce using rule 23 (expression -> ID SUBASSIGN expression .)
-    EQ              reduce using rule 23 (expression -> ID SUBASSIGN expression .)
-    NEQ             reduce using rule 23 (expression -> ID SUBASSIGN expression .)
-    LT              reduce using rule 23 (expression -> ID SUBASSIGN expression .)
-    NLT             reduce using rule 23 (expression -> ID SUBASSIGN expression .)
-    GT              reduce using rule 23 (expression -> ID SUBASSIGN expression .)
-    NGT             reduce using rule 23 (expression -> ID SUBASSIGN expression .)
     )               reduce using rule 23 (expression -> ID SUBASSIGN expression .)
     ,               reduce using rule 23 (expression -> ID SUBASSIGN expression .)
     ]               reduce using rule 23 (expression -> ID SUBASSIGN expression .)
@@ -4414,6 +4318,12 @@ state 86
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
     '               shift and go to state 41
+    EQ              shift and go to state 42
+    NEQ             shift and go to state 43
+    LT              shift and go to state 44
+    NLT             shift and go to state 45
+    GT              shift and go to state 46
+    NGT             shift and go to state 47
 
   ! +               [ reduce using rule 23 (expression -> ID SUBASSIGN expression .) ]
   ! -               [ reduce using rule 23 (expression -> ID SUBASSIGN expression .) ]
@@ -4424,12 +4334,12 @@ state 86
   ! DOTMUL          [ reduce using rule 23 (expression -> ID SUBASSIGN expression .) ]
   ! DOTDIV          [ reduce using rule 23 (expression -> ID SUBASSIGN expression .) ]
   ! '               [ reduce using rule 23 (expression -> ID SUBASSIGN expression .) ]
-  ! EQ              [ shift and go to state 42 ]
-  ! NEQ             [ shift and go to state 43 ]
-  ! LT              [ shift and go to state 44 ]
-  ! NLT             [ shift and go to state 45 ]
-  ! GT              [ shift and go to state 46 ]
-  ! NGT             [ shift and go to state 47 ]
+  ! EQ              [ reduce using rule 23 (expression -> ID SUBASSIGN expression .) ]
+  ! NEQ             [ reduce using rule 23 (expression -> ID SUBASSIGN expression .) ]
+  ! LT              [ reduce using rule 23 (expression -> ID SUBASSIGN expression .) ]
+  ! NLT             [ reduce using rule 23 (expression -> ID SUBASSIGN expression .) ]
+  ! GT              [ reduce using rule 23 (expression -> ID SUBASSIGN expression .) ]
+  ! NGT             [ reduce using rule 23 (expression -> ID SUBASSIGN expression .) ]
 
 
 state 87
@@ -4452,12 +4362,6 @@ state 87
     (49) expression -> expression . NGT expression
 
     ;               reduce using rule 24 (expression -> ID MULASSIGN expression .)
-    EQ              reduce using rule 24 (expression -> ID MULASSIGN expression .)
-    NEQ             reduce using rule 24 (expression -> ID MULASSIGN expression .)
-    LT              reduce using rule 24 (expression -> ID MULASSIGN expression .)
-    NLT             reduce using rule 24 (expression -> ID MULASSIGN expression .)
-    GT              reduce using rule 24 (expression -> ID MULASSIGN expression .)
-    NGT             reduce using rule 24 (expression -> ID MULASSIGN expression .)
     )               reduce using rule 24 (expression -> ID MULASSIGN expression .)
     ,               reduce using rule 24 (expression -> ID MULASSIGN expression .)
     ]               reduce using rule 24 (expression -> ID MULASSIGN expression .)
@@ -4488,6 +4392,12 @@ state 87
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
     '               shift and go to state 41
+    EQ              shift and go to state 42
+    NEQ             shift and go to state 43
+    LT              shift and go to state 44
+    NLT             shift and go to state 45
+    GT              shift and go to state 46
+    NGT             shift and go to state 47
 
   ! +               [ reduce using rule 24 (expression -> ID MULASSIGN expression .) ]
   ! -               [ reduce using rule 24 (expression -> ID MULASSIGN expression .) ]
@@ -4498,12 +4408,12 @@ state 87
   ! DOTMUL          [ reduce using rule 24 (expression -> ID MULASSIGN expression .) ]
   ! DOTDIV          [ reduce using rule 24 (expression -> ID MULASSIGN expression .) ]
   ! '               [ reduce using rule 24 (expression -> ID MULASSIGN expression .) ]
-  ! EQ              [ shift and go to state 42 ]
-  ! NEQ             [ shift and go to state 43 ]
-  ! LT              [ shift and go to state 44 ]
-  ! NLT             [ shift and go to state 45 ]
-  ! GT              [ shift and go to state 46 ]
-  ! NGT             [ shift and go to state 47 ]
+  ! EQ              [ reduce using rule 24 (expression -> ID MULASSIGN expression .) ]
+  ! NEQ             [ reduce using rule 24 (expression -> ID MULASSIGN expression .) ]
+  ! LT              [ reduce using rule 24 (expression -> ID MULASSIGN expression .) ]
+  ! NLT             [ reduce using rule 24 (expression -> ID MULASSIGN expression .) ]
+  ! GT              [ reduce using rule 24 (expression -> ID MULASSIGN expression .) ]
+  ! NGT             [ reduce using rule 24 (expression -> ID MULASSIGN expression .) ]
 
 
 state 88
@@ -4526,12 +4436,6 @@ state 88
     (49) expression -> expression . NGT expression
 
     ;               reduce using rule 25 (expression -> ID DIVASSIGN expression .)
-    EQ              reduce using rule 25 (expression -> ID DIVASSIGN expression .)
-    NEQ             reduce using rule 25 (expression -> ID DIVASSIGN expression .)
-    LT              reduce using rule 25 (expression -> ID DIVASSIGN expression .)
-    NLT             reduce using rule 25 (expression -> ID DIVASSIGN expression .)
-    GT              reduce using rule 25 (expression -> ID DIVASSIGN expression .)
-    NGT             reduce using rule 25 (expression -> ID DIVASSIGN expression .)
     )               reduce using rule 25 (expression -> ID DIVASSIGN expression .)
     ,               reduce using rule 25 (expression -> ID DIVASSIGN expression .)
     ]               reduce using rule 25 (expression -> ID DIVASSIGN expression .)
@@ -4562,6 +4466,12 @@ state 88
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
     '               shift and go to state 41
+    EQ              shift and go to state 42
+    NEQ             shift and go to state 43
+    LT              shift and go to state 44
+    NLT             shift and go to state 45
+    GT              shift and go to state 46
+    NGT             shift and go to state 47
 
   ! +               [ reduce using rule 25 (expression -> ID DIVASSIGN expression .) ]
   ! -               [ reduce using rule 25 (expression -> ID DIVASSIGN expression .) ]
@@ -4572,12 +4482,12 @@ state 88
   ! DOTMUL          [ reduce using rule 25 (expression -> ID DIVASSIGN expression .) ]
   ! DOTDIV          [ reduce using rule 25 (expression -> ID DIVASSIGN expression .) ]
   ! '               [ reduce using rule 25 (expression -> ID DIVASSIGN expression .) ]
-  ! EQ              [ shift and go to state 42 ]
-  ! NEQ             [ shift and go to state 43 ]
-  ! LT              [ shift and go to state 44 ]
-  ! NLT             [ shift and go to state 45 ]
-  ! GT              [ shift and go to state 46 ]
-  ! NGT             [ shift and go to state 47 ]
+  ! EQ              [ reduce using rule 25 (expression -> ID DIVASSIGN expression .) ]
+  ! NEQ             [ reduce using rule 25 (expression -> ID DIVASSIGN expression .) ]
+  ! LT              [ reduce using rule 25 (expression -> ID DIVASSIGN expression .) ]
+  ! NLT             [ reduce using rule 25 (expression -> ID DIVASSIGN expression .) ]
+  ! GT              [ reduce using rule 25 (expression -> ID DIVASSIGN expression .) ]
+  ! NGT             [ reduce using rule 25 (expression -> ID DIVASSIGN expression .) ]
 
 
 state 89
@@ -5744,7 +5654,6 @@ state 117
     (48) expression -> expression . GT expression
     (49) expression -> expression . NGT expression
 
-  ! shift/reduce conflict for - resolved as shift
     {               reduce using rule 55 (range -> expression : expression .)
     BREAK           reduce using rule 55 (range -> expression : expression .)
     CONTINUE        reduce using rule 55 (range -> expression : expression .)
@@ -5762,8 +5671,8 @@ state 117
     ZEROS           reduce using rule 55 (range -> expression : expression .)
     ONES            reduce using rule 55 (range -> expression : expression .)
     EYE             reduce using rule 55 (range -> expression : expression .)
+    -               reduce using rule 55 (range -> expression : expression .)
     +               shift and go to state 33
-    -               shift and go to state 34
     *               shift and go to state 35
     /               shift and go to state 36
     DOTADD          shift and go to state 37
@@ -5778,7 +5687,7 @@ state 117
     GT              shift and go to state 46
     NGT             shift and go to state 47
 
-  ! -               [ reduce using rule 55 (range -> expression : expression .) ]
+  ! -               [ shift and go to state 34 ]
 
 
 state 118
@@ -5801,12 +5710,6 @@ state 118
     (49) expression -> expression . NGT expression
 
     ;               reduce using rule 26 (expression -> ID [ expression_list ] = expression .)
-    EQ              reduce using rule 26 (expression -> ID [ expression_list ] = expression .)
-    NEQ             reduce using rule 26 (expression -> ID [ expression_list ] = expression .)
-    LT              reduce using rule 26 (expression -> ID [ expression_list ] = expression .)
-    NLT             reduce using rule 26 (expression -> ID [ expression_list ] = expression .)
-    GT              reduce using rule 26 (expression -> ID [ expression_list ] = expression .)
-    NGT             reduce using rule 26 (expression -> ID [ expression_list ] = expression .)
     )               reduce using rule 26 (expression -> ID [ expression_list ] = expression .)
     ,               reduce using rule 26 (expression -> ID [ expression_list ] = expression .)
     ]               reduce using rule 26 (expression -> ID [ expression_list ] = expression .)
@@ -5837,6 +5740,12 @@ state 118
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
     '               shift and go to state 41
+    EQ              shift and go to state 42
+    NEQ             shift and go to state 43
+    LT              shift and go to state 44
+    NLT             shift and go to state 45
+    GT              shift and go to state 46
+    NGT             shift and go to state 47
 
   ! +               [ reduce using rule 26 (expression -> ID [ expression_list ] = expression .) ]
   ! -               [ reduce using rule 26 (expression -> ID [ expression_list ] = expression .) ]
@@ -5847,12 +5756,12 @@ state 118
   ! DOTMUL          [ reduce using rule 26 (expression -> ID [ expression_list ] = expression .) ]
   ! DOTDIV          [ reduce using rule 26 (expression -> ID [ expression_list ] = expression .) ]
   ! '               [ reduce using rule 26 (expression -> ID [ expression_list ] = expression .) ]
-  ! EQ              [ shift and go to state 42 ]
-  ! NEQ             [ shift and go to state 43 ]
-  ! LT              [ shift and go to state 44 ]
-  ! NLT             [ shift and go to state 45 ]
-  ! GT              [ shift and go to state 46 ]
-  ! NGT             [ shift and go to state 47 ]
+  ! EQ              [ reduce using rule 26 (expression -> ID [ expression_list ] = expression .) ]
+  ! NEQ             [ reduce using rule 26 (expression -> ID [ expression_list ] = expression .) ]
+  ! LT              [ reduce using rule 26 (expression -> ID [ expression_list ] = expression .) ]
+  ! NLT             [ reduce using rule 26 (expression -> ID [ expression_list ] = expression .) ]
+  ! GT              [ reduce using rule 26 (expression -> ID [ expression_list ] = expression .) ]
+  ! NGT             [ reduce using rule 26 (expression -> ID [ expression_list ] = expression .) ]
 
 
 state 119
@@ -5875,12 +5784,6 @@ state 119
     (49) expression -> expression . NGT expression
 
     ;               reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .)
-    EQ              reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .)
-    NEQ             reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .)
-    LT              reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .)
-    NLT             reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .)
-    GT              reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .)
-    NGT             reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .)
     )               reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .)
     ,               reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .)
     ]               reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .)
@@ -5911,6 +5814,12 @@ state 119
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
     '               shift and go to state 41
+    EQ              shift and go to state 42
+    NEQ             shift and go to state 43
+    LT              shift and go to state 44
+    NLT             shift and go to state 45
+    GT              shift and go to state 46
+    NGT             shift and go to state 47
 
   ! +               [ reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .) ]
   ! -               [ reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .) ]
@@ -5921,12 +5830,12 @@ state 119
   ! DOTMUL          [ reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .) ]
   ! DOTDIV          [ reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .) ]
   ! '               [ reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .) ]
-  ! EQ              [ shift and go to state 42 ]
-  ! NEQ             [ shift and go to state 43 ]
-  ! LT              [ shift and go to state 44 ]
-  ! NLT             [ shift and go to state 45 ]
-  ! GT              [ shift and go to state 46 ]
-  ! NGT             [ shift and go to state 47 ]
+  ! EQ              [ reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .) ]
+  ! NEQ             [ reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .) ]
+  ! LT              [ reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .) ]
+  ! NLT             [ reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .) ]
+  ! GT              [ reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .) ]
+  ! NGT             [ reduce using rule 27 (expression -> ID [ expression_list ] ADDASSIGN expression .) ]
 
 
 state 120
@@ -5949,12 +5858,6 @@ state 120
     (49) expression -> expression . NGT expression
 
     ;               reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .)
-    EQ              reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .)
-    NEQ             reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .)
-    LT              reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .)
-    NLT             reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .)
-    GT              reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .)
-    NGT             reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .)
     )               reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .)
     ,               reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .)
     ]               reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .)
@@ -5985,6 +5888,12 @@ state 120
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
     '               shift and go to state 41
+    EQ              shift and go to state 42
+    NEQ             shift and go to state 43
+    LT              shift and go to state 44
+    NLT             shift and go to state 45
+    GT              shift and go to state 46
+    NGT             shift and go to state 47
 
   ! +               [ reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .) ]
   ! -               [ reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .) ]
@@ -5995,12 +5904,12 @@ state 120
   ! DOTMUL          [ reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .) ]
   ! DOTDIV          [ reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .) ]
   ! '               [ reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .) ]
-  ! EQ              [ shift and go to state 42 ]
-  ! NEQ             [ shift and go to state 43 ]
-  ! LT              [ shift and go to state 44 ]
-  ! NLT             [ shift and go to state 45 ]
-  ! GT              [ shift and go to state 46 ]
-  ! NGT             [ shift and go to state 47 ]
+  ! EQ              [ reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .) ]
+  ! NEQ             [ reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .) ]
+  ! LT              [ reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .) ]
+  ! NLT             [ reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .) ]
+  ! GT              [ reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .) ]
+  ! NGT             [ reduce using rule 28 (expression -> ID [ expression_list ] SUBASSIGN expression .) ]
 
 
 state 121
@@ -6023,12 +5932,6 @@ state 121
     (49) expression -> expression . NGT expression
 
     ;               reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .)
-    EQ              reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .)
-    NEQ             reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .)
-    LT              reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .)
-    NLT             reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .)
-    GT              reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .)
-    NGT             reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .)
     )               reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .)
     ,               reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .)
     ]               reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .)
@@ -6059,6 +5962,12 @@ state 121
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
     '               shift and go to state 41
+    EQ              shift and go to state 42
+    NEQ             shift and go to state 43
+    LT              shift and go to state 44
+    NLT             shift and go to state 45
+    GT              shift and go to state 46
+    NGT             shift and go to state 47
 
   ! +               [ reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .) ]
   ! -               [ reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .) ]
@@ -6069,12 +5978,12 @@ state 121
   ! DOTMUL          [ reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .) ]
   ! DOTDIV          [ reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .) ]
   ! '               [ reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .) ]
-  ! EQ              [ shift and go to state 42 ]
-  ! NEQ             [ shift and go to state 43 ]
-  ! LT              [ shift and go to state 44 ]
-  ! NLT             [ shift and go to state 45 ]
-  ! GT              [ shift and go to state 46 ]
-  ! NGT             [ shift and go to state 47 ]
+  ! EQ              [ reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .) ]
+  ! NEQ             [ reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .) ]
+  ! LT              [ reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .) ]
+  ! NLT             [ reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .) ]
+  ! GT              [ reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .) ]
+  ! NGT             [ reduce using rule 29 (expression -> ID [ expression_list ] MULASSIGN expression .) ]
 
 
 state 122
@@ -6097,12 +6006,6 @@ state 122
     (49) expression -> expression . NGT expression
 
     ;               reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .)
-    EQ              reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .)
-    NEQ             reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .)
-    LT              reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .)
-    NLT             reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .)
-    GT              reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .)
-    NGT             reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .)
     )               reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .)
     ,               reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .)
     ]               reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .)
@@ -6133,6 +6036,12 @@ state 122
     DOTMUL          shift and go to state 39
     DOTDIV          shift and go to state 40
     '               shift and go to state 41
+    EQ              shift and go to state 42
+    NEQ             shift and go to state 43
+    LT              shift and go to state 44
+    NLT             shift and go to state 45
+    GT              shift and go to state 46
+    NGT             shift and go to state 47
 
   ! +               [ reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .) ]
   ! -               [ reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .) ]
@@ -6143,12 +6052,12 @@ state 122
   ! DOTMUL          [ reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .) ]
   ! DOTDIV          [ reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .) ]
   ! '               [ reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .) ]
-  ! EQ              [ shift and go to state 42 ]
-  ! NEQ             [ shift and go to state 43 ]
-  ! LT              [ shift and go to state 44 ]
-  ! NLT             [ shift and go to state 45 ]
-  ! GT              [ shift and go to state 46 ]
-  ! NGT             [ shift and go to state 47 ]
+  ! EQ              [ reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .) ]
+  ! NEQ             [ reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .) ]
+  ! LT              [ reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .) ]
+  ! NLT             [ reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .) ]
+  ! GT              [ reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .) ]
+  ! NGT             [ reduce using rule 30 (expression -> ID [ expression_list ] DIVASSIGN expression .) ]
 
 
 state 123
@@ -6261,94 +6170,3 @@ WARNING:
 WARNING: Conflicts:
 WARNING: 
 WARNING: shift/reduce conflict for [ in state 13 resolved as shift
-WARNING: shift/reduce conflict for + in state 77 resolved as shift
-WARNING: shift/reduce conflict for - in state 77 resolved as shift
-WARNING: shift/reduce conflict for * in state 77 resolved as shift
-WARNING: shift/reduce conflict for / in state 77 resolved as shift
-WARNING: shift/reduce conflict for DOTADD in state 77 resolved as shift
-WARNING: shift/reduce conflict for DOTSUB in state 77 resolved as shift
-WARNING: shift/reduce conflict for DOTMUL in state 77 resolved as shift
-WARNING: shift/reduce conflict for DOTDIV in state 77 resolved as shift
-WARNING: shift/reduce conflict for ' in state 77 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 77 resolved as shift
-WARNING: shift/reduce conflict for NEQ in state 77 resolved as shift
-WARNING: shift/reduce conflict for LT in state 77 resolved as shift
-WARNING: shift/reduce conflict for NLT in state 77 resolved as shift
-WARNING: shift/reduce conflict for GT in state 77 resolved as shift
-WARNING: shift/reduce conflict for NGT in state 77 resolved as shift
-WARNING: shift/reduce conflict for + in state 78 resolved as shift
-WARNING: shift/reduce conflict for - in state 78 resolved as shift
-WARNING: shift/reduce conflict for * in state 78 resolved as shift
-WARNING: shift/reduce conflict for / in state 78 resolved as shift
-WARNING: shift/reduce conflict for DOTADD in state 78 resolved as shift
-WARNING: shift/reduce conflict for DOTSUB in state 78 resolved as shift
-WARNING: shift/reduce conflict for DOTMUL in state 78 resolved as shift
-WARNING: shift/reduce conflict for DOTDIV in state 78 resolved as shift
-WARNING: shift/reduce conflict for ' in state 78 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 78 resolved as shift
-WARNING: shift/reduce conflict for NEQ in state 78 resolved as shift
-WARNING: shift/reduce conflict for LT in state 78 resolved as shift
-WARNING: shift/reduce conflict for NLT in state 78 resolved as shift
-WARNING: shift/reduce conflict for GT in state 78 resolved as shift
-WARNING: shift/reduce conflict for NGT in state 78 resolved as shift
-WARNING: shift/reduce conflict for + in state 79 resolved as shift
-WARNING: shift/reduce conflict for - in state 79 resolved as shift
-WARNING: shift/reduce conflict for * in state 79 resolved as shift
-WARNING: shift/reduce conflict for / in state 79 resolved as shift
-WARNING: shift/reduce conflict for DOTADD in state 79 resolved as shift
-WARNING: shift/reduce conflict for DOTSUB in state 79 resolved as shift
-WARNING: shift/reduce conflict for DOTMUL in state 79 resolved as shift
-WARNING: shift/reduce conflict for DOTDIV in state 79 resolved as shift
-WARNING: shift/reduce conflict for ' in state 79 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 79 resolved as shift
-WARNING: shift/reduce conflict for NEQ in state 79 resolved as shift
-WARNING: shift/reduce conflict for LT in state 79 resolved as shift
-WARNING: shift/reduce conflict for NLT in state 79 resolved as shift
-WARNING: shift/reduce conflict for GT in state 79 resolved as shift
-WARNING: shift/reduce conflict for NGT in state 79 resolved as shift
-WARNING: shift/reduce conflict for + in state 80 resolved as shift
-WARNING: shift/reduce conflict for - in state 80 resolved as shift
-WARNING: shift/reduce conflict for * in state 80 resolved as shift
-WARNING: shift/reduce conflict for / in state 80 resolved as shift
-WARNING: shift/reduce conflict for DOTADD in state 80 resolved as shift
-WARNING: shift/reduce conflict for DOTSUB in state 80 resolved as shift
-WARNING: shift/reduce conflict for DOTMUL in state 80 resolved as shift
-WARNING: shift/reduce conflict for DOTDIV in state 80 resolved as shift
-WARNING: shift/reduce conflict for ' in state 80 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 80 resolved as shift
-WARNING: shift/reduce conflict for NEQ in state 80 resolved as shift
-WARNING: shift/reduce conflict for LT in state 80 resolved as shift
-WARNING: shift/reduce conflict for NLT in state 80 resolved as shift
-WARNING: shift/reduce conflict for GT in state 80 resolved as shift
-WARNING: shift/reduce conflict for NGT in state 80 resolved as shift
-WARNING: shift/reduce conflict for + in state 81 resolved as shift
-WARNING: shift/reduce conflict for - in state 81 resolved as shift
-WARNING: shift/reduce conflict for * in state 81 resolved as shift
-WARNING: shift/reduce conflict for / in state 81 resolved as shift
-WARNING: shift/reduce conflict for DOTADD in state 81 resolved as shift
-WARNING: shift/reduce conflict for DOTSUB in state 81 resolved as shift
-WARNING: shift/reduce conflict for DOTMUL in state 81 resolved as shift
-WARNING: shift/reduce conflict for DOTDIV in state 81 resolved as shift
-WARNING: shift/reduce conflict for ' in state 81 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 81 resolved as shift
-WARNING: shift/reduce conflict for NEQ in state 81 resolved as shift
-WARNING: shift/reduce conflict for LT in state 81 resolved as shift
-WARNING: shift/reduce conflict for NLT in state 81 resolved as shift
-WARNING: shift/reduce conflict for GT in state 81 resolved as shift
-WARNING: shift/reduce conflict for NGT in state 81 resolved as shift
-WARNING: shift/reduce conflict for + in state 82 resolved as shift
-WARNING: shift/reduce conflict for - in state 82 resolved as shift
-WARNING: shift/reduce conflict for * in state 82 resolved as shift
-WARNING: shift/reduce conflict for / in state 82 resolved as shift
-WARNING: shift/reduce conflict for DOTADD in state 82 resolved as shift
-WARNING: shift/reduce conflict for DOTSUB in state 82 resolved as shift
-WARNING: shift/reduce conflict for DOTMUL in state 82 resolved as shift
-WARNING: shift/reduce conflict for DOTDIV in state 82 resolved as shift
-WARNING: shift/reduce conflict for ' in state 82 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 82 resolved as shift
-WARNING: shift/reduce conflict for NEQ in state 82 resolved as shift
-WARNING: shift/reduce conflict for LT in state 82 resolved as shift
-WARNING: shift/reduce conflict for NLT in state 82 resolved as shift
-WARNING: shift/reduce conflict for GT in state 82 resolved as shift
-WARNING: shift/reduce conflict for NGT in state 82 resolved as shift
-WARNING: shift/reduce conflict for - in state 117 resolved as shift
