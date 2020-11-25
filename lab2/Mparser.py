@@ -1,5 +1,6 @@
 import scanner
 import ply.yacc as yacc
+import AST
 
 
 tokens = scanner.tokens
@@ -24,61 +25,153 @@ def p_error(p):
     else:
         print("Unexpected end of input")
 
+# --------------- PROGRAM: ------------------------
 
 def p_program(p):
     """
     program : instruction
-            | program instruction
     """
+    p[0] = AST.Block([p[1]])
 
-def p_instruction(p):
+def p_program_block(p):
+    """ 
+    program : program instruction
     """
-    instruction : for_instruction
-                | while_instruction
-                | if_instruction
-                | print_instruction
-                | '{' instructions_list '}'
-                | BREAK ';'
-                | CONTINUE ';'
-                | RETURN expression ';'
-                | expression ';'
+    program = p[1]
+    program.instructions.append(p[2])
+    p[0] = program 
+
+# --------------- INSTRUCTIONS: --------------------
+
+def p_expression_instruction(p):
+    "instruction : expression ';'"
+    p[0] = p[1]
+
+def p_break_instruction(p):
+    """ 
+    instruction : BREAK ';'
     """
+    p[0] = AST.Break()
+
+def p_continue_instruction(p):
+    """ 
+    instruction : CONTINUE ';'
+    """
+    p[0] = AST.Continue()
+
+def p_return_instruction(p):
+    """ 
+    instruction : RETURN expression ';'
+    """
+    p[0] = AST.Return(p[2])
 
 def p_instructions_list(p):
     """
     instructions_list : instruction
-                      | instructions_list instruction
     """
+    p[0] = AST.Block([p[1]])
 
-# TODO w sekcji z przypisywaniem ID czy expression ?
-def p_expression(p):
+def p_instructions(p):
+    """
+    instructions_list : instructions_list instruction
+    """
+    instructions_list = p[1]
+    instructions_list.instructions.append(p[2])
+    p[0] = instructions_list
+
+def p_block_instruction(p):
+    """
+    instruction : '{' instructions_list '}'
+    """
+    p[0] = p[2]
+
+# --------------- EXPRESSIONS: --------------------
+
+def p_expression_nest(p):
+    """
+    expression : '(' expression ')'
+    """ 
+    p[0] = p[2]
+
+def p_expression_empty_vector(p):
+    """
+    expression : '[' ']'
+    """
+    p[0] = AST.Vector()
+
+def p_expression_vector(p):
+    """
+    expression : '[' expression_list ']'
+    """
+    p[0] = p[2] #AST.Vector(p[2])
+
+def p_expression_int(p):
+    """
+    expression : INTNUM
+    """
+    p[0] = AST.Int(p[1])
+
+def p_expression_float(p):
+    """
+    expression : FLOAT
+    """
+    p[0] = AST.Float(p[1])
+
+def p_expression_id(p):
     """
     expression : ID
-               | INTNUM
-               | FLOAT
-               | STRING
- 
-               | '(' expression ')' 
- 
-               | '[' ']'
-               | '[' expression_list ']'
- 
-               | ID '=' expression       
-               | ID ADDASSIGN expression
-               | ID SUBASSIGN expression 
-               | ID MULASSIGN expression
-               | ID DIVASSIGN expression
-               | ID '[' expression_list ']' '=' expression       
+    """
+    p[0] = AST.ID(p[1])
+
+def p_expression_string(p):
+    """
+    expression : STRING
+    """
+    p[0] = AST.String(p[1])
+
+def p_expression_transposition(p):
+    """
+    expression : expression TRANSPOSITION
+    """
+    p[0] = AST.Transposition(p[1])
+
+def p_expression_opposite(p):
+    """
+    expression : '-' expression %prec OPP
+    """
+    p[0] = AST.Opposite(p[2])
+
+def p_expression_function(p):
+    """
+    expression : ZEROS '(' expression_list ')'
+               | ONES '(' expression_list ')'
+               | EYE '(' expression_list ')'
+    """
+    p[0] = AST.Function(p[1], p[3])
+
+def p_expression_assign(p):
+    """
+    expression : ID '=' expression       
+                 | ID ADDASSIGN expression
+                 | ID SUBASSIGN expression 
+                 | ID MULASSIGN expression
+                 | ID DIVASSIGN expression
+    """
+    p[0] = AST.Assign(p[2], AST.ID(p[1]), p[3])
+
+def p_expression_list_assign(p):
+    """
+    expression : ID '[' expression_list ']' '=' expression       
                | ID '[' expression_list ']' ADDASSIGN expression
                | ID '[' expression_list ']' SUBASSIGN expression 
                | ID '[' expression_list ']' MULASSIGN expression
                | ID '[' expression_list ']' DIVASSIGN expression
- 
-               | ZEROS '(' expression_list ')'
-               | ONES '(' expression_list ')'
-               | EYE '(' expression_list ')'
- 
-               | expression '+' expression
+    """
+    p[0] = AST.ListAssign(p[5], AST.ID(p[1]), p[3], p[6])
+
+def p_expression_binary(p):
+    """ 
+    expression : expression '+' expression
                | expression '-' expression
                | expression '*' expression
                | expression '/' expression
@@ -86,45 +179,67 @@ def p_expression(p):
                | expression DOTSUB expression
                | expression DOTMUL expression
                | expression DOTDIV expression
-               | '-' expression %prec OPP
- 
-               | expression TRANSPOSITION
-               
                | expression EQ expression
                | expression NEQ expression
                | expression LT expression
                | expression NLT expression
                | expression GT expression
                | expression NGT expression
-    """ 
+    """
+    p[0] = AST.Binary(p[2], p[1], p[3])
 
 def p_expression_list(p):
     """
     expression_list : expression
-                    | expression_list ',' expression
     """
+    p[0] = AST.ExpressionsBlock([p[1]])
+
+def p_expressions(p):
+    """
+    expression_list : expression_list ',' expression
+    """
+    expression_list = p[1]
+    expression_list.expressions.append(p[3])
+    p[0] = expression_list
+
+# --------------- SPECIAL INSTRUCTIONS: --------------------
+
+def p_if_else_instruction(p):
+    """
+    instruction : IF '(' expression ')' instruction ELSE instruction
+    """
+    p[0] = AST.If(p[3], p[5], p[7])
 
 def p_if_instruction(p):
     """
-    if_instruction : IF '(' expression ')' instruction %prec IFX
-                   | IF '(' expression ')' instruction ELSE instruction
+    instruction : IF '(' expression ')' instruction %prec IFX
     """
+    p[0] = AST.If(p[3], p[5])
 
 def p_while_instruction(p):
     """
-    while_instruction : WHILE '(' expression ')' instruction
+    instruction : WHILE '(' expression ')' instruction
     """
+    p[0] = AST.While(p[3], p[5])
+
+def p_range(p):
+    """
+    range : expression ':' expression
+    """
+    p[0] = AST.Range(p[1], p[3])
 
 def p_for_instruction(p):
     """
-    range : expression ':' expression
-    for_instruction : FOR ID '=' range instruction
+    instruction : FOR ID '=' range instruction
     """
+    p[0] = AST.For(AST.ID(p[2]), p[4], p[5])
+
 
 def p_print_instruction(p):
     """
-    print_instruction : PRINT expression_list ';'
+    instruction : PRINT expression_list ';'
     """
+    p[0] = AST.Print(p[2])
 
 
 parser = yacc.yacc()
