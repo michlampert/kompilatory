@@ -119,7 +119,7 @@ class TreePrinter:
         self.condition.printTree(indent + 1)
         print("|  " * indent + "THEN")
         self.true.printTree(indent + 1)
-        if self.false:
+        if self.false != AST.Block([]):
             print("|  " * indent + "ELSE")
             self.false.printTree(indent + 1)
 

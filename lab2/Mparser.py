@@ -127,7 +127,7 @@ def p_expression_string(p):
     """
     expression : STRING
     """
-    p[0] = AST.String(p[1])
+    p[0] = AST.String("\"" + p[1] + "\"")
 
 def p_expression_transposition(p):
     """
