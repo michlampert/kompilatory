@@ -31,7 +31,7 @@ def p_program(p):
     """
     program : instruction
     """
-    p[0] = AST.Block([p[1]])
+    p[0] = AST.Block(p.lineno(1), [p[1]])
 
 def p_program_block(p):
     """ 
@@ -51,25 +51,25 @@ def p_break_instruction(p):
     """ 
     instruction : BREAK ';'
     """
-    p[0] = AST.Break()
+    p[0] = AST.Break(p.lineno(1))
 
 def p_continue_instruction(p):
     """ 
     instruction : CONTINUE ';'
     """
-    p[0] = AST.Continue()
+    p[0] = AST.Continue(p.lineno(1))
 
 def p_return_instruction(p):
     """ 
     instruction : RETURN expression ';'
     """
-    p[0] = AST.Return(p[2])
+    p[0] = AST.Return(p.lineno(1), p[2])
 
 def p_instructions_list(p):
     """
     instructions_list : instruction
     """
-    p[0] = AST.Block([p[1]])
+    p[0] = AST.Block(p.lineno(1), [p[1]])
 
 def p_instructions(p):
     """
@@ -97,7 +97,7 @@ def p_expression_empty_vector(p):
     """
     expression : '[' ']'
     """
-    p[0] = AST.Vector()
+    p[0] = AST.Vector(p.lineno(1))
 
 def p_expression_vector(p):
     """
@@ -109,37 +109,37 @@ def p_expression_int(p):
     """
     expression : INTNUM
     """
-    p[0] = AST.Int(p[1])
+    p[0] = AST.Int(p.lineno(1), p[1])
 
 def p_expression_float(p):
     """
     expression : FLOAT
     """
-    p[0] = AST.Float(p[1])
+    p[0] = AST.Float(p.lineno(1), p[1])
 
 def p_expression_id(p):
     """
     expression : ID
     """
-    p[0] = AST.ID(p[1])
+    p[0] = AST.ID(p.lineno(1), p[1])
 
 def p_expression_string(p):
     """
     expression : STRING
     """
-    p[0] = AST.String("\"" + p[1] + "\"")
+    p[0] = AST.String(p.lineno(1), "\"" + p[1] + "\"")
 
 def p_expression_transposition(p):
     """
     expression : expression TRANSPOSITION
     """
-    p[0] = AST.Transposition(p[1])
+    p[0] = AST.Transposition(p.lineno(1), p[1])
 
 def p_expression_opposite(p):
     """
     expression : '-' expression %prec OPP
     """
-    p[0] = AST.Opposite(p[2])
+    p[0] = AST.Opposite(p.lineno(1), p[2])
 
 def p_expression_function(p):
     """
@@ -147,7 +147,7 @@ def p_expression_function(p):
                | ONES '(' expression_list ')'
                | EYE '(' expression_list ')'
     """
-    p[0] = AST.Function(p[1], p[3])
+    p[0] = AST.Function(p.lineno(1), p[1], p[3])
 
 def p_expression_assign(p):
     """
@@ -157,7 +157,7 @@ def p_expression_assign(p):
                  | ID MULASSIGN expression
                  | ID DIVASSIGN expression
     """
-    p[0] = AST.Assign(p[2], AST.ID(p[1]), p[3])
+    p[0] = AST.Assign(p.lineno(1), p[2], AST.ID(p.lineno(1), p[1]), p[3])
 
 def p_expression_list_assign(p):
     """
@@ -167,7 +167,7 @@ def p_expression_list_assign(p):
                | ID '[' expression_list ']' MULASSIGN expression
                | ID '[' expression_list ']' DIVASSIGN expression
     """
-    p[0] = AST.ListAssign(p[5], AST.ID(p[1]), p[3], p[6])
+    p[0] = AST.ListAssign(p.lineno(1), p[5], AST.ID(p.lineno(1), p[1]), p[3], p[6])
 
 def p_expression_binary(p):
     """ 
@@ -186,13 +186,13 @@ def p_expression_binary(p):
                | expression GT expression
                | expression NGT expression
     """
-    p[0] = AST.Binary(p[2], p[1], p[3])
+    p[0] = AST.Binary(p.lineno(1), p[2], p[1], p[3])
 
 def p_expression_list(p):
     """
     expression_list : expression
     """
-    p[0] = AST.ExpressionsBlock([p[1]])
+    p[0] = AST.ExpressionsBlock(p.lineno(1), [p[1]])
 
 def p_expressions(p):
     """
@@ -208,38 +208,38 @@ def p_if_else_instruction(p):
     """
     instruction : IF '(' expression ')' instruction ELSE instruction
     """
-    p[0] = AST.If(p[3], p[5], p[7])
+    p[0] = AST.If(p.lineno(1), p[3], p[5], p[7])
 
 def p_if_instruction(p):
     """
     instruction : IF '(' expression ')' instruction %prec IFX
     """
-    p[0] = AST.If(p[3], p[5])
+    p[0] = AST.If(p.lineno(1), p[3], p[5])
 
 def p_while_instruction(p):
     """
     instruction : WHILE '(' expression ')' instruction
     """
-    p[0] = AST.While(p[3], p[5])
+    p[0] = AST.While(p.lineno(1), p[3], p[5])
 
 def p_range(p):
     """
     range : expression ':' expression
     """
-    p[0] = AST.Range(p[1], p[3])
+    p[0] = AST.Range(p.lineno(1), p[1], p[3])
 
 def p_for_instruction(p):
     """
     instruction : FOR ID '=' range instruction
     """
-    p[0] = AST.For(AST.ID(p[2]), p[4], p[5])
+    p[0] = AST.For(p.lineno(1), AST.ID(p.lineno(1), p[2]), p[4], p[5])
 
 
 def p_print_instruction(p):
     """
     instruction : PRINT expression_list ';'
     """
-    p[0] = AST.Print(p[2])
+    p[0] = AST.Print(p.lineno(1), p[2])
 
 
 parser = yacc.yacc()

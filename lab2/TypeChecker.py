@@ -99,7 +99,10 @@ class TypeChecker(NodeVisitor):
         pass
 
     def visit_Vector(self, node):
-        pass
+        symbols = [self.visit(n) for n in node.values]
+        if len(set(symbols)!=1):
+            return None
+        return None
 
     def visit_Transposition(self, node):
         pass

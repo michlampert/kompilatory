@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 
+@dataclass
 class Node:
-    pass
+    line: str
 
 @dataclass
 class Int(Node):
