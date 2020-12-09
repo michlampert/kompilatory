@@ -6,6 +6,7 @@ INT = 'INT'
 FLOAT = 'FLOAT'
 STRING = 'STRING'
 RANGE = 'RANGE'
+VECTOR = 'VECTOR'
 ARRAY = 'ARRAY'
 BOOL = 'BOOL'
 
@@ -28,7 +29,7 @@ for op in ['<', '>', '==', '!=', '<=', '>=']:
 # We can also compare strings and arrays:
 for op in ['==', '!=']:
     ttype[op][STRING][STRING] = BOOL
-    ttype[op][ARRAY][ARRAY] = BOOL
+    ttype[op][VECTOR][VECTOR] = BOOL
 
 class NodeVisitor(object):
 
@@ -79,6 +80,13 @@ class TypeChecker(NodeVisitor):
         else:
             print(f"{node.id} - undefined!")
             return None
+
+    # TODO: uwzgledniac rozmiar i typ macierzy
+    def visit_Function(self, node):
+        self.visit(node.argument)
+        if node.function not in ['zeros', 'eye', 'ones']: return None
+        if isinstance(node.argument, AST.Int): return ARRAY
+        return None
             
     def visit_Binary(self, node):
         pass
