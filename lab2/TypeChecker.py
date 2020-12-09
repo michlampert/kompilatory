@@ -67,7 +67,7 @@ class TypeChecker(NodeVisitor):
         self.counter_loop = 0
 
     def print_error(self, node, msg):
-        print(f"line {node.line}: {message}")
+        print(f"LINE {node.line}: {msg}")
 
     def visit_Int(self, node):
         return INT
@@ -83,13 +83,13 @@ class TypeChecker(NodeVisitor):
         if symbol:
             return symbol.type
         else:
-            print(f"{node.id} - undefined!")
+            self.print_error(node, f"{node.id} is undefined!")
             return None
 
     def visit_Function(self, node):
-        self.visit(node.argument)
+        arg_symbol = self.visit(node.argument)
         if node.function not in ['zeros', 'eye', 'ones']: return None
-        if isinstance(node.argument, AST.Int): return ARRAY
+        if arg_symbol == INT: return ARRAY
         return None
             
     def visit_Binary(self, node):
@@ -102,7 +102,13 @@ class TypeChecker(NodeVisitor):
         pass
 
     def visit_While(self, node):
-        pass
+        self.counter_loop += 1
+        condition_symbol = self.visit(node.condition)
+        if condition_symbol != BOOL: self.print_error(node, f"Condition has to evaluate to boolean - got {condition_symbol}!")
+        # TODO: Visit block of code:
+        
+        self.counter_loop-=1
+        return None
 
     def visit_Range(self, node):
         first_symbol = self.visit(node.first)
@@ -111,7 +117,13 @@ class TypeChecker(NodeVisitor):
         return RANGE
 
     def visit_For(self, node):
-        pass
+        self.counter_loop += 1
+        range_symbol = self.visit(node.range)
+        if range_symbol != RANGE: self.print_error(node, f"For loop: got {range_symbol} instead of range!")
+        # TODO: Visit block of code:
+
+        self.counter_loop -= 1
+        return None
 
     def visit_Print(self, node):
         self.visit(node.expression)
