@@ -1,5 +1,5 @@
 from collections import defaultdict
-
+from SymbolTable import *
 # ---------------- TYPES -----------------
 
 INT = 'INT'
@@ -98,15 +98,38 @@ class TypeChecker(NodeVisitor):
     def visit_Assign(self, node):
         pass
 
-    def visit_If(self, node):
+    def visit_Vector(self, node):
         pass
+
+    def visit_Transposition(self, node):
+        pass
+
+    def visit_Block(self, node):
+        self.table.pushScope("block")
+        self.visit(node.instructions)
+
+    def visit_ExpressionsBlock(self, node):
+        self.table.pushScope("block")
+        self.visit(node.expressions)
+
+    def visit_If(self, node):
+        condition_symbol = self.visit(node.condition)
+        if condition_symbol != BOOL: self.print_error(node, f'If: got {condition_symbol} instead of Bool as condition.')
+        self.table.pushScope("true")
+        self.visit(node.true)
+        self.table.popScope()
+        self.table.pushScope("false")
+        self.visit(node.false)
+        self.table.popScope()
+        return None
 
     def visit_While(self, node):
         self.counter_loop += 1
         condition_symbol = self.visit(node.condition)
         if condition_symbol != BOOL: self.print_error(node, f"Condition has to evaluate to boolean - got {condition_symbol}!")
-        # TODO: Visit block of code:
-        
+        self.table.pushScope("expression")
+        self.visit(node.expression)
+        self.table.popScope()
         self.counter_loop-=1
         return None
 
@@ -120,8 +143,9 @@ class TypeChecker(NodeVisitor):
         self.counter_loop += 1
         range_symbol = self.visit(node.range)
         if range_symbol != RANGE: self.print_error(node, f"For loop: got {range_symbol} instead of range!")
-        # TODO: Visit block of code:
-
+        self.table.pushScope("expression")
+        self.visit(node.expression)
+        self.table.popScope()
         self.counter_loop -= 1
         return None
 
@@ -141,3 +165,8 @@ class TypeChecker(NodeVisitor):
     def visit_Continue(self, node):
         if self.counter_loop == 0: self.print_error(node, "CONTINUE has to be inside of loop!")
         return None
+
+    def visit_Opposite(self, node):
+        opposite_symbol = self.visit(node.expression)
+        if opposite_symbol not in [FLOAT, INT]: self.print_error(node, 'Opposite: got {type1} instead of number.')
+        return opposite_symbol
