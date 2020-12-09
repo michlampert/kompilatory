@@ -63,6 +63,11 @@ class TypeChecker(NodeVisitor):
 
     def __init__(self):
         self.table = SymbolTable(None, "table")
+        # We want to check if BREAK/CONTINUE is inside loop:
+        self.counter_loop = 0
+
+    def print_error(self, node, msg):
+        print(f"line {node.line}: {message}")
 
     def visit_Int(self, node):
         return INT
@@ -81,7 +86,6 @@ class TypeChecker(NodeVisitor):
             print(f"{node.id} - undefined!")
             return None
 
-    # TODO: uwzgledniac rozmiar i typ macierzy
     def visit_Function(self, node):
         self.visit(node.argument)
         if node.function not in ['zeros', 'eye', 'ones']: return None
@@ -101,7 +105,27 @@ class TypeChecker(NodeVisitor):
         pass
 
     def visit_Range(self, node):
-        pass
+        first_symbol = self.visit(node.first)
+        last_symbol = self.visit(node.last)
+        if first_symbol != INT or last_symbol != INT: self.print_error(node, "Range's first and last has to be an integer!")
+        return RANGE
 
     def visit_For(self, node):
         pass
+
+    def visit_Print(self, node):
+        self.visit(node.expression)
+        return None
+
+    def visit_Return(self, node):
+        self.visit(node.expression)
+        self.print_error(node, "RETURN has to be inside function definition!")
+        return None
+    
+    def visit_Break(self, node):
+        if self.counter_loop == 0: self.print_error(node, "BREAK has to be inside of loop!")
+        return None
+
+    def visit_Continue(self, node):
+        if self.counter_loop == 0: self.print_error(node, "CONTINUE has to be inside of loop!")
+        return None
