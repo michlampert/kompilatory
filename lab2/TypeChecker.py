@@ -81,7 +81,7 @@ class TypeChecker(NodeVisitor):
     def visit_ID(self, node):
         symbol = self.table.get(node.id)
         if symbol:
-            return symbol.type
+            return symbol
         else:
             self.print_error(node, f"{node.id} is undefined!")
             return None
@@ -93,16 +93,27 @@ class TypeChecker(NodeVisitor):
         return None
             
     def visit_Binary(self, node):
-        pass
+        left_symbol = self.visit(node.left)
+        right_symbol = self.visit(node.right)
+        operator = node.operator
+        print(left_symbol, right_symbol, operator)
+        if operator[0] != '.':
+            bin_symbol = ttype[operator][left_symbol][right_symbol]
+            if bin_symbol is None: self.print_error(node, f'Mismatched types for {operator}, with {left_symbol} and {right_symbol}')
+            return bin_symbol
+        else:
+            return None
 
     def visit_Assign(self, node):
-        pass
+        symbol = self.visit(node.value)
+        self.table.put(node.id.id, symbol)
+        return symbol
 
     def visit_Vector(self, node):
         symbols = [self.visit(n) for n in node.values]
         if len(set(symbols)!=1):
-            return None
-        return None
+            return VECTOR
+        return VECTOR
 
     def visit_Transposition(self, node):
         pass
@@ -158,7 +169,7 @@ class TypeChecker(NodeVisitor):
 
     def visit_Return(self, node):
         self.visit(node.expression)
-        self.print_error(node, "RETURN has to be inside function definition!")
+        #self.print_error(node, "RETURN has to be inside function definition!")
         return None
     
     def visit_Break(self, node):

@@ -100,7 +100,7 @@ class While(Node):
 class If(Node):
     condition: Node
     true: Node
-    false: Node = Block([])
+    false: Node = Block(0, [])
 
 @dataclass
 class Error(Node):
