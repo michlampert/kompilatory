@@ -20,6 +20,7 @@ for op in ['+', '-', '*', '/']:
     ttype[op][FLOAT][INT] = ttype[op][INT][FLOAT] = ttype[op][FLOAT][FLOAT] = FLOAT
 
 ttype['+'][STRING][STRING] = STRING
+ttype['+'][ARRAY][ARRAY] = ARRAY
 
 # Boolean operators:
 for op in ['<', '>', '==', '!=', '<=', '>=']:
@@ -87,9 +88,11 @@ class TypeChecker(NodeVisitor):
             return None
 
     def visit_Function(self, node):
-        arg_symbol = self.visit(node.argument)
+        # print(node.argument, arg_symbol)
         if node.function not in ['zeros', 'eye', 'ones']: return None
-        if arg_symbol == INT: return ARRAY
+        if len(node.argument.expressions) == 1:
+            arg_symbol = self.visit(node.argument.expressions[0])
+            if arg_symbol == INT: return ARRAY
         return None
             
     def visit_Binary(self, node):
@@ -106,6 +109,7 @@ class TypeChecker(NodeVisitor):
     def visit_Assign(self, node):
         symbol = self.visit(node.value)
         self.table.put(node.id.id, symbol)
+        print(symbol, node.id.id)
         return symbol
 
     def visit_Vector(self, node):
@@ -119,11 +123,13 @@ class TypeChecker(NodeVisitor):
 
     def visit_Block(self, node):
         self.table.pushScope("block")
-        self.visit(node.instructions)
+        return self.visit(node.instructions)
+        
 
     def visit_ExpressionsBlock(self, node):
         self.table.pushScope("block")
-        self.visit(node.expressions)
+        print(node.expressions)
+        return self.visit(node.expressions)
 
     def visit_If(self, node):
         condition_symbol = self.visit(node.condition)
