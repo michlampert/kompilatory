@@ -96,7 +96,6 @@ class TypeChecker(NodeVisitor):
         left_symbol = self.visit(node.left)
         right_symbol = self.visit(node.right)
         operator = node.operator
-        print(left_symbol, right_symbol, operator)
         if operator[0] != '.':
             bin_symbol = ttype[operator][left_symbol][right_symbol]
             if bin_symbol is None: self.print_error(node, f'Mismatched types for {operator}, with {left_symbol} and {right_symbol}')
@@ -158,6 +157,7 @@ class TypeChecker(NodeVisitor):
         range_symbol = self.visit(node.range)
         if range_symbol != RANGE: self.print_error(node, f"For loop: got {range_symbol} instead of range!")
         self.table.pushScope("expression")
+        self.table.put(node.id.id, INT)
         self.visit(node.expression)
         self.table.popScope()
         self.counter_loop -= 1
