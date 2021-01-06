@@ -1,5 +1,6 @@
 from collections import defaultdict
 from SymbolTable import *
+import AST
 # ---------------- TYPES -----------------
 
 INT = 'INT'
@@ -113,9 +114,18 @@ class TypeChecker(NodeVisitor):
         return symbol
 
     def visit_Vector(self, node):
-        symbols = [self.visit(n) for n in node.values]
-        if len(set(symbols)!=1):
-            return VECTOR
+        symbols = [self.visit(n) for n in node.values.expressions]
+        len_ith_symbol = lambda i: node.values.expressions[i].values.expressions
+        for i,s in enumerate(symbols):
+            if s != symbols[0]:
+                self.print_error(node, f'Mismatched types for: {s} and {symbols[0]}!')
+            if s == VECTOR:
+                if len_ith_symbol(i) != len_ith_symbol(0):
+                    self.print_error(node, f'Mismatched size of vectors for: {s} and {symbols[0]}!')
+            if s == ARRAY:
+                self.print_error(node, f'We do not support 3D arrays!')
+        if VECTOR in symbols: 
+            return ARRAY
         return VECTOR
 
     def visit_Transposition(self, node):
