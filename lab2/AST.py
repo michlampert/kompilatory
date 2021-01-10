@@ -43,7 +43,7 @@ class Opposite(Node):
 @dataclass
 class Reference(Node):
     id: Node
-    expressions: list
+    index: list
 
 @dataclass
 class Function(Node):

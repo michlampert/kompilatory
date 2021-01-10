@@ -203,9 +203,19 @@ class TypeChecker(NodeVisitor):
         return opposite_symbol
 
     def visit_ListAssign(self, node):
-        id_type = self.table.get(node.id.id)
+        id_type = self.visit(node.id)
         expressions = [self.visit(i) for i in node.index.expressions]
         if [e for e in expressions if e != INT]: self.print_error(node, 'All indexes have to be integers.')
         if id_type != VECTOR and id_type != ARRAY: self.print_error(node, '{node.id.id} is not a collection.')
         if id_type == VECTOR and len(node.index.expressions) > 1:  self.print_error(node, '{node.id.id} is a vector not an array - bad reference.')
+        # What should we return here?
+        return VECTOR
+
+    def visit_Reference(self, node):
+        id_type = self.visit(node.id)
+        expressions = [self.visit(i) for i in node.index.expressions]
+        if [e for e in expressions if e != INT]: self.print_error(node, 'All indexes have to be integers.')
+        if id_type != VECTOR and id_type != ARRAY: self.print_error(node, '{node.id.id} is not a collection.')
+        if id_type == VECTOR and len(node.index.expressions) > 1:  self.print_error(node, '{node.id.id} is a vector not an array - bad reference.')
+        # Here we should save type of vector/array and return it:
         return VECTOR
