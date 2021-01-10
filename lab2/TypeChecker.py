@@ -21,7 +21,7 @@ for op in ['+', '-', '*', '/']:
     ttype[op][FLOAT][INT] = ttype[op][INT][FLOAT] = ttype[op][FLOAT][FLOAT] = FLOAT
 
 ttype['+'][STRING][STRING] = STRING
-ttype['+'][ARRAY][ARRAY] = ARRAY
+#ttype['+'][ARRAY][ARRAY] = ARRAY
 
 # Boolean operators:
 for op in ['<', '>', '==', '!=', '<=', '>=']:
@@ -32,6 +32,10 @@ for op in ['<', '>', '==', '!=', '<=', '>=']:
 for op in ['==', '!=']:
     ttype[op][STRING][STRING] = BOOL
     ttype[op][VECTOR][VECTOR] = BOOL
+
+for op in [".+", ".-", ".*", "./"]:
+    ttype[op][VECTOR][VECTOR] = BOOL
+    ttype[op][ARRAY][ARRAY] = BOOL
 
 class NodeVisitor(object):
 
@@ -205,6 +209,7 @@ class TypeChecker(NodeVisitor):
     def visit_ListAssign(self, node):
         id_type = self.visit(node.id)
         expressions = [self.visit(i) for i in node.index.expressions]
+        print(node)
         if [e for e in expressions if e != INT]: self.print_error(node, 'All indexes have to be integers.')
         if id_type != VECTOR and id_type != ARRAY: self.print_error(node, '{node.id.id} is not a collection.')
         if id_type == VECTOR and len(node.index.expressions) > 1:  self.print_error(node, '{node.id.id} is a vector not an array - bad reference.')
