@@ -41,6 +41,11 @@ class Opposite(Node):
     expression: Node
 
 @dataclass
+class Reference(Node):
+    id: Node
+    expressions: list
+
+@dataclass
 class Function(Node):
     function: str
     argument: Node

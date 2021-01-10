@@ -94,7 +94,8 @@ class TypeChecker(NodeVisitor):
         if len(node.argument.expressions) == 1:
             arg_symbol = self.visit(node.argument.expressions[0])
             if arg_symbol == INT: return ARRAY
-        return None
+        self.print_error(node, f'Bad arguments for function: {node.function}')
+        return ARRAY
             
     def visit_Binary(self, node):
         left_symbol = self.visit(node.left)
@@ -115,7 +116,7 @@ class TypeChecker(NodeVisitor):
 
     def visit_Vector(self, node):
         symbols = [self.visit(n) for n in node.values.expressions]
-        len_ith_symbol = lambda i: node.values.expressions[i].values.expressions
+        len_ith_symbol = lambda i: len(node.values.expressions[i].values.expressions)
         for i,s in enumerate(symbols):
             if s != symbols[0]:
                 self.print_error(node, f'Mismatched types for: {s} and {symbols[0]}!')
@@ -200,3 +201,11 @@ class TypeChecker(NodeVisitor):
         opposite_symbol = self.visit(node.expression)
         if opposite_symbol not in [FLOAT, INT]: self.print_error(node, 'Opposite: got {type1} instead of number.')
         return opposite_symbol
+
+    def visit_ListAssign(self, node):
+        id_type = self.table.get(node.id.id)
+        expressions = [self.visit(i) for i in node.index.expressions]
+        if [e for e in expressions if e != INT]: self.print_error(node, 'All indexes have to be integers.')
+        if id_type != VECTOR and id_type != ARRAY: self.print_error(node, '{node.id.id} is not a collection.')
+        if id_type == VECTOR and len(node.index.expressions) > 1:  self.print_error(node, '{node.id.id} is a vector not an array - bad reference.')
+        return VECTOR
