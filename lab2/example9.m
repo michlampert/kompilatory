@@ -1,0 +1,1 @@
+print zeros(3);

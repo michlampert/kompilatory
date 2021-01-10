@@ -70,9 +70,11 @@ class TypeChecker(NodeVisitor):
     def __init__(self):
         self.table = SymbolTable(None, "table")
         # We want to check if BREAK/CONTINUE is inside loop:
+        self.error_counter = 0
         self.counter_loop = 0
 
     def print_error(self, node, msg):
+        self.error_counter += 1
         print(f"LINE {node.line}: {msg}")
 
     def visit_Int(self, node):
@@ -134,13 +136,15 @@ class TypeChecker(NodeVisitor):
         return VECTOR
 
     def visit_Transposition(self, node):
-        pass
+        if self.visit(node.expression) != ARRAY:
+            self.print_error(node, f'Only arrays can be transposed!')
+        return ARRAY
+
 
     def visit_Block(self, node):
         self.table.pushScope("block")
         return self.visit(node.instructions)
         
-
     def visit_ExpressionsBlock(self, node):
         self.table.pushScope("block")
         print(node.expressions)
@@ -209,7 +213,6 @@ class TypeChecker(NodeVisitor):
     def visit_ListAssign(self, node):
         id_type = self.visit(node.id)
         expressions = [self.visit(i) for i in node.index.expressions]
-        print(node)
         if [e for e in expressions if e != INT]: self.print_error(node, 'All indexes have to be integers.')
         if id_type != VECTOR and id_type != ARRAY: self.print_error(node, '{node.id.id} is not a collection.')
         if id_type == VECTOR and len(node.index.expressions) > 1:  self.print_error(node, '{node.id.id} is a vector not an array - bad reference.')
