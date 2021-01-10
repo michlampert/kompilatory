@@ -97,13 +97,13 @@ def p_expression_empty_vector(p):
     """
     expression : '[' ']'
     """
-    p[0] = AST.Vector(p.lineno(1))
+    p[0] = AST.Vector(p.lineno(1), [])
 
 def p_expression_vector(p):
     """
     expression : '[' expression_list ']'
     """
-    p[0] = p[2] #AST.Vector(p[2])
+    p[0] = AST.Vector(p.lineno(1), p[2]) #AST.Vector(p[2])
 
 def p_expression_int(p):
     """
@@ -168,6 +168,12 @@ def p_expression_list_assign(p):
                | ID '[' expression_list ']' DIVASSIGN expression
     """
     p[0] = AST.ListAssign(p.lineno(1), p[5], AST.ID(p.lineno(1), p[1]), p[3], p[6])
+
+def p_expression_array_reference(p):
+    """
+    expression : ID '[' expression_list ']'
+    """
+    p[0] = AST.Reference(p.lineno(1), AST.ID(p.lineno(1), p[1]),  p[3])
 
 def p_expression_binary(p):
     """ 

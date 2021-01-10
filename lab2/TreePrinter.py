@@ -52,6 +52,13 @@ class TreePrinter:
         print("|  " * indent + "OPPOSITE")
         self.expression.printTree(indent + 1)
 
+    @addToClass(AST.Reference)
+    def printReference(self, ident=0):
+        print("|  " * indent + "REFERENCE")
+        self.id.printTree(ident + 1)
+        for e in self.expressions:
+            e.printTree(ident+1)
+
     @addToClass(AST.Function)
     def printTree(self, indent=0):
         print("|  " * indent + self.function)

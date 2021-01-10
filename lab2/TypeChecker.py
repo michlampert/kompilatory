@@ -1,5 +1,6 @@
 from collections import defaultdict
 from SymbolTable import *
+import AST
 # ---------------- TYPES -----------------
 
 INT = 'INT'
@@ -20,7 +21,7 @@ for op in ['+', '-', '*', '/']:
     ttype[op][FLOAT][INT] = ttype[op][INT][FLOAT] = ttype[op][FLOAT][FLOAT] = FLOAT
 
 ttype['+'][STRING][STRING] = STRING
-ttype['+'][ARRAY][ARRAY] = ARRAY
+#ttype['+'][ARRAY][ARRAY] = ARRAY
 
 # Boolean operators:
 for op in ['<', '>', '==', '!=', '<=', '>=']:
@@ -31,6 +32,10 @@ for op in ['<', '>', '==', '!=', '<=', '>=']:
 for op in ['==', '!=']:
     ttype[op][STRING][STRING] = BOOL
     ttype[op][VECTOR][VECTOR] = BOOL
+
+for op in [".+", ".-", ".*", "./"]:
+    ttype[op][VECTOR][VECTOR] = BOOL
+    ttype[op][ARRAY][ARRAY] = BOOL
 
 class NodeVisitor(object):
 
@@ -93,7 +98,8 @@ class TypeChecker(NodeVisitor):
         if len(node.argument.expressions) == 1:
             arg_symbol = self.visit(node.argument.expressions[0])
             if arg_symbol == INT: return ARRAY
-        return None
+        self.print_error(node, f'Bad arguments for function: {node.function}')
+        return ARRAY
             
     def visit_Binary(self, node):
         left_symbol = self.visit(node.left)
@@ -113,9 +119,18 @@ class TypeChecker(NodeVisitor):
         return symbol
 
     def visit_Vector(self, node):
-        symbols = [self.visit(n) for n in node.values]
-        if len(set(symbols)!=1):
-            return VECTOR
+        symbols = [self.visit(n) for n in node.values.expressions]
+        len_ith_symbol = lambda i: len(node.values.expressions[i].values.expressions)
+        for i,s in enumerate(symbols):
+            if s != symbols[0]:
+                self.print_error(node, f'Mismatched types for: {s} and {symbols[0]}!')
+            if s == VECTOR:
+                if len_ith_symbol(i) != len_ith_symbol(0):
+                    self.print_error(node, f'Mismatched size of vectors for: {s} and {symbols[0]}!')
+            if s == ARRAY:
+                self.print_error(node, f'We do not support 3D arrays!')
+        if VECTOR in symbols: 
+            return ARRAY
         return VECTOR
 
     def visit_Transposition(self, node):
@@ -190,3 +205,22 @@ class TypeChecker(NodeVisitor):
         opposite_symbol = self.visit(node.expression)
         if opposite_symbol not in [FLOAT, INT]: self.print_error(node, 'Opposite: got {type1} instead of number.')
         return opposite_symbol
+
+    def visit_ListAssign(self, node):
+        id_type = self.visit(node.id)
+        expressions = [self.visit(i) for i in node.index.expressions]
+        print(node)
+        if [e for e in expressions if e != INT]: self.print_error(node, 'All indexes have to be integers.')
+        if id_type != VECTOR and id_type != ARRAY: self.print_error(node, '{node.id.id} is not a collection.')
+        if id_type == VECTOR and len(node.index.expressions) > 1:  self.print_error(node, '{node.id.id} is a vector not an array - bad reference.')
+        # What should we return here?
+        return VECTOR
+
+    def visit_Reference(self, node):
+        id_type = self.visit(node.id)
+        expressions = [self.visit(i) for i in node.index.expressions]
+        if [e for e in expressions if e != INT]: self.print_error(node, 'All indexes have to be integers.')
+        if id_type != VECTOR and id_type != ARRAY: self.print_error(node, '{node.id.id} is not a collection.')
+        if id_type == VECTOR and len(node.index.expressions) > 1:  self.print_error(node, '{node.id.id} is a vector not an array - bad reference.')
+        # Here we should save type of vector/array and return it:
+        return VECTOR
