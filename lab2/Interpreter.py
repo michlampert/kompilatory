@@ -4,16 +4,39 @@ from Memory import *
 from Exceptions import  *
 from visit import *
 import sys
-#import numpy as np
 
 sys.setrecursionlimit(10000)
 
 ops = dict()
+# Boolean operations:
+ops["=="] = lambda x,y: x == y
+ops["!="] = lambda x,y: x != y
+ops[">"] = lambda x,y: x > y
+ops[">="] = lambda x,y: x >= y
+ops["<"] = lambda x,y: x < y
+ops["<="] = lambda x,y: x <= y
+# Arithmetic operations:
 ops['+'] = lambda x,y: x + y
 ops['-'] = lambda x,y: x - y
 ops['*'] = lambda x,y: x * y
 ops['/'] = lambda x,y: x / y
+# Arithmetic operations for arrays/vectors:
 
+def apply_op_matrix(op, matrix1, matrix2):
+    if isinstance(matrix1[0], list):
+        return [[op(matrix1[i][j],matrix2[i][j]) for j in range(len(matrix1[0]))] for i in range(len(matrix1))]
+    else:
+        return [op(matrix1[i], matrix2[i]) for i in range(len(matrix1))]
+
+ops[".+"] = lambda x,y: apply_op_matrix(ops["+"], x, y)
+ops[".-"] = lambda x,y: apply_op_matrix(ops["-"], x, y)
+ops[".*"] = lambda x,y: apply_op_matrix(ops["*"], x, y)
+ops["./"] = lambda x,y: apply_op_matrix(ops["/"], x, y)
+
+
+
+def transpose(matrix):
+    return [[matrix[i][j] for i in range(len(matrix))] for j in range(len(matrix[0]))]
 
 class Interpreter(object):
     def __init__(self):
@@ -51,13 +74,12 @@ class Interpreter(object):
 
     @when(AST.Vector)
     def visit(self, node):
-        return [self.visit(value) for value in node.values]
+        return self.visit(node.values)
 
     @when(AST.Transposition)
     def visit(self, node):
         array = self.visit(node.expression)
-        pass
-        #return np.transpose(array)
+        return transpose(array)
 
     @when(AST.Opposite)
     def visit(self, node):
@@ -67,7 +89,11 @@ class Interpreter(object):
     def visit(self, node):
         collection = self.visit(node.id)
         index = self.visit(node.index)
-        return collection[index]
+        if len(index) == 1:
+            return collection[index[0]]
+        else:
+            return collection[index[0]][index[1]]
+
 
     @when(AST.Binary)
     def visit(self, node):
@@ -96,7 +122,7 @@ class Interpreter(object):
     def visit(self, node):
         first = self.visit(node.first)
         last = self.visit(node.last)
-        return range(first, last)
+        return [first, last]
 
     @when(AST.If)
     def visit(self, node):
@@ -114,19 +140,57 @@ class Interpreter(object):
 
     @when(AST.While)
     def visit(self, node):
-        pass
+        self.stack.push(Memory())
+        while self.visit(node.condition):
+            self.visit(node.expression)
+        self.stack.pop()
 
     @when(AST.For)
     def visit(self, node):
-        pass
+        self.stack.push(Memory())
+        [first, last] = self.visit(node.range)
+        self.stack.insert(node.id.id, first)
+        while self.stack.get(node.id.id) < last:
+            self.visit(node.expression)
+            self.stack.set(node.id.id, self.stack.get(node.id.id) + 1)
+        self.stack.pop()
+        
 
     @when(AST.Assign)
     def visit(self, node):
-        pass
+        assign_op = node.type
+        value = self.visit(node.value)
+        if len(assign_op) == 1:
+            self.stack.set(node.id.id, value)
+        else:
+            op = assign_op[0]
+            old_value = self.stack.get(node.id.id)
+            self.stack.set(node.id.id, ops[op](old_value, value))
+        
+
 
     @when(AST.ListAssign)
     def visit(self, node):
-        pass
+        old_array = self.visit(node.id)
+        index = self.visit(node.index)
+        assign_op = node.type
+        value = self.visit(node.value)
+        new_array = old_array
+        print(old_array)
+        print(index)
+        if len(assign_op) == 1:
+            if len(index) == 1:
+                new_array[index[0]] = value
+            else:
+                new_array[index[0]][index[1]] = value
+            self.stack.set(node.id.id, value)
+        else:
+            op = assign_op[0]
+            if len(index) == 1:
+                new_array[index[0]] = ops[op](old_array[index[0]], value)
+            else:
+                new_array[index[0]][index[1]] = ops[op](old_array[index[0]][index[1]], value)
+        self.stack.set(node.id.id, new_array)
 
     @when(AST.Function)
     def visit(self, node):

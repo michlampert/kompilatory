@@ -6,10 +6,10 @@ import AST
 tokens = scanner.tokens
 
 precedence = (
+   ('left', '=', "ADDASSIGN", "SUBASSIGN", "MULASSIGN", "DIVASSIGN"),
    ("left", "LT", "GT", "NGT", "NLT", "NEQ", "EQ"),
    ("left", '+', '-', "DOTADD", "DOTSUB"),
    ("left", '*', '/', "DOTMUL", "DOTDIV"),
-   ('left', '=', "ADDASSIGN", "SUBASSIGN", "MULASSIGN", "DIVASSIGN"),
    ("nonassoc", 'ONES', 'ZEROS', 'EYE'),
    ("nonassoc", "OPP"),
    ("nonassoc", 'TRANSPOSITION'),

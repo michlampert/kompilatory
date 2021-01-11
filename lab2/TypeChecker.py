@@ -21,6 +21,8 @@ for op in ['+', '-', '*', '/']:
     ttype[op][FLOAT][INT] = ttype[op][INT][FLOAT] = ttype[op][FLOAT][FLOAT] = FLOAT
 
 ttype['+'][STRING][STRING] = STRING
+ttype['*'][STRING][INT] = STRING
+ttype['*'][INT][STRING] = STRING
 #ttype['+'][ARRAY][ARRAY] = ARRAY
 
 # Boolean operators:
