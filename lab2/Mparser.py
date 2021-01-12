@@ -11,11 +11,12 @@ precedence = (
    ("left", '+', '-', "DOTADD", "DOTSUB"),
    ("left", '*', '/', "DOTMUL", "DOTDIV"),
    ("nonassoc", 'ONES', 'ZEROS', 'EYE'),
-   ("nonassoc", "OPP"),
+   #("right", ":"),
+   #("right", 'ID', '['),
    ("nonassoc", 'TRANSPOSITION'),
-   ("nonassoc", ":"),
    ("nonassoc", 'IFX'),
-   ("nonassoc", 'ELSE')
+   ("nonassoc", 'ELSE'),
+   ("right", "OPP")
 )
 
 

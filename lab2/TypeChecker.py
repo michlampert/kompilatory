@@ -114,12 +114,16 @@ class TypeChecker(NodeVisitor):
             if bin_symbol is None: self.print_error(node, f'Mismatched types for {operator}, with {left_symbol} and {right_symbol}')
             return bin_symbol
         else:
+            if left_symbol == right_symbol:
+                if left_symbol == VECTOR: return VECTOR
+                if left_symbol == ARRAY: return ARRAY
+            self.print_error(node, f'Mismatched types for {operator}, with {left_symbol} and {right_symbol}')
             return None
 
     def visit_Assign(self, node):
         symbol = self.visit(node.value)
         self.table.put(node.id.id, symbol)
-        print(symbol, node.id.id)
+        #print(symbol, node.id.id)
         return symbol
 
     def visit_Vector(self, node):
@@ -149,7 +153,7 @@ class TypeChecker(NodeVisitor):
         
     def visit_ExpressionsBlock(self, node):
         self.table.pushScope("block")
-        print(node.expressions)
+        #print(node.expressions)
         return self.visit(node.expressions)
 
     def visit_If(self, node):

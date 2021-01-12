@@ -104,7 +104,7 @@ class Interpreter(object):
     @when(AST.Print)
     def visit(self, node):
         expression = self.visit(node.expression)
-        print(expression)
+        print(" ".join([str(x) for x in expression]))
 
     @when(AST.Break)
     def visit(self, node):
@@ -127,22 +127,37 @@ class Interpreter(object):
     @when(AST.If)
     def visit(self, node):
         condition = self.visit(node.condition)
-        # Generalnie trzeba dodać try/catch żeby rozważyć przypadek gdy w ifie jest zwracany wynik
         if condition:
             self.stack.push(Memory())
-            self.visit(node.true)
-            self.stack.pop()
+            try:
+                self.visit(node.true)
+                self.stack.pop()
+            except ReturnValueException as return_value: 
+                self.stack.pop()
+                raise ReturnValueException(return_value)
         else:
             self.stack.push(Memory())
-            self.visit(node.false)
-            self.pop()
+            try:
+                self.visit(node.false)
+                self.stack.pop()
+            except ReturnValueException as return_value: 
+                self.stack.pop()
+                raise ReturnValueException(return_value)
 
 
     @when(AST.While)
     def visit(self, node):
         self.stack.push(Memory())
         while self.visit(node.condition):
-            self.visit(node.expression)
+            try:
+                self.visit(node.expression)
+            except ReturnValueException as return_value:
+                self.stack.pop()
+                raise ReturnValueException(return_value)
+            except BreakException:
+                break
+            except ContinueException:
+                continue
         self.stack.pop()
 
     @when(AST.For)
@@ -150,9 +165,17 @@ class Interpreter(object):
         self.stack.push(Memory())
         [first, last] = self.visit(node.range)
         self.stack.insert(node.id.id, first)
-        while self.stack.get(node.id.id) < last:
-            self.visit(node.expression)
-            self.stack.set(node.id.id, self.stack.get(node.id.id) + 1)
+        while self.visit(node.id) < last:
+            try:
+                self.visit(node.expression)
+                self.stack.set(node.id.id, self.visit(node.id) + 1)
+            except ReturnValueException as return_value:
+                self.stack.pop()
+                raise ReturnValueException(return_value)
+            except BreakException:
+                break
+            except ContinueException:
+                continue
         self.stack.pop()
         
 
@@ -176,8 +199,6 @@ class Interpreter(object):
         assign_op = node.type
         value = self.visit(node.value)
         new_array = old_array
-        print(old_array)
-        print(index)
         if len(assign_op) == 1:
             if len(index) == 1:
                 new_array[index[0]] = value
