@@ -6,16 +6,15 @@ import AST
 tokens = scanner.tokens
 
 precedence = (
+   ('left', '=', "ADDASSIGN", "SUBASSIGN", "MULASSIGN", "DIVASSIGN"),
    ("left", "LT", "GT", "NGT", "NLT", "NEQ", "EQ"),
    ("left", '+', '-', "DOTADD", "DOTSUB"),
    ("left", '*', '/', "DOTMUL", "DOTDIV"),
-   ('left', '=', "ADDASSIGN", "SUBASSIGN", "MULASSIGN", "DIVASSIGN"),
    ("nonassoc", 'ONES', 'ZEROS', 'EYE'),
-   ("nonassoc", "OPP"),
    ("nonassoc", 'TRANSPOSITION'),
-   ("nonassoc", ":"),
    ("nonassoc", 'IFX'),
-   ("nonassoc", 'ELSE')
+   ("nonassoc", 'ELSE'),
+   ("right", "OPP")
 )
 
 
@@ -169,6 +168,7 @@ def p_expression_list_assign(p):
     """
     p[0] = AST.ListAssign(p.lineno(1), p[5], AST.ID(p.lineno(1), p[1]), p[3], p[6])
 
+
 def p_expression_array_reference(p):
     """
     expression : ID '[' expression_list ']'
@@ -233,6 +233,7 @@ def p_range(p):
     range : expression ':' expression
     """
     p[0] = AST.Range(p.lineno(1), p[1], p[3])
+
 
 def p_for_instruction(p):
     """

@@ -1,5 +1,6 @@
-x = 0,
-y = zeros(5);
+
+x = 0;
+y = zeros(5,5);
 z = x + y;
 
 x = eye(5);
@@ -12,9 +13,5 @@ y = [ [1,2,3,4,5],
 z = x + y;
 
 x = zeros(5);
-y = zeros(5,7);
+y = zeros(7);
 z = x + y;
-
-x = ones(3,5)
-#z = x[7,10]
-#v = x[2,3,4]
