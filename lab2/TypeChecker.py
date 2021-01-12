@@ -23,7 +23,6 @@ for op in ['+', '-', '*', '/']:
 ttype['+'][STRING][STRING] = STRING
 ttype['*'][STRING][INT] = STRING
 ttype['*'][INT][STRING] = STRING
-#ttype['+'][ARRAY][ARRAY] = ARRAY
 
 # Boolean operators:
 for op in ['<', '>', '==', '!=', '<=', '>=']:
@@ -97,11 +96,19 @@ class TypeChecker(NodeVisitor):
             return None
 
     def visit_Function(self, node):
-        # print(node.argument, arg_symbol)
         if node.function not in ['zeros', 'eye', 'ones']: return None
-        if len(node.argument.expressions) == 1:
-            arg_symbol = self.visit(node.argument.expressions[0])
-            if arg_symbol == INT: return ARRAY
+        if node.function == 'eye':
+            if len(node.argument.expressions) == 1:
+                arg_symbol = self.visit(node.argument.expressions[0])
+                if arg_symbol == INT: return ARRAY
+        else:
+            if len(node.argument.expressions) == 1:
+                arg_symbol = self.visit(node.argument.expressions[0])
+                if arg_symbol == INT: return VECTOR
+            if len(node.argument.expressions) == 2:
+                arg_symbol1 = self.visit(node.argument.expressions[0])
+                arg_symbol2 = self.visit(node.argument.expressions[1])
+                if arg_symbol1 == INT and arg_symbol2 == INT: return ARRAY
         self.print_error(node, f'Bad arguments for function: {node.function}')
         return ARRAY
             
@@ -219,17 +226,15 @@ class TypeChecker(NodeVisitor):
     def visit_ListAssign(self, node):
         id_type = self.visit(node.id)
         expressions = [self.visit(i) for i in node.index.expressions]
-        if [e for e in expressions if e != INT]: self.print_error(node, 'All indexes have to be integers.')
+        if [e for e in expressions if e != INT and e != RANGE]: self.print_error(node, 'All indexes have to be integers.')
         if id_type != VECTOR and id_type != ARRAY: self.print_error(node, '{node.id.id} is not a collection.')
         if id_type == VECTOR and len(node.index.expressions) > 1:  self.print_error(node, '{node.id.id} is a vector not an array - bad reference.')
-        # What should we return here?
         return VECTOR
 
     def visit_Reference(self, node):
         id_type = self.visit(node.id)
         expressions = [self.visit(i) for i in node.index.expressions]
-        if [e for e in expressions if e != INT]: self.print_error(node, 'All indexes have to be integers.')
+        if [e for e in expressions if e != INT and e != RANGE]: self.print_error(node, 'All indexes have to be integers.')
         if id_type != VECTOR and id_type != ARRAY: self.print_error(node, '{node.id.id} is not a collection.')
         if id_type == VECTOR and len(node.index.expressions) > 1:  self.print_error(node, '{node.id.id} is a vector not an array - bad reference.')
-        # Here we should save type of vector/array and return it:
         return VECTOR

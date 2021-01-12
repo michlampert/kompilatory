@@ -1,4 +1,4 @@
-x = zeros(3);
+x = zeros(3,3);
 x[0,0] = 2;
 print x;
 y = 3;

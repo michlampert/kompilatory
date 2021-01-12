@@ -190,8 +190,6 @@ class Interpreter(object):
             old_value = self.stack.get(node.id.id)
             self.stack.set(node.id.id, ops[op](old_value, value))
         
-
-
     @when(AST.ListAssign)
     def visit(self, node):
         old_array = self.visit(node.id)
@@ -201,14 +199,22 @@ class Interpreter(object):
         new_array = old_array
         if len(assign_op) == 1:
             if len(index) == 1:
-                new_array[index[0]] = value
+                if isinstance(index[0], int):
+                    new_array[index[0]] = value
+                else:
+                    left, right = index[0]
+                    new_array[left:right] = [value]*(right-left)
             else:
                 new_array[index[0]][index[1]] = value
             self.stack.set(node.id.id, value)
         else:
             op = assign_op[0]
             if len(index) == 1:
-                new_array[index[0]] = ops[op](old_array[index[0]], value)
+                if isinstance(index[0], int):
+                    new_array[index[0]] = ops[op](old_array[index[0]], value)
+                else:
+                    left, right = index[0]
+                    new_array[left:right] = [ops[op](old_array[i], value) for i in range(left, right)]
             else:
                 new_array[index[0]][index[1]] = ops[op](old_array[index[0]][index[1]], value)
         self.stack.set(node.id.id, new_array)
@@ -216,13 +222,12 @@ class Interpreter(object):
     @when(AST.Function)
     def visit(self, node):
         arguments = self.visit(node.argument)
-        argument = arguments[0]
         if node.function == "zeros":
-            return [[0 for _ in range(argument)] for _ in range(argument)]
+            return [[0 for _ in range(arguments[1])] for _ in range(arguments[0])]
         elif node.function == "ones":
-            return [[1 for _ in range(argument)] for _ in range(argument)]
+            return [[1 for _ in range(arguments[1])] for _ in range(arguments[0])]
         elif node.function == "eye":
-            return [[1 if i == j else 0 for i in range(argument)] for j in range(argument)]
+            return [[1 if i == j else 0 for i in range(arguments[0])] for j in range(arguments[0])]
 
 
 

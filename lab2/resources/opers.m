@@ -1,6 +1,6 @@
 
 x = 0;
-y = zeros(5);
+y = zeros(5,5);
 z = x + y;
 
 x = eye(5);

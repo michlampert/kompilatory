@@ -11,8 +11,6 @@ precedence = (
    ("left", '+', '-', "DOTADD", "DOTSUB"),
    ("left", '*', '/', "DOTMUL", "DOTDIV"),
    ("nonassoc", 'ONES', 'ZEROS', 'EYE'),
-   #("right", ":"),
-   #("right", 'ID', '['),
    ("nonassoc", 'TRANSPOSITION'),
    ("nonassoc", 'IFX'),
    ("nonassoc", 'ELSE'),
@@ -170,6 +168,7 @@ def p_expression_list_assign(p):
     """
     p[0] = AST.ListAssign(p.lineno(1), p[5], AST.ID(p.lineno(1), p[1]), p[3], p[6])
 
+
 def p_expression_array_reference(p):
     """
     expression : ID '[' expression_list ']'
@@ -234,6 +233,7 @@ def p_range(p):
     range : expression ':' expression
     """
     p[0] = AST.Range(p.lineno(1), p[1], p[3])
+
 
 def p_for_instruction(p):
     """
