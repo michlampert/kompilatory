@@ -1,6 +1,7 @@
 from collections import defaultdict
 from SymbolTable import *
 import AST
+from termcolor import colored
 # ---------------- TYPES -----------------
 
 INT = 'INT'
@@ -81,7 +82,7 @@ class TypeChecker(NodeVisitor):
 
     def print_error(self, node, msg):
         self.error_counter += 1
-        print(f"LINE {node.line}: {msg}")
+        print(colored(f"LINE {node.line}: {msg}", 'blue'))
 
     def visit_Int(self, node):
         return INT
