@@ -38,6 +38,11 @@ for op in [".+", ".-", ".*", "./"]:
     ttype[op][VECTOR][VECTOR] = BOOL
     ttype[op][ARRAY][ARRAY] = BOOL
 
+class Collection:
+    def __init__(self, type, size):
+        self.type = type
+        self.size = size
+
 class NodeVisitor(object):
 
     def visit(self, node):
@@ -100,17 +105,21 @@ class TypeChecker(NodeVisitor):
         if node.function == 'eye':
             if len(node.argument.expressions) == 1:
                 arg_symbol = self.visit(node.argument.expressions[0])
-                if arg_symbol == INT: return ARRAY
+                arg_value = node.argument.expressions[0].value
+                if arg_symbol == INT: return Collection(ARRAY, [arg_value, arg_value])
         else:
             if len(node.argument.expressions) == 1:
                 arg_symbol = self.visit(node.argument.expressions[0])
-                if arg_symbol == INT: return VECTOR
+                arg_value = node.argument.expressions[0].value
+                if arg_symbol == INT: return Collection(VECTOR, arg_value)
             if len(node.argument.expressions) == 2:
                 arg_symbol1 = self.visit(node.argument.expressions[0])
                 arg_symbol2 = self.visit(node.argument.expressions[1])
-                if arg_symbol1 == INT and arg_symbol2 == INT: return ARRAY
+                arg_value1 = node.argument.expressions[0].value
+                arg_value2 = node.argument.expressions[1].value
+                if arg_symbol1 == INT and arg_symbol2 == INT: return Collection(ARRAY, [arg_value1, arg_value2])
         self.print_error(node, f'Bad arguments for function: {node.function}')
-        return ARRAY
+        return None
             
     def visit_Binary(self, node):
         left_symbol = self.visit(node.left)
@@ -121,10 +130,10 @@ class TypeChecker(NodeVisitor):
             if bin_symbol is None: self.print_error(node, f'Mismatched types for {operator}, with {left_symbol} and {right_symbol}')
             return bin_symbol
         else:
-            if left_symbol == right_symbol:
-                if left_symbol == VECTOR: return VECTOR
-                if left_symbol == ARRAY: return ARRAY
-            self.print_error(node, f'Mismatched types for {operator}, with {left_symbol} and {right_symbol}')
+            if isinstance(left_symbol, Collection) and isinstance(right_symbol, Collection):
+                if left_symbol.type == right_symbol.type and left_symbol.size == right_symbol.size: return left_symbol
+            else: 
+                self.print_error(node, f'Mismatched types for {operator}, with {left_symbol.type} and {right_symbol.type}')
             return None
 
     def visit_Assign(self, node):
@@ -137,21 +146,25 @@ class TypeChecker(NodeVisitor):
         symbols = [self.visit(n) for n in node.values.expressions]
         len_ith_symbol = lambda i: len(node.values.expressions[i].values.expressions)
         for i,s in enumerate(symbols):
-            if s != symbols[0]:
+            if not isinstance(s, Collection) and s != symbols[0]:
                 self.print_error(node, f'Mismatched types for: {s} and {symbols[0]}!')
-            if s == VECTOR:
+            if isinstance(s, Collection) and (not isinstance(symbols[0], Collection) or s.type != symbols[0].type):
+                self.print_error(node, f'Mismatched types for: {s} and {symbols[0]}!')
+            if isinstance(s, Collection) and s.type == VECTOR:
                 if len_ith_symbol(i) != len_ith_symbol(0):
                     self.print_error(node, f'Mismatched size of vectors for: {s} and {symbols[0]}!')
-            if s == ARRAY:
+            if isinstance(s, Collection) and s.type == ARRAY:
                 self.print_error(node, f'We do not support 3D arrays!')
-        if VECTOR in symbols: 
-            return ARRAY
-        return VECTOR
+        if isinstance(s, Collection) and s.type == VECTOR: 
+            return Collection(ARRAY, [len(symbols), len_ith_symbol(0)])
+        return Collection(VECTOR, len(symbols))
 
     def visit_Transposition(self, node):
-        if self.visit(node.expression) != ARRAY:
+        symbol = self.visit(node.expression) 
+        if not isinstance(symbol, Collection) or symbol.type != ARRAY:
             self.print_error(node, f'Only arrays can be transposed!')
-        return ARRAY
+        symbol.size[0], symbol.size[1] = symbol.size[1], symbol.size[0]
+        return symbol
 
 
     def visit_Block(self, node):
@@ -224,17 +237,34 @@ class TypeChecker(NodeVisitor):
         return opposite_symbol
 
     def visit_ListAssign(self, node):
+        #print(self.visit(node.id).size)
         id_type = self.visit(node.id)
         expressions = [self.visit(i) for i in node.index.expressions]
         if [e for e in expressions if e != INT and e != RANGE]: self.print_error(node, 'All indexes have to be integers.')
-        if id_type != VECTOR and id_type != ARRAY: self.print_error(node, '{node.id.id} is not a collection.')
-        if id_type == VECTOR and len(node.index.expressions) > 1:  self.print_error(node, '{node.id.id} is a vector not an array - bad reference.')
-        return VECTOR
+        if not isinstance(id_type, Collection) : self.print_error(node, '{node.id.id} is not a collection.')
+        if id_type.type == VECTOR and len(node.index.expressions) > 1:  self.print_error(node, '{node.id.id} is a vector not an array - bad reference.')
+        indexes = [index.value for index in node.index.expressions]
+        if None not in indexes:
+            if len(indexes) == 2:
+                if indexes[0] >= id_type.size[0] or indexes[1] >= id_type.size[1]:
+                    self.print_error(node, 'Index out of scope.')
+            else:
+                if indexes[0] >= id_type.size:
+                    self.print_error(node, 'Index out of scope.')
+        return id_type
 
     def visit_Reference(self, node):
         id_type = self.visit(node.id)
         expressions = [self.visit(i) for i in node.index.expressions]
         if [e for e in expressions if e != INT and e != RANGE]: self.print_error(node, 'All indexes have to be integers.')
-        if id_type != VECTOR and id_type != ARRAY: self.print_error(node, '{node.id.id} is not a collection.')
-        if id_type == VECTOR and len(node.index.expressions) > 1:  self.print_error(node, '{node.id.id} is a vector not an array - bad reference.')
-        return VECTOR
+        if not isinstance(id_type, Collection): self.print_error(node, '{node.id.id} is not a collection.')
+        if id_type.type == VECTOR and len(node.index.expressions) > 1:  self.print_error(node, '{node.id.id} is a vector not an array - bad reference.')
+        indexes = [index.value for index in node.index.expressions]
+        if None not in indexes:
+            if len(indexes) == 2:
+                if indexes[0] >= id_type.size[0] or indexes[1] >= id_type.size[1]:
+                    self.print_error(node, 'Index out of scope.')
+            else:
+                if indexes[0] >= id_type.size:
+                    self.print_error(node, 'Index out of scope.')
+        return id_type

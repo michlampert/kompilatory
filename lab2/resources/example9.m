@@ -1,4 +1,4 @@
-x = zeros(3,3);
+x = eye(3);
 x[0,0] = 2;
 print x;
 y = 3;
@@ -6,7 +6,8 @@ y += 3;
 print y;
 y *= 4.5;
 print y;
-t = eye(3);
+t = zeros(3,3);
+print t[4,2];
 print t;
 print t .+ x;
 c = 3.4;

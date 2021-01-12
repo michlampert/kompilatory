@@ -5,11 +5,12 @@ import scanner
 from TreePrinter import TreePrinter
 from TypeChecker import TypeChecker
 from Interpreter import Interpreter
+from termcolor import colored
 
 if __name__ == '__main__':
 
     try:
-        filename = sys.argv[1] if len(sys.argv) > 1 else "lab2/example9.m"
+        filename = sys.argv[1] if len(sys.argv) > 1 else "lab2/resources/example9.m"
         file = open(filename, "r")
     except IOError:
         print("Cannot open {0} file".format(filename))
@@ -22,3 +23,6 @@ if __name__ == '__main__':
     if typeChecker.error_counter == 0:
         interpreter = Interpreter()
         interpreter.visit(ast)
+    else:
+        result = "Parsing finished with: " + str(typeChecker.error_counter) + " errors."
+        print(colored(result, 'red'))
